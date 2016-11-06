@@ -9,29 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var USERS = [
-    { id: 'OSK13001', name: '13A', marks: 85 },
-    { id: 'OSK13002', name: '13B', marks: 75 },
-    { id: 'OSK13003', name: '13C', marks: 65 },
-    { id: 'OSK14001', name: '14A', marks: 55 },
-    { id: 'OSK14002', name: '14B', marks: 45 },
-    { id: 'OSK14003', name: '14C', marks: 35 },
-    { id: 'OSK15005', name: '15A', marks: 25 },
-    { id: 'OSK15006', name: '15B', marks: 15 },
-];
+var user_service_1 = require('./user.service');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(userService) {
+        this.userService = userService;
         this.title = 'Coach-X';
-        this.users = USERS; // ユーザーデータの読み込み
     }
+    AppComponent.prototype.getUsers = function () {
+        var _this = this;
+        this.userService.getUsers()
+            .then(function (users) { return _this.users = users; });
+    };
+    AppComponent.prototype.ngOnInit = function () {
+        this.getUsers();
+    };
     AppComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'my-app',
             templateUrl: 'app.component.html',
             styleUrls: ['app.component.css'],
+            providers: [user_service_1.UserService],
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [user_service_1.UserService])
     ], AppComponent);
     return AppComponent;
 }());
