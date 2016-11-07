@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+/* Master Styles */
+h1 {
+    color: #369;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
+}
+h2, h3 {
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+}
+body {
+    margin: 2em;
+}
+
+/*
+ * T.A.F. Styles 
+ */
+
+/* color palet */
+.taf-black{
+    color: #000000;
+}
+.taf-white{
+    color: #ffffff;
+}
+.taf-black-back{
+    color: #bdbdbd;
+    background-color: #000000;
+}
+.taf-blue{
+    color: #64B5F6;
+}
+.taf-orange{
+    color: #ff9800;
+}
+
+/* Fooler Logo */
+/*
+ *
+ * Footer Logo
+ *
+ */
+.taf-logo{
+    background-color: #000000;
+    width: 100%;
+}
+.taf-logo-footer{
+    background-color: #000000;
+    width: 100%;
+    padding: 1em;
+}
+
+.taf-logo-footer .taf-title{
+    color: #ff9800;
+    font-size: 2em;
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
+.taf-logo-footer .taf-subtitle{
+    color: #ffffff;
+    font-size: 0.5em;
+    border-bottom: #ffffff 1px solid;
+    margin-bottom: 0em;
+    padding-bottom: 0em;
+}
