@@ -19,5 +19,11 @@ export class UserService {
 	    .then(() => this.getUsers());
     }
 
+    // 単一のユーザを取得
+    getUser(id: string): Promise<User>{
+	return this.getUsers()
+	    .then(users => users.find(user => user.id === id));
+    }
+
     
 }

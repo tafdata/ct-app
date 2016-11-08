@@ -5,10 +5,10 @@
 						<a class="nav-link" href="#">Coach-X <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-						<a class="nav-link" href="#">MyPage</a>
+						<a routerLink="/mypage" class="nav-link">MyPage</a>
 				</li>
 				<li class="nav-item">
-						<a class="nav-link" href="#">Overview</a>
+						<a routerLink="/overview" class="nav-link">Overview</a>
 				</li>
 				<li ngbDropdown class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle" id="supportedContentDropdown"  ngbDropdownToggle>Dropdown</a>
@@ -24,14 +24,8 @@
 <!-- Main Container
 --------------------------------------------------->
 <div class="container-fluid">
-		<!-- CT Score  一覧 -->
-		<section class="row">
-				<div class="col-sm-12">
-						<app-ct-score-table [users]="users"></app-ct-score-table>
-				</div>
-		</section>
+		<router-outlet></router-outlet>
 </div>
-
 
 <!-- Footer
 -------------------------------------------------->

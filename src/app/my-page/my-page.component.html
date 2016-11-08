@@ -1,0 +1,14 @@
+<h2>マイページ</h2>
+
+
+<a *ngFor="let user of users" [routerLink]="['/mypage', user.id]">
+		<div *ngIf="user">
+				<p>{{user.name}}</p>
+		</div>
+</a>
+
+<div *ngIf="user">
+		<h2>{{user.name}}</h2>
+</div>
+
+<button class="btn btn-default" (click)="goBack()">Back</button>
