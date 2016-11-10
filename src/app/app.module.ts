@@ -9,9 +9,17 @@ import { CtScoreTableComponent } from './ct-score-table/ct-score-table.component
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { MyPageComponent }       from './my-page/my-page.component';
 
+import { AppRoutingModule }      from './app-routing.module.ts';
+
+// Imports for loading & configuring the in-memory web api
+// import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { InMemoryDataService }  from './in-memory-data.service';
+
+
+
 import { UserService }           from './user.service';
 
-import { AppRoutingModule }      from './app-routing.module.ts';
+
 
 
 @NgModule({
@@ -25,6 +33,7 @@ import { AppRoutingModule }      from './app-routing.module.ts';
 	AppRoutingModule,
 	BrowserModule,
 	HttpModule,
+//	InMemoryWebApiModule.forRoot(InMemoryDataService),
 	NgbModule.forRoot(),
     ],
     providers: [
