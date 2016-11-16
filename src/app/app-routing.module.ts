@@ -4,13 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { CtScoreTableComponent } from './ct-score-table/ct-score-table.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { MyPageComponent }       from './my-page/my-page.component';
+import { LoginComponent }        from './login/login.component';
 
 
 const routes: Routes = [
     {
 	path: '',
-	redirectTo: '/mypage',
+	redirectTo: '/login',
 	pathMatch: 'full',
+    },
+    {
+	path: 'login',
+	component: LoginComponent,
     },
     {
 	path: 'overview',

@@ -1,0 +1,10 @@
+<h3>My Page</h3>
+
+<div class="grid grid-pad">
+		<a *ngFor="let user of users" [routerLink]="['/mypage', user.id]" class="col-1-4">
+				<div class="module user">
+						<h4>{{user.name}}</h4>
+				</div>
+		</a>
+</div>
+<app-user-search></app-user-search>
