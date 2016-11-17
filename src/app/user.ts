@@ -2,5 +2,5 @@
 export class User {
     id: string;
     name: string;
-    marks: number;
+    ctMarks: number[];
 }

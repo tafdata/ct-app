@@ -11,6 +11,7 @@ import './rxjs-extentions';
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
+import { nvD3 }                 from 'ng2-nvd3';
 
 
 import { CtScoreTableComponent } from './ct-score-table/ct-score-table.component';
@@ -20,6 +21,7 @@ import { MyPageComponent }       from './my-page/my-page.component';
 import { UserService }           from './user.service';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { LoginComponent } from './login/login.component';
+import { CtScoreChartComponent } from './ct-score-chart/ct-score-chart.component';
 
 
 
@@ -31,7 +33,9 @@ import { LoginComponent } from './login/login.component';
 	OverviewPageComponent,
 	MyPageComponent,
 	UserSearchComponent,
-	LoginComponent
+	LoginComponent,
+	CtScoreChartComponent,
+	nvD3,
     ],
     imports: [
 	AppRoutingModule,
