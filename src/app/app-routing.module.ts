@@ -23,7 +23,7 @@ const routes: Routes = [
     },
     {
 	path: 'mypage',
-	component: MyPageComponent,
+	component: '404',
     },
     {
 	path: 'mypage/:id',
