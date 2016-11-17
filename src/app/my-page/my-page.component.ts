@@ -4,6 +4,56 @@ import { Location }                 from '@angular/common';
 
 import { User }                     from '../user';
 import { UserService }              from '../user.service';
+import { Mark }                     from '../mark';
+
+const MARKS: Mark[] = [
+    {
+	id: 1,
+	name: "スナッチ",
+	mark: 40,
+	score: 670,
+	rank: 5,
+	rankSP1: 3,
+	rankSP2: 0,
+    },
+    {
+    	id: 2,
+    	name: "クリーン",
+    	mark: 62.5,
+    	score: 789,
+    	rank: 5,
+    	rankSP1: 3,
+    	rankSP2: -1,
+    },
+    {
+    	id: 3,
+    	name: "スクワット",
+    	mark: 70,
+    	score: 970,
+    	rank: 2,
+    	rankSP1: 3,
+    	rankSP2: -1,
+    },
+    {
+    	id: 4,
+    	name: "立幅跳",
+    	mark: 2.31,
+    	score: 675,
+    	rank: 5,
+    	rankSP1: 3,
+    	rankSP2: -1,
+    },
+    {
+    	id: 5,
+    	name: "立五段",
+    	mark: 11.8,
+    	score: 670,
+    	rank: 5,
+    	rankSP1: 3,
+    	rankSP2: -1,
+    }
+];
+
 
 
 @Component({
@@ -16,6 +66,7 @@ export class MyPageComponent implements OnInit {
     user: User;
     users: User[] = [];
     data: any;
+    dataTable = MARKS;
     
     constructor(
 	private userService: UserService,
@@ -33,7 +84,7 @@ export class MyPageComponent implements OnInit {
     // nvD3用のデータセット整形
     //
     formatData(user: User): any{
-	let key = "Cumualtive Return",
+	let key = "CTスコア",
 	values = [];
 	console.log("formatDataset");
 	console.log(user);
@@ -58,52 +109,12 @@ export class MyPageComponent implements OnInit {
 		.then(user => {
 		    this.user = user;
 		    this.data = this.formatData(this.user);
-//		    console.log(this.data);
 		});
 	});
 	this.userService.getUsers()
 	    .then(users => this.users = users);
 
-	// 入力データ
-	// this.data = [
-	//     {
-	// 	key: "Cumulative Return",
-	// 	values: [
-	// 	    {
-	// 		"label" : "A",
-	// 		"value" : 29.765957771107
-	// 	    } ,
-	// 	    {
-	// 		"label" : "B" ,
-	// 		"value" : 0
-	// 	    } ,
-	// 	    {
-	// 		"label" : "C" ,
-	// 		"value" : 32.807804682612
-	// 	    } ,
-	// 	    {
-	// 		"label" : "D" ,
-	// 		"value" : 196.45946739256
-	// 	    } ,
-	// 	    {
-	// 		"label" : "E" ,
-	// 		"value" : 0.19434030906893
-	// 	    } ,
-	// 	    {
-	// 		"label" : "F" ,
-	// 		"value" : 98.079782601442
-	// 	    } ,
-	// 	    {
-	// 		"label" : "G" ,
-	// 		"value" : 13.925743130903
-	// 	    } ,
-	// 	    {
-	// 		"label" : "H" ,
-	// 		"value" : 5.1387322875705
-	// 	    }
-	// 	]
-	//     }
-	// ];	
+	console.log(this.dataTable);
     }
 
     

@@ -22,6 +22,7 @@ import { UserService }           from './user.service';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { LoginComponent } from './login/login.component';
 import { CtScoreChartComponent } from './ct-score-chart/ct-score-chart.component';
+import { MyCtScoreTableComponent } from './my-ct-score-table/my-ct-score-table.component';
 
 
 
@@ -36,6 +37,7 @@ import { CtScoreChartComponent } from './ct-score-chart/ct-score-chart.component
 	LoginComponent,
 	CtScoreChartComponent,
 	nvD3,
+	MyCtScoreTableComponent,
     ],
     imports: [
 	AppRoutingModule,
