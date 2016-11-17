@@ -5,7 +5,7 @@ import { CtScoreTableComponent } from './ct-score-table/ct-score-table.component
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { MyPageComponent }       from './my-page/my-page.component';
 import { LoginComponent }        from './login/login.component';
-
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
     {
@@ -28,6 +28,14 @@ const routes: Routes = [
     {
 	path: 'mypage/:id',
 	component: MyPageComponent,
+    },
+    {
+	path: '404',
+	component: NotFoundComponent,
+    },
+    {
+	path: '**',
+	redirectTo: '404',
     },
 ];
 @NgModule({
