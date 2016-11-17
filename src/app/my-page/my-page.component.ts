@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute, Params, Router }   from '@angular/router';
 import { Location }                 from '@angular/common';
 
 import { User }                     from '../user';
@@ -70,6 +70,7 @@ export class MyPageComponent implements OnInit {
     
     constructor(
 	private userService: UserService,
+	private router: Router,
 	private route: ActivatedRoute,
 	private location: Location
     ) { }
@@ -77,6 +78,11 @@ export class MyPageComponent implements OnInit {
     // 戻るボタン
     goBack(): void{
 	this.location.back();
+    }
+
+    // 404リダイレクト
+    go404Page(): void{
+	this.router.navigate(['/404']);
     }
 
 
@@ -88,17 +94,23 @@ export class MyPageComponent implements OnInit {
 	values = [];
 	console.log("formatDataset");
 	console.log(user);
-	console.log(user.ctMarks);
-
-	let counter=0;
-	for(let mark of user.ctMarks){
-	    console.log(mark);
-	    values.push({
-		label: "no."+counter,
-		value: mark,
-	    });
-	    counter++;
+	
+	try{
+	    console.log(user.ctMarks);
+	    let counter=0;
+	    for(let mark of user.ctMarks){
+		values.push({
+		    label: "no."+counter,
+		    value: mark,
+		});
+		counter++;
+	    }
 	}
+	catch(e){
+	    console.log("Error: in formatData");
+	    this.go404Page();
+	}
+	    
 	return [{ key: key, values: values}];
     }
 
@@ -114,7 +126,6 @@ export class MyPageComponent implements OnInit {
 	this.userService.getUsers()
 	    .then(users => this.users = users);
 
-	console.log(this.dataTable);
     }
 
     

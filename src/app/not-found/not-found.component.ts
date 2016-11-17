@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-//import { ActivatedRoute }    from '@angular/router';
+import { Router }    from '@angular/router';
 import { Location }          from '@angular/common';
 
 
@@ -13,11 +13,17 @@ export class NotFoundComponent{
 
     constructor(
 	private location: Location,
+	private router: Router,
     ) { }
 
     // 戻るボタン
     goBack(): void{
 	this.location.back();
+    }
+
+    // Homeへ
+    goLoginPage(): void{
+	this.router.navigate(['/login']);
     }
     
 }

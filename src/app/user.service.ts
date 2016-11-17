@@ -1,6 +1,7 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
+
 import 'rxjs/add/operator/toPromise';
 
 import { User }       from './user';
@@ -11,7 +12,7 @@ export class UserService {
     private usersUrl = 'app/users'; // URL to web api
     
     constructor(
-	private http: Http
+	private http: Http,
     ) { }
 
     // 全ユーザーを取得
@@ -30,6 +31,7 @@ export class UserService {
 	    .then(users => users.find(user => user.id === id));
     }
 
+    
     // エラーハンドリング
     private handleError(error: any): Promise<any> {
 	console.error('An error occurred', error); // for demo purposes only
