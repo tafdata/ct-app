@@ -3,6 +3,9 @@
 <div *ngIf="user">
 		<h2>{{user.name}}</h2>
 </div>
+
+<app-my-summary [user]="user"></app-my-summary>
+
 <app-ct-score-chart [user]="user" [data]="data"></app-ct-score-chart>
 <app-my-ct-score-table [dataMyCtScore]="dataTable"></app-my-ct-score-table>
 
