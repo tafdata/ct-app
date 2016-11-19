@@ -3,8 +3,10 @@
 				<div class="card card-outline-info text-xs-center">
 						<div class="card-block">
 								<blockquote class="card-blockquote">
-										<h3>{{user.name}}</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+										<div *ngIf="user">
+												<h3>{{user.name}}</h3>
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+										</div>
 										<footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
 								</blockquote>
 						</div>

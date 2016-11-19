@@ -10,7 +10,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
     {
 	path: '',
-	redirectTo: '/login',
+	redirectTo: 'mypage/OSK14326',
 	pathMatch: 'full',
     },
     {
