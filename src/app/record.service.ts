@@ -16,7 +16,14 @@ export class RecordService {
 
     // idを指定して記録を取得
     getRecord(id: string): Record{
-	return this.getRecords().find(record => record.id === id);
+	return  this.getRecords().find(record => record.id === id);
     }
-    
+
+    // Promiseを使ってgetRecord
+    getRecordPromise(id: string): Promise<Record>{
+	return new Promise(function(resolve, reject) {
+	    //	    let records = this.getRecords();
+	    resolve(this.getRecords().find(record => record.id === id));	    
+	 });
+    }
 }

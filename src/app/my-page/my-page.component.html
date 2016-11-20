@@ -1,12 +1,13 @@
 <h2>マイページ</h2>
-
+<!-- ユーザー情報 -->
 <div *ngIf="user">
 		<h2>{{user.name}}</h2>
+		<app-my-summary [user]="user"></app-my-summary>
 </div>
-
-<app-my-summary [user]="user"></app-my-summary>
-
-<app-ct-score-chart [user]="user" [data]="data"></app-ct-score-chart>
-<app-my-ct-score-table [dataMyCtScore]="dataTable"></app-my-ct-score-table>
+<!-- CTの結果 -->
+<div *ngIf="records">
+		<app-ct-score-chart [data]="data"></app-ct-score-chart>
+		<app-my-ct-score-table [records]="records"></app-my-ct-score-table>
+</div>
 
 <button class="btn btn-default" (click)="goBack()">Back</button>

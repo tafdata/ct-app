@@ -1,6 +1,6 @@
 <!-- My CT Score Table Component -->
-<div *ngIf="data">
-		<h2>CT スコア一覧</h2>
+<div *ngIf="records">
+		<h2>CT Score Table</h2>
 		<div class="table-responsive">
 				<table class="table table-sm table-striped table-bordered">
 						<thead class="thead-inverse">
@@ -18,14 +18,14 @@
 								</tr>
 						</thead>
 						<tbody>
-								<tr *ngFor="let val of data">
-										<td>{{val.name}}</td>
-										<td>{{val.mark}}</td>
-										<td>{{val.score}}</td>
-										<td>{{val.rank}}</td>
-										<td>{{val.rankSP1}}</td>
-										<td>{{val.rankSP2}}</td>
-								</tr>
+								<tr *ngFor="let mark of records.records">
+										<td>{{mark.name}}</td>
+										<td>{{mark.mark}}</td>
+										<td>{{mark.score}}</td>
+										<td>{{mark.rank}}</td>
+										<td>{{mark.rankSP1}}</td>
+										<td>{{mark.rankSP2}}</td>
+						 		</tr>
 						</tbody>
 				</table>
 		</div>

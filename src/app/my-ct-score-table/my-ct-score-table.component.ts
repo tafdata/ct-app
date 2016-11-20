@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 import { Mark }    from '../mark';
+import { Record }  from '../record';
 
 
 @Component({
@@ -11,13 +12,13 @@ import { Mark }    from '../mark';
 
 
 export class MyCtScoreTableComponent implements OnChanges {
-    @Input("dataMyCtScore") data: any;
+    @Input() records: Record;
     
     constructor() { }
     
     ngOnChanges(changes: any) {
 	console.log("my-ct-score-table");
-	console.log(this.data);
+	console.log(this.records);
     }
 
 }

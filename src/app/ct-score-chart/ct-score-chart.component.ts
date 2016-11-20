@@ -12,7 +12,6 @@ import { User }              from '../user';
 })
 export class CtScoreChartComponent implements OnChanges {
     // ユーザ
-    @Input() user: any;
     @Input() data: any;
 
     // Chartの設定オブジェクト
@@ -24,9 +23,9 @@ export class CtScoreChartComponent implements OnChanges {
 
     ngOnChanges(changes: any){
 	console.log("ct-score-chart");
-	console.log(this.user);
 	console.log(this.data);
-	// 	// グラフの設定
+	
+	// グラフの設定
     	this.options = {
     	    chart: {
     	    	type: 'discreteBarChart',

@@ -19,7 +19,6 @@ export class MyPageComponent implements OnInit {
     user: User;
     records: Record;
     data: any;
-    dataTable: any;
 
     
     constructor(
@@ -30,9 +29,18 @@ export class MyPageComponent implements OnInit {
 	private location: Location
     ) { }
 
+    
+
+    // Promiseで
+    getRecord(id: string, recordService: any): Promise<any>{
+	return new Promise(function(resolve, reject){
+	    resolve(recordService.getRecord(id));
+	});
+    }
+    
     // 戻るボタン
     goBack(): void{
-	this.location.back();
+	this.location.back();	
     }
 
     // 404リダイレクト
@@ -44,14 +52,13 @@ export class MyPageComponent implements OnInit {
     //
     // nvD3用のデータセット整形
     //
-    formatData(record: Record): any{
+    formatData(records: Record): any{
 	let key = "CTスコア",
 	values = [];
 	console.log("formatDataset");
 	
 	try{
-	    console.log(record.records);
-	    for(let mark of record.records){
+	    for(let mark of records.records){
 		values.push({
 		    label: mark.name,
 		    value: mark.mark,
@@ -62,7 +69,8 @@ export class MyPageComponent implements OnInit {
 	    console.log("Error: in formatData");
 	    this.go404Page();
 	}
-	    
+
+	// 結果を格納
 	return [{ key: key, values: values}];
     }
 
@@ -72,12 +80,14 @@ export class MyPageComponent implements OnInit {
 	    this.userService.getUser(id)
 		.then(user => {
 		    this.user = user;
-
 		});
-	    this.records = this.recordService.getRecord(id);
+	    this.getRecord(id, this.recordService)
+		.then(records => {
+		    console.log(records);
+		    this.records = records;
+		    this.data = this.formatData(records);
+		});	    
 	});
-	this.dataTable = this.records.records;
-	this.data = this.formatData(this.records);
     }
     
 }
