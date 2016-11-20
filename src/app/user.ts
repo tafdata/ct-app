@@ -2,5 +2,8 @@
 export class User {
     id: string;
     name: string;
-    ctMarks: number[];
+    team: string;
+    sex: string;
+    SP1: number;
+    SP2: number;
 }

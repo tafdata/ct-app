@@ -5,55 +5,8 @@ import { Location }                 from '@angular/common';
 import { User }                     from '../user';
 import { UserService }              from '../user.service';
 import { Mark }                     from '../mark';
-
-const MARKS: Mark[] = [
-    {
-	id: 1,
-	name: "スナッチ",
-	mark: 40,
-	score: 670,
-	rank: 5,
-	rankSP1: 3,
-	rankSP2: 0,
-    },
-    {
-    	id: 2,
-    	name: "クリーン",
-    	mark: 62.5,
-    	score: 789,
-    	rank: 5,
-    	rankSP1: 3,
-    	rankSP2: -1,
-    },
-    {
-    	id: 3,
-    	name: "スクワット",
-    	mark: 70,
-    	score: 970,
-    	rank: 2,
-    	rankSP1: 3,
-    	rankSP2: -1,
-    },
-    {
-    	id: 4,
-    	name: "立幅跳",
-    	mark: 2.31,
-    	score: 675,
-    	rank: 5,
-    	rankSP1: 3,
-    	rankSP2: -1,
-    },
-    {
-    	id: 5,
-    	name: "立五段",
-    	mark: 11.8,
-    	score: 670,
-    	rank: 5,
-    	rankSP1: 3,
-    	rankSP2: -1,
-    }
-];
-
+import { Record }                   from '../record';
+import { RecordService }            from '../record.service';
 
 
 @Component({
@@ -64,13 +17,14 @@ const MARKS: Mark[] = [
 export class MyPageComponent implements OnInit {
 
     user: User;
-    users: User[] = [];
+    records: Record;
     data: any;
-    dataTable = MARKS;
+    dataTable: any;
 
     
     constructor(
 	private userService: UserService,
+	private recordService: RecordService,
 	private router: Router,
 	private route: ActivatedRoute,
 	private location: Location
@@ -90,21 +44,18 @@ export class MyPageComponent implements OnInit {
     //
     // nvD3用のデータセット整形
     //
-    formatData(user: User): any{
+    formatData(record: Record): any{
 	let key = "CTスコア",
 	values = [];
 	console.log("formatDataset");
-	console.log(user);
 	
 	try{
-	    console.log(user.ctMarks);
-	    let counter=0;
-	    for(let mark of user.ctMarks){
+	    console.log(record.records);
+	    for(let mark of record.records){
 		values.push({
-		    label: "no."+counter,
-		    value: mark,
+		    label: mark.name,
+		    value: mark.mark,
 		});
-		counter++;
 	    }
 	}
 	catch(e){
@@ -121,12 +72,12 @@ export class MyPageComponent implements OnInit {
 	    this.userService.getUser(id)
 		.then(user => {
 		    this.user = user;
-		    this.data = this.formatData(this.user);
-		});
-	});
-	this.userService.getUsers()
-	    .then(users => this.users = users);
-    }
 
+		});
+	    this.records = this.recordService.getRecord(id);
+	});
+	this.dataTable = this.records.records;
+	this.data = this.formatData(this.records);
+    }
     
 }
