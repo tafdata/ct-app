@@ -13,4 +13,18 @@ export class ItemService {
     getItems(): Item[]{
 	return ITEMS;
     }
+
+    // idで指定した種目を取得
+    getItem(id: number): Item{
+	return this.getItems().find(item => item.id === id);
+    }
+
+    // idの配列で複数種目の情報を取得
+    getItemsByIdList(list: number[]){
+	let items: Item[];
+	for(let id of list){
+	    items.push(this.getItem(id));
+	}	
+	return items;
+    }
 }

@@ -28,6 +28,7 @@ import { CtScoreChartComponent } from './ct-score-chart/ct-score-chart.component
 import { MyCtScoreTableComponent } from './my-ct-score-table/my-ct-score-table.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MySummaryComponent } from './my-summary/my-summary.component';
+import { MyCtTargetComponent } from './my-ct-target/my-ct-target.component';
 
 
 
@@ -45,6 +46,7 @@ import { MySummaryComponent } from './my-summary/my-summary.component';
 	MyCtScoreTableComponent,
 	NotFoundComponent,
 	MySummaryComponent,
+	MyCtTargetComponent,
     ],
     imports: [
 	AppRoutingModule,

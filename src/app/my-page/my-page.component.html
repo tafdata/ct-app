@@ -7,7 +7,11 @@
 <!-- CTの結果 -->
 <div *ngIf="records">
 		<app-ct-score-chart [data]="data"></app-ct-score-chart>
-		<app-my-ct-score-table [records]="records"></app-my-ct-score-table>
+		<app-my-ct-score-table [records]="records"></app-my-ct-score-table>		
+</div>
+<!-- CT 目標値 -->
+<div *ngIf="user">
+		<app-my-ct-target [user]="user"></app-my-ct-target>
 </div>
 
 <button class="btn btn-default" (click)="goBack()">Back</button>
