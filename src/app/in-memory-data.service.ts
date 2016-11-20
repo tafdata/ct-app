@@ -1,5 +1,21 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
+
+export class InMemoryUserService implements InMemoryDbService {
+  createDb() {
+      let data = [
+	  { id: 'OSK14001', name: 'Imagawa',   team: "OSK" },
+	  { id: 'OSK14326', name: 'Yoshimura', team: "OSK" },
+	  { id: 'OSK15003', name: 'Yoshikuni', team: "OSK" },
+	  { id: 'OSK15005', name: 'Sakaguchi', team: "OSK" },
+	  { id: 'OSK16005', name: 'Watase',    team: "OSK" },
+	  { id: 'OSK16006', name: 'Kawane',    team: "OSK" },
+      ];
+    return {data};
+  }
+}
+
+
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
       let users = [
@@ -14,3 +30,4 @@ export class InMemoryDataService implements InMemoryDbService {
     return {users};
   }
 }
+

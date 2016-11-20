@@ -23,14 +23,13 @@ export class UserService {
 	    .catch(this.handleError);
     }
 
-    
-    
-    // 単一のユーザを取得
+    // idを指定してユーザを取得
     getUser(id: string): Promise<User>{
-	return this.getUsers()
-	    .then(users => users.find(user => user.id === id));
+    	return this.getUsers()
+    	    .then(users => users.find(user => user.id === id));
     }
 
+    
     
     // エラーハンドリング
     private handleError(error: any): Promise<any> {
@@ -38,5 +37,5 @@ export class UserService {
 	return Promise.reject(error.message || error);
     }
 
-    
+
 }

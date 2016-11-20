@@ -67,6 +67,7 @@ export class MyPageComponent implements OnInit {
     users: User[] = [];
     data: any;
     dataTable = MARKS;
+
     
     constructor(
 	private userService: UserService,
@@ -125,7 +126,6 @@ export class MyPageComponent implements OnInit {
 	});
 	this.userService.getUsers()
 	    .then(users => this.users = users);
-
     }
 
     

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 // import { FormsModule }    from '@angular/forms'; 
-import { HttpModule }    from '@angular/http';
+import { HttpModule, JsonpModule }    from '@angular/http';
 import { NgModule }      from '@angular/core';
 import { NgbModule }     from '@ng-bootstrap/ng-bootstrap';
 
@@ -19,7 +19,9 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { MyPageComponent }       from './my-page/my-page.component';
 
 import { UserService }           from './user.service';
-import { UserSearchComponent } from './user-search/user-search.component';
+import { UserSearchComponent }   from './user-search/user-search.component';
+import { ItemService }           from './item.service';
+
 import { LoginComponent } from './login/login.component';
 import { CtScoreChartComponent } from './ct-score-chart/ct-score-chart.component';
 import { MyCtScoreTableComponent } from './my-ct-score-table/my-ct-score-table.component';
@@ -47,11 +49,13 @@ import { MySummaryComponent } from './my-summary/my-summary.component';
 	AppRoutingModule,
 	BrowserModule,
 	HttpModule,
+	JsonpModule,
 	InMemoryWebApiModule.forRoot(InMemoryDataService),
 	NgbModule.forRoot(),
     ],
     providers: [
-	UserService
+	UserService,
+	ItemService
     ],
     bootstrap: [ AppComponent ]
 })

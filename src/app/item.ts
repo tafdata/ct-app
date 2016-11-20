@@ -1,5 +1,5 @@
 // 種目クラス
-export class User {
+export class Item {
     id: number;
     name: string;
     unit: string;
