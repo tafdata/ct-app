@@ -22,6 +22,7 @@ import { UserService }           from './user.service';
 import { UserSearchComponent }   from './user-search/user-search.component';
 import { ItemService }           from './item.service';
 import { RecordService }         from './record.service';
+import { DataService }           from './data.service';
 
 import { LoginComponent } from './login/login.component';
 import { CtScoreChartComponent } from './ct-score-chart/ct-score-chart.component';
@@ -60,6 +61,7 @@ import { MyCtTargetComponent } from './my-ct-target/my-ct-target.component';
 	UserService,
 	ItemService,
 	RecordService,
+	DataService,
     ],
     bootstrap: [ AppComponent ]
 })

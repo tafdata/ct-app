@@ -16,7 +16,7 @@ export class ItemService {
 
     // idで指定した種目を取得
     getItem(id: number): Item{
-	return this.getItems().find(item => item.id === id);
+	return  this.getItems().find(item => item.id === id);
     }
 
     // idの配列で複数種目の情報を取得
