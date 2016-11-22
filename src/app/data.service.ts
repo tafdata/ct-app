@@ -9,11 +9,35 @@ export class DataService {
     constructor() { }
 
     //
+    // Sort用関数
+    compareItemId(a: any, b: any){
+	if(a.itemId > b.itemId) return -1;
+	if(a.itemId < b.itemId) return 1;
+	return 0;
+    }
+
+    //
     // 回帰曲線のパラメータを全て取得
     getRegressionLineParams(): RegressionLineParam[]{
 	return DATA.RegressionLineParam;
     }
-    // id指定
+    // sp指定
+    getRegressionLineParamsBySp(sp: number): RegressionLineParam[]{
+	let params: RegressionLineParam[] = [];
+	let paramsAll: RegressionLineParam[] = this.getRegressionLineParams();
+
+	// 全てのParamオブジェクトを探索
+	for(let param of paramsAll){
+	    if(param.sp === sp){
+		params.push(param);
+	    }
+	}
+	// itemId順にソート
+	return params.sort(this.compareItemId);	   
+    }
+	
+	
+    // sp&id指定
     getRegressionLineParamByIds(sp: number, itemId: number): RegressionLineParam{
 	let params: RegressionLineParam[] = this.getRegressionLineParams();
 	let result: RegressionLineParam;
