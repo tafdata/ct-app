@@ -24,6 +24,8 @@ import { DataService } from '../data.service';
 export class MyCtTargetComponent implements OnChanges {
     @Input() user: User;
     dataTargetMarks: any = []; // CT目標記録テーブル用データ
+    dataTableRivals: string[] = ["OSK14326","OSK14001","OSK15003"]; // CTライバルテーブル用データ
+
     
     constructor(
 	private itemService: ItemService,
@@ -37,32 +39,25 @@ export class MyCtTargetComponent implements OnChanges {
 	let spItem: Item;
 	let items: Item[] = [];
 
-	console.log("makeDataSet...start");
 	this.getSPItem(sp, this.itemService)
 	    .then(response => {
 		spItem = response;
-		console.log(spItem);
 		return this.getSPRecordRange(sp, this.dataService);
 	    })
 	    .then(response =>{
 		range = response;
-		console.log(range);
 		return this.getRegressionLineParams(sp,this.dataService);
 	    })
 	    .then(response =>{
 		params = response;
-		console.log(params);
 		return this.getItems(params, this.itemService);
 	    })
 	    .then(response => {
 		items = response;
-		console.log(items);
 		return this.calcTargetMark(spItem,range,items,params);
 	    })
 	    .then(response => {
-		console.log(response);
 		this.dataTargetMarks.push(response);
-		console.log(this.dataTargetMarks);
 	    });
 	
     }
@@ -113,7 +108,6 @@ export class MyCtTargetComponent implements OnChanges {
 		xList.push(x/100);
 		x = Math.floor(x + range.step*100);
 	    }
-	    console.log(xList);
 	    
 	    for(let i: number=0;i<items.length;i++){
 		let vals: number[] = [];

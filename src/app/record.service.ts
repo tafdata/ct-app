@@ -19,11 +19,13 @@ export class RecordService {
 	return  this.getRecords().find(record => record.id === id);
     }
 
-    // Promiseを使ってgetRecord
-    getRecordPromise(id: string): Promise<Record>{
-	return new Promise(function(resolve, reject) {
-	    //	    let records = this.getRecords();
-	    resolve(this.getRecords().find(record => record.id === id));	    
-	 });
+    // idの配列から複数のユーザーの記録を取得
+    getRecordsByUserIdList(userIdList: string[]): Record[]{
+	let records: Record[] = [];
+	for(let id of userIdList){
+	    records.push(this.getRecord(id));
+	}
+	return records;
     }
+    
 }

@@ -30,32 +30,10 @@
 				</div>
 		</div>
 		<div class="col-md-6">
-				<div *ngIf="dataset">
+				<div *ngIf="dataTableRivals">
 						<h3>Your Rivals</h3>
 						<!-- ng-bootstrap: Tab -->
-						<ngb-tabset>				
-								<ngb-tab *ngFor="let data of dataset">
-										<template ngbTabTitle>{{data.spName}}</template>
-										<template ngbTabContent>
-												<div class="table-responsive">
-														<table class="table table-striped">
-																<thead>
-																		<tr>
-																				<th style="white-space:nowrap;">{{data.spName}}[{{data.spUnit}}]</th>
-																				<th *ngFor="let val of data.x">{{val | number:'1.2-2'}}</th>
-																		</tr>
-																</thead>
-																<tbody>
-																		<tr *ngFor="let record of data.data">
-																				<td scope="row" style="white-space: nowrap;">{{record.itemName}}[{{record.itemUnit}}]</td>
-																				<td *ngFor="let val of record.values" style="white-space: nowrap;">{{val | number:'1.2-2'}}</td>
-																		</tr>
-																</tbody>
-														</table>
-												</div>
-										</template>
-								</ngb-tab>
-						</ngb-tabset>
+						<app-ct-score-table [userIdList]="dataTableRivals"></app-ct-score-table>
 				</div>
 		</div>
 </div>
