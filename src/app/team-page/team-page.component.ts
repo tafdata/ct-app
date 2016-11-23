@@ -1,5 +1,4 @@
 import { Component, OnInit }      from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Location }               from '@angular/common';
 
 
@@ -11,8 +10,6 @@ import { Location }               from '@angular/common';
 export class TeamPageComponent implements OnInit {
 
     constructor(
-	private router: Router,
-	private route: ActivatedRoute,
 	private location: Location,
     ) { }
 
