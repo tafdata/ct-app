@@ -1,6 +1,9 @@
 import { Component, OnInit }      from '@angular/core';
 import { Location }               from '@angular/common';
 
+import { Team }                   from '../team';
+import { TeamService }            from '../team.service';
+
 
 @Component({
     selector: 'app-team-page',
@@ -8,9 +11,11 @@ import { Location }               from '@angular/common';
     styleUrls: ['./team-page.component.css']
 })
 export class TeamPageComponent implements OnInit {
-
+    teams: Team[];
+    
     constructor(
 	private location: Location,
+	private teamService: TeamService,
     ) { }
 
     //
@@ -20,6 +25,7 @@ export class TeamPageComponent implements OnInit {
     }
     
     ngOnInit() {
+	this.teams = this.teamService.getTeams();
     }
 
 }
