@@ -11,13 +11,22 @@ import { TeamService }            from '../team.service';
     styleUrls: ['./team-page.component.css']
 })
 export class TeamPageComponent implements OnInit {
+
     teams: Team[];
+    model: number;
+    selectedTeam: Team;
     
     constructor(
 	private location: Location,
 	private teamService: TeamService,
     ) { }
 
+    //
+    // チーム選択
+    changeTeam(id: string): void{
+	this.selectedTeam = this.teamService.getTeamById(id);
+    }
+    
     //
     // 戻るボタン
     goBack(): void{
@@ -26,6 +35,7 @@ export class TeamPageComponent implements OnInit {
     
     ngOnInit() {
 	this.teams = this.teamService.getTeams();
+	this.selectedTeam = this.teams[0];
     }
 
 }

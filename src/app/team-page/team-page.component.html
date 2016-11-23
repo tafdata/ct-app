@@ -1,6 +1,22 @@
-<p>
-  team-page works!
-</p>
+<h2>Team Page</h2> 
+
+<!-- チーム選択 -->
+
+<div class="row">
+		<div class="col-xs-6">
+				<div ngbDropdown class="d-inline-block w-100" >
+						<button class="btn btn-outline-primary btn-block" id="dropdownMenu1" ngbDropdownToggle>{{selectedTeam.name}}</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<button *ngFor="let team of teams" class="dropdown-item" (click)="changeTeam(team.id)">{{team.name}}</button>
+						</div>
+				</div>
+		</div>
+</div>
+
 
 <!-- 戻るボタン -->
-<button class="btn btn-default" (click)="goBack()">Back</button>
+<div class="row">
+		<div class="col-xs-12">
+				<button class="btn btn-default" (click)="goBack()">Back</button>
+		</div>
+</div>

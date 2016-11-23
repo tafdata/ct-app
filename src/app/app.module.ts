@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-// import { FormsModule }    from '@angular/forms'; 
+import { FormsModule }    from '@angular/forms'; 
 import { HttpModule, JsonpModule }    from '@angular/http';
 import { NgModule }      from '@angular/core';
 import { NgbModule }     from '@ng-bootstrap/ng-bootstrap';
@@ -55,6 +55,7 @@ import { TeamPageComponent } from './team-page/team-page.component';
     imports: [
 	AppRoutingModule,
 	BrowserModule,
+	FormsModule,
 	HttpModule,
 	JsonpModule,
 	InMemoryWebApiModule.forRoot(InMemoryDataService),
