@@ -30,6 +30,7 @@ import { MyCtScoreTableComponent } from './my-ct-score-table/my-ct-score-table.c
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MySummaryComponent } from './my-summary/my-summary.component';
 import { MyCtTargetComponent } from './my-ct-target/my-ct-target.component';
+import { TeamPageComponent } from './team-page/team-page.component';
 
 
 
@@ -48,6 +49,7 @@ import { MyCtTargetComponent } from './my-ct-target/my-ct-target.component';
 	NotFoundComponent,
 	MySummaryComponent,
 	MyCtTargetComponent,
+	TeamPageComponent,
     ],
     imports: [
 	AppRoutingModule,
