@@ -2,7 +2,7 @@
 <div class="row">
 		<div class="col-md-6">
 				<div *ngIf="dataTargetMarks">
-						<h3>My CT Target Records</h3>
+						<h3>CT Target Marks</h3>
 						<!-- ng-bootstrap: Tab -->
 						<ngb-tabset>				
 								<ngb-tab *ngFor="let data of dataTargetMarks">
@@ -29,11 +29,20 @@
 						</ngb-tabset>
 				</div>
 		</div>
+
+		
 		<div class="col-md-6">
 				<div *ngIf="dataTableRivals">
 						<h3>Your Rivals</h3>
 						<!-- ng-bootstrap: Tab -->
-						<app-ct-score-table [userIdList]="dataTableRivals"></app-ct-score-table>
+						<ngb-tabset>				
+								<ngb-tab *ngFor="let data of dataTableRivals">
+										<template ngbTabTitle>{{data.spItem.name}}</template>
+										<template ngbTabContent>
+												<app-ct-score-table [userIdList]="data.rivalsId"></app-ct-score-table>												
+										</template>
+								</ngb-tab>
+						</ngb-tabset>
 				</div>
 		</div>
 </div>

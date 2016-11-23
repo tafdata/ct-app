@@ -13,5 +13,17 @@ export const DATA: any = {
 	{ sp: 103, min:  1.70, max:  2.20, step: 0.05 },
 	{ sp: 104, min:  3.00, max:  5.50, step: 0.10 },
     ],
-    
+    Rivals: [
+	{ userId: "OSK14001", sp: 101, rivalsId: ["OSK15005","OSK15003","OSK16006",] },
+	{ userId: "OSK14326", sp: 101, rivalsId: ["OSK15005","OSK16006",] },
+	{ userId: "OSK14326", sp: 102, rivalsId: ["OSK15005","OSK15003","OSK16006",] },
+	{ userId: "OSK15003", sp: 101, rivalsId: ["OSK15005","OSK15003","OSK16006",] },
+	{ userId: "OSK15003", sp: 102, rivalsId: ["OSK14326","OSK16006",] },
+	{ userId: "OSK15005", sp: 103, rivalsId: ["OSK14001","OSK15003",] },
+	{ userId: "OSK16005", sp: 101, rivalsId: ["OSK15005","OSK15003","OSK16006",] },
+	{ userId: "OSK16005", sp: 102, rivalsId: ["OSK15005","OSK15003","OSK16006",] },
+	{ userId: "OSK16006", sp: 101, rivalsId: ["OSK15005","OSK15003","OSK16006",] },
+	{ userId: "OSK16006", sp: 104, rivalsId: ["OSK15005","OSK15003","OSK16006",] },
+    ],
+	    
 };

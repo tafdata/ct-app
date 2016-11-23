@@ -19,3 +19,12 @@ export class RecordRange {
     max: number;
     step: number;
 }
+
+
+//
+// ライバル選手のIDリスト
+export class Rival{
+    userId: string;
+    sp: number;
+    rivalsId: string[];
+}

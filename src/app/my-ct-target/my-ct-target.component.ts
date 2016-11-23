@@ -24,7 +24,7 @@ import { DataService } from '../data.service';
 export class MyCtTargetComponent implements OnChanges {
     @Input() user: User;
     dataTargetMarks: any = []; // CT目標記録テーブル用データ
-    dataTableRivals: string[] = ["OSK14326","OSK14001","OSK15003"]; // CTライバルテーブル用データ
+    dataTableRivals: any = []; // CTライバルテーブル用データ
 
     
     constructor(
@@ -32,7 +32,9 @@ export class MyCtTargetComponent implements OnChanges {
 	private dataService: DataService,
     ) { }
 
-    // Ct Target Table用データセット作成
+    /************************************
+     ** Ct Target Table用データセット作成 **
+     ************************************/
     makeDataSetForCtTargetTable(sp: number){
 	let range: RecordRange;
 	let params: RegressionLineParam[] = [];
@@ -128,13 +130,33 @@ export class MyCtTargetComponent implements OnChanges {
 	    });
 	});
     }
-    
+
+
+    /************************************
+     ** Ct Rival Table用データセット作成 **
+     *************************************/
+    makeDatasetForTableRivals(userId: string, sp: number): void{    
+	let rivals = this.dataService.getRivalsByUserIdAndSp(userId, sp);
+	let spItem = this.itemService.getItem(sp);
+
+	this.dataTableRivals.push({
+	    spItem: spItem,
+	    rivalsId: rivals.rivalsId,
+	});
+    }
     
     ngOnChanges(changes: any) {
 	// 目標データのデータセット作成
-	if(this.user.SP1){ this.makeDataSetForCtTargetTable(this.user.SP1); }
-	if(this.user.SP2){ this.makeDataSetForCtTargetTable(this.user.SP2); }
+	if(this.user.SP1){
+	    this.makeDataSetForCtTargetTable(this.user.SP1);
+	    this.makeDatasetForTableRivals(this.user.id, this.user.SP1);
+	}
+	if(this.user.SP2){
+	    this.makeDataSetForCtTargetTable(this.user.SP2);
+	    this.makeDatasetForTableRivals(this.user.id, this.user.SP2);
+	}
 	
+
     }
 
 }
