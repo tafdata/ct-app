@@ -23,11 +23,7 @@ import { DataService } from '../data.service';
 
 export class MyCtTargetComponent implements OnChanges {
     @Input() user: User;
-    targetRecords: number[] = [6.80, 6.90, 7.00, 7.10];
-    data: any = [];
-    SP1: Item;
-    SP2: Item;
-    SP: Item[];
+    dataTargetMarks: any = []; // CT目標記録テーブル用データ
     
     constructor(
 	private itemService: ItemService,
@@ -65,8 +61,8 @@ export class MyCtTargetComponent implements OnChanges {
 	    })
 	    .then(response => {
 		console.log(response);
-		this.data.push(response);
-		console.log(this.data);
+		this.dataTargetMarks.push(response);
+		console.log(this.dataTargetMarks);
 	    });
 	
     }
@@ -125,25 +121,26 @@ export class MyCtTargetComponent implements OnChanges {
 		    vals.push(params[i].a * xList[j] + params[i].b);
 		}
 		dataset.push({
-		    itemName: items[i].name,
-		    values: vals,
+		    itemName: items[i].name, // CT種目名
+		    itemUnit: items[i].unit, // CT種目の単位
+		    values: vals, // 記録の配列
 		});
 	    }
-
-	    console.log(dataset);
-	    resolve(dataset);
+	    resolve({
+		spName: spItem.name, // 専門種目名
+		spUnit: spItem.unit, // 専門種目の単位
+		x: xList, // 目標記録(独立変数X)
+		data: dataset, // CT項目名&単位&目標記録
+	    });
 	});
     }
     
     
     ngOnChanges(changes: any) {
+	// 目標データのデータセット作成
+	if(this.user.SP1){ this.makeDataSetForCtTargetTable(this.user.SP1); }
+	if(this.user.SP2){ this.makeDataSetForCtTargetTable(this.user.SP2); }
 	
-	this.SP1 = this.itemService.getItem(this.user.SP1);
-	this.SP2 = this.itemService.getItem(this.user.SP2);
-
-	this.makeDataSetForCtTargetTable(101);
-	this.makeDataSetForCtTargetTable(102);
-
     }
 
 }
