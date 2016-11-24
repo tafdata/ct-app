@@ -59,10 +59,12 @@ export class MyPageComponent implements OnInit {
 	
 	try{
 	    for(let mark of records.records){
-		values.push({
-		    label: mark.name,
-		    value: mark.mark,
-		});
+		if(mark.id != 0){
+		    values.push({
+			label: mark.name,
+			value: mark.mark,
+		    });
+		}
 	    }
 	}
 	catch(e){
