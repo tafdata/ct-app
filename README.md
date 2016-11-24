@@ -26,11 +26,13 @@ Angular2 based application for visualize the result of 'Contorol Test', physical
 
 実際のデータを使用してアプリケーションを使用するためには、このプロジェクトをcloneして以下のファイルを変更してください。データの形式は別途クラスを定義しているのでそちらを参考にしてください。
 
-1. src/app/in-memory-data.service.ts
-ユーザーに関する情報
-*users*の配列の中に以下のクラスを格納する。
+#### src/app/in-memory-data.service.ts
+
+ユーザーに関する情報。*users*の配列の中に以下のクラスを格納する。
+
 データ形式: class User　(/src/app/user.ts)
-`
+
+```typescript:/src/app/user.ts
 	// ユーザークラス
 	export class User {
 	    id: string;   // ユーザーID
@@ -40,9 +42,9 @@ Angular2 based application for visualize the result of 'Contorol Test', physical
 	    SP1: number;  // 専門種目ID(1つめ) idは 'mock-item.ts'で決めたもの。タグは"sp"
 	    SP2: number;  // 専門種目ID(2つめ)
 	}
-`
-Ex.
-`  { id: 'OSK14001', name: 'Imagawa',   team: "OSK", sex: "W", SP1: 101  },`
+```
+
+Ex.`  { id: 'OSK14001', name: 'Imagawa',   team: "OSK", sex: "W", SP1: 101  },`
 
 
 2. src/app/mock-data.ts
