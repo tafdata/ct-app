@@ -1,6 +1,6 @@
 <div class="row">
 		<div class="col-xs-12">
-				<div *ngIf="user">
+				<div *ngIf="mark">
 						<div class="card card-outline-info text-xs-center">								
 								<div class="card-header">												
 										<span><span class="h3">{{user.name}}</span>さんの結果</span>
@@ -9,7 +9,7 @@
 										<div class="row flex-items-xs-middle">
 												<div class="col-md-6">
 														<p class="text-xs-left">総合スコア</p>
-														<h3 class="display-2">{{scoreTotal}}<small class="text-muted">点</small></h3>
+														<h3 class="display-2" >{{mark.score}}<small class="text-muted">点</small></h3>
 														<p>{{scoreMax}}点中({{goalAvg}}%)</p>
 												</div>
 
@@ -17,15 +17,15 @@
 														<div class="row flex-items-xs-middle">
 																<div class="col-xs-4">
 																		<p>全体順位</p>
-																		<h4 class="dislay-2">{{rankTotal}}<small>位</small></h4>
+																		<h4 class="dislay-2">{{mark.rank}}<small>位</small></h4>
 																</div>
-																<div class="col-xs-4">
-																		<p>{{SP1}}</p>
-																		<h4 class="dislay-2">{{rankTotal}}<small>位</small></h4>
+																<div class="col-xs-4" >
+																		<p *ngIf="SP1">{{SP1.name}}</p>
+																		<h4 class="dislay-2" *ngIf="mark.rankSP1">{{mark.rankSP1}}<small>位</small></h4>
 																</div>
-																<div class="col-xs-4">
-																		<p>{{SP2}}</p>
-																		<h4 class="dislay-2">{{rankTotal}}<small>位</small></h4>
+																<div class="col-xs-4" >
+																		<p *ngIf="SP2">{{SP2.name}}</p>
+																		<h4 class="dislay-2" *ngIf="mark.rankSP2">{{mark.rankSP2}}<small>位</small></h4>
 																</div>
 														</div>
 												</div>

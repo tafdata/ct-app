@@ -2,7 +2,7 @@
 <!-- ユーザー情報 -->
 <div *ngIf="user">
 		<h2>{{user.name}}</h2>
-		<app-my-summary [user]="user"></app-my-summary>
+		<app-my-summary [user]="user" [record]="records"></app-my-summary>
 </div>
 <!-- CTの結果 -->
 <div *ngIf="records">
@@ -11,7 +11,7 @@
 </div>
 <!-- CT 目標値 -->
 <div *ngIf="user">
-		<app-my-ct-target [user]="user"></app-my-ct-target>
+		<app-my-ct-target [user]="user" ></app-my-ct-target>
 </div>
 
 <!-- 戻るボタン -->
