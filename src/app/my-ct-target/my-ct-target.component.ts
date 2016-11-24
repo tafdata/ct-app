@@ -149,7 +149,6 @@ export class MyCtTargetComponent implements OnChanges {
 	    })
 	    .then(response => {
 		spItem = response;		
-		console.log(rivals);
 		for(let userId of rivals.rivalsId){
 		    this.userService.getUser(userId)
 			.then(response => {
