@@ -1,11 +1,12 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 import { User } from '../user';
+import { UserService } from '../user.service';
 import { Item } from '../item';
 import { ItemService } from '../item.service';
 import { Mark } from '../mark';
 import { Record } from '../record';
-import { RegressionLineParam, RecordRange } from '../data'
+import { RegressionLineParam, RecordRange, Rival } from '../data'
 import { DataService } from '../data.service';
 
 
@@ -30,6 +31,7 @@ export class MyCtTargetComponent implements OnChanges {
     constructor(
 	private itemService: ItemService,
 	private dataService: DataService,
+	private userService: UserService,
     ) { }
 
     /************************************
@@ -136,15 +138,41 @@ export class MyCtTargetComponent implements OnChanges {
      ** Ct Rival Table用データセット作成 **
      *************************************/
     makeDatasetForTableRivals(userId: string, sp: number): void{    
-	let rivals = this.dataService.getRivalsByUserIdAndSp(userId, sp);
-	let spItem = this.itemService.getItem(sp);
+	let rivals: Rival;
+	let spItem: Item;
+	let list: User[] = [];
 
-	this.dataTableRivals.push({
-	    spItem: spItem,
-	    rivalsId: rivals.rivalsId,
+	this.getRivals(userId, sp, this.dataService)
+	    .then(response =>{
+		rivals = response;
+		return this.getItem(sp, this.itemService);
+	    })
+	    .then(response => {
+		spItem = response;		
+		console.log(rivals);
+		for(let userId of rivals.rivalsId){
+		    this.userService.getUser(userId)
+			.then(response => {
+			    list.push(response);
+			});
+		}		
+		this.dataTableRivals.push({
+		    spItem: spItem,
+		    rivalUsers: list,
+		});
+	    });
+    }
+    getRivals(userId: string, sp: number, dataService: any): Promise<Rival>{
+	return new Promise(function(resolve,reject){
+	    resolve(dataService.getRivalsByUserIdAndSp(userId, sp));
 	});
     }
-    
+    getItem(sp: number, itemService: any): Promise<Item>{
+	return new Promise(function(resolve, reject){
+	    resolve(itemService.getItem(sp));
+	});
+    }
+	
     ngOnChanges(changes: any) {
 	// 目標データのデータセット作成
 	if(this.user.SP1){

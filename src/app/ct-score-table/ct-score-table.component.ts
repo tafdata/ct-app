@@ -18,7 +18,7 @@ import { RecordService }            from '../record.service';
 
 export class CtScoreTableComponent implements OnChanges{
     @Input()
-    userIdList: string[]; // 結果を表示するユーザーIDのリスト
+    userList: User[]; // 結果を表示するユーザーIDのリスト
     tbody: any = [];    //  tbody用データ
     thead: any = [];       // thead用データ
 
@@ -38,19 +38,22 @@ export class CtScoreTableComponent implements OnChanges{
 
     
     // tbody用データの作成
-    makeTBodyDataset(idList: string[], thead: Item[]): any{
-	let records: any = this.recordService.getRecordsByUserIdList(idList);
+    makeTBodyDataset(users: User[], thead: Item[]): any{
 	let tbody: any = [];
 
-	for(let record of records){
-	    this.userService.getUser(record.id)
-		.then(response => {
-		    tbody.push(this.buildTBodyRecord(response, record.records, thead));
+	for(let user of users){
+	    this.getMarksByUserId(user.id, this.recordService)
+		.then(response => { // response: Mark[];
+		    tbody.push(this.buildTBodyRecord(user, response, thead));
 		});
 	}
-	
 	return tbody;
     }
+    getMarksByUserId(id: string, recordService: any): Promise<Mark[]>{
+	return new Promise(function(resolve,reject){
+	    resolve(recordService.getRecord(id).records);
+	});
+    }	
     buildTBodyRecord(user: User, marks: Mark[], thead: Item[]): any{
 	let vals: any = [];
 	// theadに含まれている記録のみを選択
@@ -79,7 +82,7 @@ export class CtScoreTableComponent implements OnChanges{
 	this.makeTHeadDataset()
 	    .then(response => {
 		this.thead = response;
-		this.tbody =  this.makeTBodyDataset(this.userIdList, response);
+		this.tbody =  this.makeTBodyDataset(this.userList, response);
 	    });
 
     }

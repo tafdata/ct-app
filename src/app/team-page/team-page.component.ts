@@ -17,7 +17,7 @@ export class TeamPageComponent implements OnInit {
     teams: Team[];
     model: number;
     selectedTeam: Team;
-    userIdList: string[] = [];
+    userList: User[] = [];
     
     constructor(
 	private location: Location,
@@ -29,22 +29,15 @@ export class TeamPageComponent implements OnInit {
     // チーム選択
     changeTeam(id: string): void{
 	this.selectedTeam = this.teamService.getTeamById(id);
-	this.makeTeamMembersIdList(this.selectedTeam.id)
-	    .then(response => {
-		this.userIdList = response;
-	    });
+	this.makeTeamMemberList(this.selectedTeam.id);
     }
 
     //
     // チームメンバー全員のIDを取得
-    makeTeamMembersIdList(teamId: string): Promise<string[]>{
+    makeTeamMemberList(teamId: string): Promise<string[]>{
 	return this.userService.getUsersByTeamId(teamId)
 	    .then(response => {
-		let list: string[] = [];
-		for(let user of response){
-		    list.push(user.id);
-		}
-		return list;
+		this.userList = response;
 	    });
     }
     
@@ -57,10 +50,7 @@ export class TeamPageComponent implements OnInit {
     ngOnInit() {
 	this.teams = this.teamService.getTeams();
 	this.selectedTeam = this.teams[0];
-	this.makeTeamMembersIdList(this.selectedTeam.id)
-	    .then(response => {
-		this.userIdList = response;
-	    });
+	this.makeTeamMemberList(this.selectedTeam.id);
     }
 
 }

@@ -39,7 +39,7 @@
 								<ngb-tab *ngFor="let data of dataTableRivals">
 										<template ngbTabTitle>{{data.spItem.name}}</template>
 										<template ngbTabContent>
-												<app-ct-score-table [userIdList]="data.rivalsId"></app-ct-score-table>												
+												<app-ct-score-table [userList]="data.rivalUsers"></app-ct-score-table>												
 										</template>
 								</ngb-tab>
 						</ngb-tabset>
