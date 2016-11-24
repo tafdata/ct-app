@@ -15,21 +15,35 @@ export class UserService {
 	private http: Http,
     ) { }
 
-    // 全ユーザーを取得
+    //
+    // 全取得
     getUsers(): Promise<User[]>{
 	return this.http.get(this.usersUrl)
 	    .toPromise()
 	    .then(response => response.json().data as User[])
 	    .catch(this.handleError);
     }
-
-    // idを指定してユーザを取得
+    //
+    // idを指定
     getUser(id: string): Promise<User>{
     	return this.getUsers()
     	    .then(users => users.find(user => user.id === id));
     }
+    //
+    // teamId指定
+    getUsersByTeamId(teamId: string): Promise<User[]>{
+	return this.getUsers()
+	    .then(response => {
+		let users: User[] = []; 
+		for(let user of response){
+		    if(user.team === teamId){
+			users.push(user);
+		    }
+		}
+		return users;
+	    });
+    }
 
-    
     
     // エラーハンドリング
     private handleError(error: any): Promise<any> {
