@@ -1,10 +1,10 @@
 // 記録クラス
 export class Mark{
-    id: number;
-    name: string;
-    mark: number;
-    score: number;
-    rank: number;
-    rankSP1: number;
-    rankSP2: number;
+    id: number;       // 種目Id
+    name: string;     // 種目名
+    mark: number;     // 記録[ex. 6.00]
+    score: number;    // スコア
+    rank: number;     // 総合順位
+    rankSP1: number;  // 専門種目1内での順位
+    rankSP2: number;  // 専門種目2内での順位
 }
