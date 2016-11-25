@@ -35,9 +35,7 @@ Angular2 based application for visualize the result of 'Contorol Test', physical
 
 #### [1]src/app/in-memory-data.service.ts
 
-ユーザーに関する情報。*users*の配列の中に以下のクラスを格納する。
-
-データ形式: class User　(/src/app/user.ts)
+ユーザーに関する情報。*users*の配列の中に以下のクラスを格納する。データ形式: class User　(/src/app/user.ts)
 
 ```typescript:/src/app/user.ts
 	// ユーザークラス
@@ -57,10 +55,9 @@ Ex.`  { id: 'OSK14001', name: 'Imagawa',   team: "OSK", sex: "W", SP1: 101  },`
 #### [2]src/app/mock-data.ts
 複数形式の情報(詳細は以下を参照)
 
-**RegressionLineParams**:
-専門種目と各CT種目について線形回帰分析を行った時に得られるパラメータ
 
-y = a*x + b
+**RegressionLineParams**:
+専門種目と各CT種目について線形回帰分析を行った時に得られるパラメータ(y = a*x + b)
 
 + y: CT種目の推定目標値
 + x: 専門種目の目標値(独立変数)
