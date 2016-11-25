@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Team }       from './team';
-import { TEAM }       from './mock-team';
+import { TEAM }       from '../data/mock-team';
 
 @Injectable()
 export class TeamService {

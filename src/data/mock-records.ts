@@ -1,4 +1,4 @@
-import { Record } from './record'
+import { Record } from '../app/record'
 
 
 export const RECORDS: Record[] = [

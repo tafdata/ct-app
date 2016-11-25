@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { DATA }       from './mock-data'
-import { RegressionLineParam, RecordRange, Rival } from './data'
+import { REGRESSION_LINE_PARAM, RECORD_RANGE, RIVALS }       from '../data/mock-data'
+import { RegressionLineParam, RecordRange, Rival }           from './data'
 
 @Injectable()
 export class DataService {
@@ -34,7 +34,7 @@ export class DataService {
     //
     // 全取得
     getRegressionLineParams(): RegressionLineParam[]{
-	return DATA.RegressionLineParam;
+	return REGRESSION_LINE_PARAM;
     }
     //
     // sp指定
@@ -70,7 +70,7 @@ export class DataService {
     //
     // 全取得
     getRecordRanges(): RecordRange[]{
-	return DATA.RecordRange;
+	return RECORD_RANGE;
     }
     //
     // id指定
@@ -85,7 +85,7 @@ export class DataService {
     //
     // 全取得
     getRivals(): Rival[]{
-	return DATA.Rivals;
+	return RIVALS;
     }
     //
     // userID指定

@@ -1,4 +1,13 @@
-import { Item } from './item'
+import { Item } from '../app/item'
+
+// 種目クラス
+// export class Item {
+//     id: number;      // 種目Id
+//     name: string;    // 種目名   
+//     unit: string;    // 記録の単位[m, sec, min, kg ...]
+//     tag:  string[];  // タグ
+// }
+
 
 export const ITEMS: Item[]= [
     { id:  0, name: "総合スコア",       unit: "点",   tag: ["ct-meta"] },

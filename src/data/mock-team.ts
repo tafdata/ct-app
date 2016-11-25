@@ -1,4 +1,11 @@
-import { Team } from './team';
+import { Team } from '../app/team';
+
+// Team用クラス
+// export class Team {
+//     id: string;    // チームId
+//     name: string;  // チーム名
+// }
+
 
 export const TEAM: Team[] = [
     { id: "OSK", name: "チームOSK"},

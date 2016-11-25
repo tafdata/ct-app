@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Mark }       from './mark';
 import { Record }     from './record';
-import { RECORDS }    from './mock-records'
+import { RECORDS }    from '../data/mock-records'
 
 @Injectable()
 export class RecordService {
