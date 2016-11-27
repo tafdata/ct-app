@@ -54,3 +54,11 @@ export class Correlation{
     values: any;    // 相関係数の配列 [ 走幅跳, 三段跳, 走高跳, 棒高跳 ]の順
 }
     
+
+//
+// ヒストグラム用データセット
+//
+export class Histgram{
+    itemId: number; // 種目Id
+    values: any;    // 配列 [ {x:number,y:number}, ....]
+}

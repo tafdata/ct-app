@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { REGRESSION_LINE_PARAM, RECORD_RANGE, RIVALS, CT_META, CORRELATIONS }       from '../data/mock-data'
-import { RegressionLineParam, RecordRange, Rival, CtMeta, Correlation }           from './data'
+import { REGRESSION_LINE_PARAM, RECORD_RANGE, RIVALS, CT_META, CORRELATIONS, HISTGRAM }       from '../data/mock-data'
+import { RegressionLineParam, RecordRange, Rival, CtMeta, Correlation, Histgram }           from './data'
 
 @Injectable()
 export class DataService {
@@ -142,19 +142,15 @@ export class DataService {
     getCorrelations(): Correlation[]{
 	return CORRELATIONS;
     }
+
+    /******************************
+     **  Histgram
+     **  ヒストグラム用
+     ******************************/
     //
-    // itemIDのリストから取得
-    getCorrelationByItemId(list: number[]): Correlation[]{
-	let correlationAll = this.getCorrelations();
-	let result: Correlation[] = [];
-
-	for(let id of list){
-	    let cor = correlationAll.find(val => val.itemId === id);
-	    if(cor){ result.push(cor); }
-	}
-
-	return result;
+    // 全取得
+    getHistgram(): Histgram[]{
+	return HISTGRAM;
     }
-
     
 }

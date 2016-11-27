@@ -1,4 +1,4 @@
-import { RegressionLineParam, RecordRange, Rival, CtMeta, Correlation }   from '../app/data'
+import { RegressionLineParam, RecordRange, Rival, CtMeta, Correlation, Histgram }   from '../app/data'
 
 
 //
@@ -102,3 +102,36 @@ export const CORRELATIONS: Correlation[] = [
     { itemId: 11, values: [ 0.44, 0.54, 0.33, 0.23] },    
 ];
 
+//
+// ヒストグラム用データセット
+//
+// export class Histgram{
+//     itemId: number; // 種目Id
+//     values: any;    // 配列 [ {x:number,y:number}, ....]
+// }
+export const HISTGRAM: Histgram[] = [
+    {
+	itemId: 1,
+	values: [ {x:0,y:0},{x:1,y:2},{x:3,y:3},{x:4,y:0},{x:5,y:2},{x:6,y:3},],
+    },
+    {
+	itemId: 2,
+	values: [ {x:0,y:0},{x:1,y:2},{x:3,y:3},{x:4,y:0},{x:5,y:2},{x:6,y:3},],
+    },
+    {
+	itemId: 3,
+	values: [ {x:0,y:0},{x:1,y:2},{x:3,y:3},{x:4,y:0},{x:5,y:2},{x:6,y:3},],
+    },
+    {
+	itemId: 4,
+	values: [ {x:0,y:0},{x:1,y:2},{x:3,y:3},{x:4,y:0},{x:5,y:2},{x:6,y:3},],
+    },
+    {
+	itemId: 5,
+	values: [ {x:0,y:0},{x:1,y:2},{x:3,y:3},{x:4,y:0},{x:5,y:2},{x:6,y:3},],
+    },
+    {
+	itemId: 6,
+	values: [ {x:0,y:0},{x:1,y:2},{x:3,y:3},{x:4,y:0},{x:5,y:2},{x:6,y:3},],
+    },
+];

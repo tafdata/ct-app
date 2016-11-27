@@ -4,7 +4,7 @@ import { User }        from '../user';
 import { UserService } from '../user.service';
 import { Item }        from '../item';
 import { ItemService } from '../item.service';
-import { CtMeta, Correlation }  from '../data';
+import { CtMeta, Correlation, Histgram }  from '../data';
 import { DataService } from '../data.service';
 import { Team }        from '../team';
 import { TeamService } from '../team.service';
@@ -22,8 +22,10 @@ export class OverviewPageComponent implements OnInit {
     teams: Team[];
     metaData: CtMeta[];
     correlations: Correlation[]; // 相関係数
+    histgram: Histgram[]; // ヒストグラム用データセット
     dataOverviewTable: any = { thead: [], tbody: {}}; // Overview    
     dataCorrelation: any = { thead: [], tbody: {}};    // 相関係数
+    dataHistgram: any;
     dataPieChart: any = [];
     
     constructor(
@@ -36,6 +38,7 @@ export class OverviewPageComponent implements OnInit {
 	this.itemSP = itemService.getItemsByTag("sp");
 	this.metaData = dataService.getCtMeta();
 	this.correlations = dataService.getCorrelations();
+	this.histgram = dataService.getHistgram();
 	this.teams = teamService.getTeams();
     }
 
@@ -74,9 +77,7 @@ export class OverviewPageComponent implements OnInit {
 	}
 	this.dataPieChart =  data;
     }    
-    buildDatasetForPieChart(itemSP): any{
-	
-    }
+
 
     //
     // Overview用データセット
@@ -85,9 +86,6 @@ export class OverviewPageComponent implements OnInit {
 	let thead: any = [
 	    {head:"平均"},{head:"最高"},{head:"分散"},{head:"参加人数"}
 	];
-	// for(let sp of this.itemSP){
-	//     thead.push({head: sp.name});
-	// }
 
 	//
 	let tbody: any = [];
@@ -105,6 +103,17 @@ export class OverviewPageComponent implements OnInit {
 	    tbody: tbody,
 	};
 	console.log(this.dataOverviewTable);
+    }
+
+    //
+    // ヒストグラム用
+    setDataForHistgram(item: Item): any{
+	let values = this.histgram.find(data => data.itemId === item.id);
+
+	this.dataHistgram = [{
+	    key: item.name,
+	    values: values.values,
+	}];		
     }
 
     //
@@ -142,6 +151,8 @@ export class OverviewPageComponent implements OnInit {
 	console.log(this.dataPieChart);
 	this.makeDataForOverviewTable();
 	this.makeDataForCorrelationTable();
+
+	this.setDataForHistgram(this.itemCT[0]);
     }
 
 }
