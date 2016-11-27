@@ -50,7 +50,6 @@ export class CtMeta {
 // 相関係数
 // ==>
 export class Correlation{
-    sex: string; // 性別
     itemId: number; // CT種目id
     values: any;    // 相関係数の配列 [ 走幅跳, 三段跳, 走高跳, 棒高跳 ]の順
 }

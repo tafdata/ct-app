@@ -85,21 +85,20 @@ export const CT_META: CtMeta[] = [
 // 相関係数
 // ==>
 // export class Correlation{
-//     sex: string; // 性別
 //     itemId: number; // CT種目id
 //     values: any;    // 相関係数の配列 [ 走幅跳, 三段跳, 走高跳, 棒高跳 ]の順
 // }
 export const CORRELATIONS: Correlation[] = [
-    { sex: "M", itemId: 1, values: [ 0.44, 0.54, 0.33, 0.23] },
-    { sex: "M", itemId: 2, values: [ 0.44, 0.54, 0.33, 0.23] },
-    { sex: "M", itemId: 3, values: [ 0.44, 0.54, 0.33, 0.23] },
-    { sex: "M", itemId: 4, values: [ 0.44, 0.54, 0.33, 0.23] },
-    { sex: "M", itemId: 5, values: [ 0.44, 0.54, 0.33, 0.23] },
-    { sex: "M", itemId: 6, values: [ 0.44, 0.54, 0.33, 0.23] },
-    { sex: "W", itemId: 7, values: [ 0.44, 0.54, 0.33, 0.23] },
-    { sex: "W", itemId: 8, values: [ 0.44, 0.54, 0.33, 0.23] },
-    { sex: "W", itemId: 9, values: [ 0.44, 0.54, 0.33, 0.23] },
-    { sex: "W", itemId: 10, values: [ 0.44, 0.54, 0.33, 0.23] },
-    { sex: "W", itemId: 11, values: [ 0.44, 0.54, 0.33, 0.23] },    
+    { itemId: 1, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { itemId: 2, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { itemId: 3, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { itemId: 4, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { itemId: 5, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { itemId: 6, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { itemId: 7, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { itemId: 8, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { itemId: 9, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { itemId: 10, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { itemId: 11, values: [ 0.44, 0.54, 0.33, 0.23] },    
 ];
 
