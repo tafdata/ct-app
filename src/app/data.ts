@@ -31,3 +31,27 @@ export class Rival{
     sp: number;          // 専門種目Id
     rivalsId: string[];  // ユーザーIdのリスト
 }
+
+//
+// CTの統計メタ情報
+// ==>  Overview Pageに使用
+export class CtMeta {
+    itemId: number;      // 種目Id
+    avg: number;         // 平均
+    max: number;         // 最高記録
+    variance: number;    // 分散
+    N: number; // 参加人数(総数)
+    NSP: any;  //各専門種目ごとの参加人数(専門種目Idと参加人数のkey-valueオブジェクトの配列)
+               // Ex. NSP: any = [ { sp:number, N: number}, ...] 
+}
+
+
+//
+// 相関係数
+// ==>
+export class Correlation{
+    sex: string; // 性別
+    itemId: number; // CT種目id
+    values: any;    // 相関係数の配列 [ 走幅跳, 三段跳, 走高跳, 棒高跳 ]の順
+}
+    

@@ -1,4 +1,4 @@
-import { RegressionLineParam, RecordRange, Rival }   from '../app/data'
+import { RegressionLineParam, RecordRange, Rival, CtMeta, Correlation }   from '../app/data'
 
 
 //
@@ -57,3 +57,49 @@ export const RIVALS: Rival[] = [
     { userId: "OSK16006", sp: 101, rivalsId: ["OSK15005","OSK15003","OSK16006",] },
     { userId: "OSK16006", sp: 104, rivalsId: ["OSK15005","OSK15003","OSK16006",] },
 ];
+
+
+//
+// CTの統計メタ情報(統計量と参加者数)
+// ==>  Overview Pageに使用
+// export class CtMetad
+//{
+//     itemId: number;      // 種目Id
+//     avg: number;         // 平均
+//     max: number;         // 最高記録
+//     variance: number:    // 分散
+//     N: number; // 参加人数(総数)
+//     NSP: any;  //各専門種目ごとの参加人数(専門種目Idと参加人数のkey-valueオブジェクトの配列)
+//                // Ex. NSP: any = [ { sp:number, N: number}, ...] 
+// }
+export const CT_META: CtMeta[] = [
+    { itemId: 1, avg: 50, max: 10, variance: 90, N: 38, NSP: [{sp: 101, N: 15}, {sp: 102, N: 9}, {sp: 103, N: 12}, {sp: 104, N: 5}], },
+    { itemId: 2, avg: 60, max: 20, variance: 90, N: 38, NSP: [{sp: 101, N: 15}, {sp: 102, N: 9}, {sp: 103, N: 12}, {sp: 104, N: 5}], },
+    { itemId: 3, avg: 70, max: 30, variance: 90, N: 38, NSP: [{sp: 101, N: 15}, {sp: 102, N: 9}, {sp: 103, N: 12}, {sp: 104, N: 5}], },
+    { itemId: 4, avg: 80, max: 40, variance: 90, N: 38, NSP: [{sp: 101, N: 15}, {sp: 102, N: 9}, {sp: 103, N: 12}, {sp: 104, N: 5}], },
+    { itemId: 5, avg: 90, max: 50, variance: 90, N: 38, NSP: [{sp: 101, N: 15}, {sp: 102, N: 9}, {sp: 103, N: 12}, {sp: 104, N: 5}], },
+    { itemId: 6, avg: 10, max: 60, variance: 90, N: 38, NSP: [{sp: 101, N: 15}, {sp: 102, N: 9}, {sp: 103, N: 12}, {sp: 104, N: 5}], },
+];
+
+//
+// 相関係数
+// ==>
+// export class Correlation{
+//     sex: string; // 性別
+//     itemId: number; // CT種目id
+//     values: any;    // 相関係数の配列 [ 走幅跳, 三段跳, 走高跳, 棒高跳 ]の順
+// }
+export const CORRELATIONS: Correlation[] = [
+    { sex: "M", itemId: 1, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { sex: "M", itemId: 2, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { sex: "M", itemId: 3, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { sex: "M", itemId: 4, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { sex: "M", itemId: 5, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { sex: "M", itemId: 6, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { sex: "W", itemId: 7, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { sex: "W", itemId: 8, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { sex: "W", itemId: 9, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { sex: "W", itemId: 10, values: [ 0.44, 0.54, 0.33, 0.23] },
+    { sex: "W", itemId: 11, values: [ 0.44, 0.54, 0.33, 0.23] },    
+];
+

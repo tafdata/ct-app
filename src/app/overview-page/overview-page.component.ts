@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { User }        from '../user';
 import { UserService } from '../user.service';
-
+import { Item }        from '../item';
+import { ItemService } from '../item.service';
+import { CtMeta, Correlation }  from '../data';
+import { DataService } from '../data.service';
+import { Team }        from '../team';
+import { TeamService } from '../team.service';
 
 @Component({
     selector: 'app-overview-page',
@@ -12,21 +17,131 @@ import { UserService } from '../user.service';
 })
 export class OverviewPageComponent implements OnInit {
 
-    users: User[] = [];
-
+    itemCT: Item[]; // CT種目
+    itemSP: Item[]  // 専門種目
+    teams: Team[];
+    metaData: CtMeta[];
+    correlations: Correlation[]; // 相関係数
+    dataOverviewTable: any = { thead: [], tbody: {}}; // Overview    
+    dataCorrelation: any = { thead: [], tbody: {}};    // 相関係数
+    dataPieChart: any = [];
+    
     constructor(
     	private userService: UserService,
-    ){}
-
-    getUsers(): void{
-    	this.userService.getUsers()
-    	    .then(users => this.users = users);	
+	private itemService: ItemService,
+	private dataService: DataService,
+	private teamService: TeamService,
+    ){
+	this.itemCT = itemService.getItemsByTag("ct");
+	this.itemSP = itemService.getItemsByTag("sp");
+	this.metaData = dataService.getCtMeta();
+	this.correlations = dataService.getCorrelations();
+	this.teams = teamService.getTeams();
     }
 
+
+    //
+    // データの取得
+    //
+    getItem(id: number): Item{
+	return this.itemCT.find(item => item.id === id);
+    }
+    getCtMeta(id: number): CtMeta{
+	return this.metaData.find(meta => meta.itemId === id);
+    }
+    getParticipant(team: Team, itemId: number): number{
+	let N: number;
+	if(N = team.participant.find(n => n.sp === itemId).N){
+	    return N;
+	}else{
+	    return 0;
+	}
+    }
+
+    //
+    // 参加人数表用のデータセット作成
+    makeDataForPieChart(): void{
+	let data: any = [];
+	for(let item of this.itemSP){
+	    let N: number = 0;
+	    for(let team of this.teams){
+		N += this.getParticipant(team, item.id);
+	    }
+	    data.push({
+		key: item.name,
+		y:   N,
+	    });
+	}
+	this.dataPieChart =  data;
+    }    
+    buildDatasetForPieChart(itemSP): any{
+	
+    }
+
+    //
+    // Overview用データセット
+    makeDataForOverviewTable(): void{
+	// ヘッダ
+	let thead: any = [
+	    {head:"平均"},{head:"最高"},{head:"分散"},{head:"参加人数"}
+	];
+	// for(let sp of this.itemSP){
+	//     thead.push({head: sp.name});
+	// }
+
+	//
+	let tbody: any = [];
+	for(let item of this.itemCT){
+	    let meta = this.getCtMeta(item.id);
+	    tbody.push({
+		item: item,
+		values: [ meta.avg, meta.max, meta.variance, meta.N]
+	    });
+	}
+
+
+	this.dataOverviewTable = {
+	    thead: thead,
+	    tbody: tbody,
+	};
+	console.log(this.dataOverviewTable);
+    }
+
+    //
+    // 相関係数用データセット
+    makeDataForCorrelationTable(): void{
+	let thead: any[] = [
+	    {head:"走幅跳"},{head:"三段跳"},{head:"走高跳"},{head:"棒高跳"}
+	];
+	let tbody: any = [];
+
+	for(let item of this.itemCT){
+	    tbody.push({
+		item: item,
+		values: this.getCorrelationByItemId(item.id).values,
+	    });		    
+	}
+	console.log(tbody);
+	this.dataCorrelation = {
+	    thead: thead,
+	    tbody: tbody,
+	}		
+    }
+    getCorrelationByItemId(id: number): Correlation{
+	return   this.correlations.find(val => val.itemId === id);
+    }
+
+
+    
     ngOnInit(): void{
-    	// this.getUsers();
-	this.userService.getUsers()
-	    .then(users => this.users = users.slice(1,5));
+	console.log(this.itemCT);
+	console.log(this.itemSP);
+	console.log(this.metaData);
+
+	this.makeDataForPieChart();
+	console.log(this.dataPieChart);
+	this.makeDataForOverviewTable();
+	this.makeDataForCorrelationTable();
     }
 
 }

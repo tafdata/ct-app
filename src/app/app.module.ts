@@ -32,6 +32,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MySummaryComponent } from './my-summary/my-summary.component';
 import { MyCtTargetComponent } from './my-ct-target/my-ct-target.component';
 import { TeamPageComponent } from './team-page/team-page.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { MultiBarHorizontalChartComponent } from './multi-bar-horizontal-chart/multi-bar-horizontal-chart.component';
+import { CtMetaTableComponent } from './ct-meta-table/ct-meta-table.component';
 
 
 
@@ -51,6 +54,9 @@ import { TeamPageComponent } from './team-page/team-page.component';
 	MySummaryComponent,
 	MyCtTargetComponent,
 	TeamPageComponent,
+	PieChartComponent,
+	MultiBarHorizontalChartComponent,
+	CtMetaTableComponent,
     ],
     imports: [
 	AppRoutingModule,

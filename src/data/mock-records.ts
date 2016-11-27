@@ -1,5 +1,22 @@
 import { Record } from '../app/record'
 
+// レコードクラス
+// export class Record {
+//     id: string;       // ユーザーId
+//     records: Mark[];  // 記録(Mark)クラスの配列
+// }
+
+// // 記録クラス
+// export class Mark{
+//     id: number;       // 種目Id
+//     name: string;     // 種目名
+//     mark: number;     // 記録[ex. 6.00]
+//     score: number;    // スコア
+//     rank: number;     // 総合順位
+//     rankSP1: number;  // 専門種目1内での順位
+//     rankSP2: number;  // 専門種目2内での順位
+// }
+
 
 export const RECORDS: Record[] = [
     {

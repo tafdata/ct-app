@@ -29,7 +29,6 @@ export class CtScoreChartComponent implements OnChanges {
     	this.options = {
     	    chart: {
     	    	type: 'discreteBarChart',
-//		type: 'multiBarHorizontalChart',
     	    	height: 200,
     	    	margin: {
     	    	    top: 20,

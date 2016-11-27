@@ -7,3 +7,29 @@
 				<h3>記録一覧</h3>
 		</div>
 </section>
+
+<!-- CT参加者 -->
+<section class="row">
+		<div class="col-sm-12">
+				<h3>参加者</h3>
+				<app-pie-chart [data]="dataPieChart"></app-pie-chart>
+				<app-multi-bar-horizontal-chart></app-multi-bar-horizontal-chart>
+		</div>
+</section>
+<!-- CT Overview -->
+<section class="row" *ngIf="dataOverviewTable">
+		<div class="col-sm-12">
+				<h3>Overview</h3>
+				<app-ct-meta-table [thead]="dataOverviewTable.thead" [tbody]="dataOverviewTable.tbody"></app-ct-meta-table>
+		</div>
+</section>
+
+<!-- CT 相関係数 -->
+<section class="row" *ngIf="dataOverviewTable">
+		<div class="col-sm-12">
+				<h3>相関係数</h3>
+				<app-ct-meta-table [thead]="dataCorrelation.thead" [tbody]="dataCorrelation.tbody"></app-ct-meta-table>
+		</div>
+</section>
+
+

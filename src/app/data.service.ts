@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { REGRESSION_LINE_PARAM, RECORD_RANGE, RIVALS }       from '../data/mock-data'
-import { RegressionLineParam, RecordRange, Rival }           from './data'
+import { REGRESSION_LINE_PARAM, RECORD_RANGE, RIVALS, CT_META, CORRELATIONS }       from '../data/mock-data'
+import { RegressionLineParam, RecordRange, Rival, CtMeta, Correlation }           from './data'
 
 @Injectable()
 export class DataService {
@@ -107,6 +107,54 @@ export class DataService {
     	return rivals.find(rival => rival.sp === sp);
     }
 
+    /******************************
+     **  Ct Meta Info
+     **  統計値と参加者数
+     ******************************/
+    //
+    // 全取得
+    getCtMeta(): CtMeta[]{
+	return CT_META;
+    }
+    //
+    // 種目Id指定
+    getCtMetaByItemId(id: number): CtMeta{
+	return this.getCtMeta().find(meta => meta.itemId === id);	
+    }
+    //
+    // 種目IDリストでデータを取得
+    getCtMetaByItemIdList(idList: number[]): CtMeta[]{
+	let mataAll: CtMeta[] = this.getCtMeta();
+	let result: CtMeta[] = [];
+	for(let id of idList){
+	    result.push(this.getCtMetaByItemId(id));
+	}
+	
+	return result;
+    }
+
+    /******************************
+     **  Correlation
+     **  相関係数
+     ******************************/
+    //
+    // 全取得
+    getCorrelations(): Correlation[]{
+	return CORRELATIONS;
+    }
+    //
+    // itemIDのリストから取得
+    getCorrelationByItemId(list: number[]): Correlation[]{
+	let correlationAll = this.getCorrelations();
+	let result: Correlation[] = [];
+
+	for(let id of list){
+	    let cor = correlationAll.find(val => val.itemId === id);
+	    if(cor){ result.push(cor); }
+	}
+
+	return result;
+    }
 
     
 }
