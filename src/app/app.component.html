@@ -1,24 +1,23 @@
 <nav class="navbar navbar-full navbar-dark bg-inverse">
 		<a class="navbar-brand" href="#">T.A.F. Data</a>
-		<ul class="nav navbar-nav">
-				<li class="nav-item active">
-						<a class="nav-link" href="#">Coach-X <span class="sr-only">(current)</span></a>
+		<ul class="nav navbar-nav float-xs-right">
+				<!-- PC用: リンク -->
+				<li class="nav-item hidden-sm-down">
+						<a class="nav-link" routerLink="/overview">概要ページ</a>
 				</li>
-				<li class="nav-item">
-						<a routerLink="/overview" class="nav-link">Overview</a>
+				<li class="nav-item hidden-sm-down">
+						<a class="nav-link" routerLink="/team">Teamページ</a>
 				</li>
-				<li class="nav-item">
-						<a routerLink="/mypage" class="nav-link">MyPage</a>
+				<li class="nav-item hidden-sm-down">
+						<a class="nav-link" routerLink="/login">Loginページ</a>
 				</li>
-				<li class="nav-item">
-						<a routerLink="/team" class="nav-link">Team</a>
-				</li>
-				<li ngbDropdown class="nav-item dropdown">
-						<a href="#" class="nav-link dropdown-toggle" id="supportedContentDropdown"  ngbDropdownToggle>Dropdown</a>
+				<!-- スマホ用: Dropdown -->
+				<li ngbDropdown class="nav-item dropdown hidden-md-up">
+						<button class="btn btn-outline-secondary" id="dropdownMenu1" ngbDropdownToggle>メニュー</button>
 						<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
-								<a class="dropdown-item" href="#">Action</a>
-								<a class="dropdown-item" href="#">Another action</a>
-								<a class="dropdown-item" href="#">Something else here</a>
+								<a class="dropdown-item" routerLink="/overview">概要ページ</a>
+								<a class="dropdown-item" routerLink="/team">Teamページ</a>
+								<a class="dropdown-item" routerLink="/login">Loginページ</a>
 						</div>
 				</li>
 		</ul>
