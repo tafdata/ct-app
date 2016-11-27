@@ -1,0 +1,21 @@
+<!-- CT Score Table Component -->
+<div>
+		<div class="table-responsive">
+				<table class="table table-striped">
+						<thead *ngIf="thead">
+								<tr>
+										<th>Name</th>
+										<th style="white-space: nowrap;">総合スコア</th>
+										<th *ngFor="let item of thead" style="white-space: nowrap;">{{item.name}}[{{item.unit}}]</th>
+								</tr>
+						</thead>
+						<tbody *ngIf="tbody">
+								<tr *ngFor="let record of tbody">
+										<th scope="row" class="white-space: nowrap;">{{record.user.name}}<small>({{record.user.team}})</small></th>
+										<td>{{record.score.mark}}</td>
+										<td *ngFor="let val of record.values">{{val.mark}}</td>
+								</tr>
+						</tbody>
+				</table>
+		</div>
+</div>
