@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router }            from '@angular/router';
 import { Observable }         from 'rxjs/Observable';
 import { Subject }           from 'rxjs/Subject';
@@ -16,7 +16,9 @@ import { User }              from '../user';
 })
 export class UserSearchComponent implements OnInit {
     users: Observable<User[]>;
+    @Output() loginUser: User;
     private searchTerms = new Subject<string>();
+
     
     constructor(
 	private userSearchService: UserSearchService,
@@ -48,6 +50,12 @@ export class UserSearchComponent implements OnInit {
     gotoMyPage(user: User): void{
 	let link = ['/mypage', user.id];
 	this.router.navigate(link);
+    }
+
+    // ユーザーをフィールドにセットする
+    setUser(user: User): void{
+	this.loginUser = user;
+	console.log(this.loginUser);
     }
     
 }

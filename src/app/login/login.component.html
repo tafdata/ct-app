@@ -1,8 +1,31 @@
-<div class="grid grid-pad">
-		<a *ngFor="let user of users" [routerLink]="['/mypage', user.id]" class="col-1-4">
-				<div class="module user">
-						<h4>{{user.name}}</h4>
+<div class="row flex-items-xs-center">
+		<div class="col-xs-10">
+				<div class="card">
+						<div class="card-header">
+								<h3>LogIn</h3>
+						</div>
+						<div class="card-block">
+								<form class="form-inline">
+										<div class="form-group">
+												<label for="inputPassword4">User</label>
+												<div>
+														<input #searchBox id="search-box" (keyup)="search(searchBox.value)" (focus)="autoComplete()" placeholder="名前(姓)" class="form-control form-control-lg"/>
+														<div>
+																<div *ngFor="let user of users | async" (click)="setUser(user)"  class="search-result">
+																		{{user.name}}({{user.team}})
+																</div>
+														</div>
+														<small id="passwordHelpInline" class="text-muted">
+																上の検索ボックスに名前(姓)を入力して、候補からユーザーを選択してください。
+														</small>
+												</div>
+												<div *ngIf="user" class="alert alert-success" role="alert">
+														<strong>{{user.name}}({{user.team}})</strong> さんが選択されました。
+												</div>
+										</div>
+										<button type="submit" class="btn btn-primary" (click)="gotoMyPage(user)">Confirm identity</button>
+								</form>
+						</div>
 				</div>
-		</a>
+		</div>
 </div>
-<app-user-search></app-user-search>
