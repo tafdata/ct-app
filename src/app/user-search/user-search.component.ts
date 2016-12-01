@@ -51,11 +51,4 @@ export class UserSearchComponent implements OnInit {
 	let link = ['/mypage', user.id];
 	this.router.navigate(link);
     }
-
-    // ユーザーをフィールドにセットする
-    setUser(user: User): void{
-	this.loginUser = user;
-	console.log(this.loginUser);
-    }
-    
 }

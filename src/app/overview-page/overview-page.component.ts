@@ -91,10 +91,13 @@ export class OverviewPageComponent implements OnInit {
 	let tbody: any = [];
 	for(let item of this.itemCT){
 	    let meta = this.getCtMeta(item.id);
-	    tbody.push({
-		item: item,
-		values: [ meta.avg, meta.max, meta.variance, meta.N]
-	    });
+	    console.log(meta);
+	    if(meta){
+		tbody.push({
+		    item: item,
+		    values: [ meta.avg, meta.max, meta.variance, meta.N]
+		});
+	    }
 	}
 
 
@@ -125,10 +128,14 @@ export class OverviewPageComponent implements OnInit {
 	let tbody: any = [];
 
 	for(let item of this.itemCT){
-	    tbody.push({
-		item: item,
-		values: this.getCorrelationByItemId(item.id).values,
-	    });		    
+	    let cor = this.getCorrelationByItemId(item.id);
+	    console.log(cor);
+	    if(cor){
+		tbody.push({
+		    item: item,
+		    values: cor.values,
+		});
+	    }
 	}
 	console.log(tbody);
 	this.dataCorrelation = {
