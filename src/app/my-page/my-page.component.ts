@@ -1,6 +1,7 @@
 import { Component, Input, OnInit }         from '@angular/core';
 import { ActivatedRoute, Params, Router }   from '@angular/router';
 import { Location }                         from '@angular/common';
+import { CookieService }             from 'angular2-cookie/core';
 
 import { User }                     from '../user';
 import { UserService }              from '../user.service';
@@ -23,6 +24,7 @@ export class MyPageComponent implements OnInit {
     data: any;
     
     constructor(
+	private cookieService: CookieService,
 	private userService: UserService,
 	private recordService: RecordService,
 	private router: Router,
@@ -78,10 +80,21 @@ export class MyPageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-	console.log("User: ");
-	console.log(this.userService.getLoginUser());
+	console.log("Coolkie: "+this.cookieService.get("taf-ct-app-user-id"));
 	this.route.params.forEach((params: Params) => {
 	    let id = params['id'];
+	    let cookieUserId = this.cookieService.get("taf-ct-app-user-id");
+	    console.log("URL Param: "+id+", cookie:"+cookieUserId);
+
+	    if(!id){ // URLにIDの指定がない
+		if(cookieUserId){
+		    id = cookieUserId;
+		}else{ // ログイン情報もない
+		    // ログイン画面にリダイレクト
+		    this.router.navigate(['/login']);	
+		}
+	    }
+	    // 指定されたユーザー情報の取得
 	    this.userService.getUser(id)
 		.then(user => {
 		    this.user = user;
@@ -91,8 +104,9 @@ export class MyPageComponent implements OnInit {
 	    	    console.log(records);
 	    	    this.records = records;
 	    	    this.data = this.formatData(records);
-	    	});	    
+	    	});
 	});
+				 
     }
     
 }

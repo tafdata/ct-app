@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit }  from '@angular/core';
 import { Router }                    from '@angular/router';
 import { Observable }                from 'rxjs/Observable';
 import { Subject }                   from 'rxjs/Subject';
+import { CookieService }             from 'angular2-cookie/core';
 
 import { User }                      from '../user';
 import { UserService }               from '../user.service';
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
 
     
     constructor(
+	private cookieService: CookieService,
 	private userService: UserService,
 	private userSearchService: UserSearchService,
 	private router: Router,
@@ -32,6 +34,11 @@ export class LoginComponent implements OnInit {
     // Push a search term into the observable stream.
     search(term: string): void{
 	this.searchTerms.next(term);
+    }
+
+    // Cookie
+    getCookie(key: string){
+	return this.cookieService.get(key);
     }
 
 
@@ -56,7 +63,8 @@ export class LoginComponent implements OnInit {
     
 
     // マイページへ移動
-    gotoMyPage(): void{	
+    gotoMyPage(): void{
+	console.log("Coolkie: "+this.cookieService.get("taf-ct-app-user-id"));
 	this.router.navigate(['/mypage', this.user.id]);
     }
 
@@ -66,7 +74,9 @@ export class LoginComponent implements OnInit {
 	this.user = user;
 	console.log(this.user);
 	this.users = null;
-	this.userService.handleLogin(user);
+
+	// Cookie
+	this.cookieService.put("taf-ct-app-user-id",user.id);
     }
     
 }

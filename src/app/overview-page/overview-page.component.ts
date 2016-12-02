@@ -21,7 +21,7 @@ export class OverviewPageComponent implements OnInit {
     user: User;
 
     // ローカル変数
-    sex: string = "m";		// 表示選択(性別)
+    sex: string = "m";	// 表示選択(性別)
     itemCT: Item[]; // CT種目
     itemSP: Item[]  // 専門種目
     teams: Team[];
@@ -103,7 +103,7 @@ export class OverviewPageComponent implements OnInit {
 	let tbody: any = [];
 	for(let item of itemCT){
 	    let meta = this.getCtMeta(item.id);
-	    console.log(meta);
+	    //console.log(meta);
 	    if(meta){
 		tbody.push({
 		    item: item,
@@ -117,7 +117,7 @@ export class OverviewPageComponent implements OnInit {
 	    thead: thead,
 	    tbody: tbody,
 	};
-	console.log(this.dataOverviewTable);
+	//console.log(this.dataOverviewTable);
     }
 
     //
@@ -141,7 +141,7 @@ export class OverviewPageComponent implements OnInit {
 
 	for(let item of itemCT){
 	    let cor = this.getCorrelationByItemId(item.id);
-	    console.log(cor);
+	    //	    console.log(cor);
 	    if(cor){
 		tbody.push({
 		    item: item,
@@ -149,7 +149,7 @@ export class OverviewPageComponent implements OnInit {
 		});
 	    }
 	}
-	console.log(tbody);
+	// console.log(tbody);
 	this.dataCorrelation = {
 	    thead: thead,
 	    tbody: tbody,
@@ -185,10 +185,8 @@ export class OverviewPageComponent implements OnInit {
 	console.log(this.itemCT);
 	console.log(this.itemSP);
 	console.log(this.metaData);
-	this.user = this.userService.getLoginUser();
-	console.log(this.user);
-	
 
+	
 	this.makeDataForPieChart();
 	console.log(this.dataPieChart);
 	this.makeDataForOverviewTable(this.itemCT);

@@ -13,6 +13,8 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from '../data/in-memory-data.service';
 import { nvD3 }                 from 'ng2-nvd3';
 
+// Cookie
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { CtScoreTableComponent } from './ct-score-table/ct-score-table.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
@@ -70,6 +72,7 @@ import { MultiBarChartComponent } from './multi-bar-chart/multi-bar-chart.compon
 	NgbModule.forRoot(),
     ],
     providers: [
+	CookieService,
 	UserService,
 	ItemService,
 	RecordService,

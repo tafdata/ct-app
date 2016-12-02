@@ -3,6 +3,9 @@
 		<ul class="nav navbar-nav float-xs-right">
 				<!-- PC用: リンク -->
 				<li class="nav-item hidden-sm-down">
+						<a class="nav-link" routerLink="/mypage">マイページ</a>
+				</li>
+				<li class="nav-item hidden-sm-down">
 						<a class="nav-link" routerLink="/overview">概要ページ</a>
 				</li>
 				<li class="nav-item hidden-sm-down">
@@ -15,6 +18,7 @@
 				<li ngbDropdown class="nav-item dropdown hidden-md-up">
 						<button class="btn btn-outline-secondary" id="dropdownMenu1" ngbDropdownToggle>メニュー</button>
 						<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+								<a class="dropdown-item" routerLink="/mypage">マイページ</a>
 								<a class="dropdown-item" routerLink="/overview">概要ページ</a>
 								<a class="dropdown-item" routerLink="/team">Teamページ</a>
 								<a class="dropdown-item" routerLink="/login">Loginページ</a>

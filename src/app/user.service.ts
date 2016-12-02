@@ -21,21 +21,6 @@ export class UserService {
     ) { }
 
     /**********************
-     **  ログイン         **
-     **********************/
-    //
-    // ログイン処理
-    handleLogin(user: User): void{
-	this.user = user;
-	console.log("Login: "+user.name);
-    }
-    //
-    // ログインユーザー情報を取得
-    getLoginUser(): User{
-	return this.user;
-    }
-
-    /**********************
      ** ユーザー情報       **
      **********************/
     //

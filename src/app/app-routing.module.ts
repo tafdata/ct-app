@@ -11,7 +11,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
     {
 	path: '',
-	redirectTo: 'login',
+	redirectTo: 'mypage',
 	pathMatch: 'full',
     },
     {
@@ -28,7 +28,7 @@ const routes: Routes = [
     },
     {
 	path: 'mypage',
-	redirectTo: '404',
+	component: MyPageComponent,
     },
     {
 	path: 'team',
