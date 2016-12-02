@@ -50,5 +50,18 @@ export class ItemService {
 	// Id順に並べ替えて戻る
 	return items.sort(this.compareId);
     }
+
+    // tagとsexを指定
+    getItemsBySexAndTag(sex: string, tag: string): Item[]{
+	let items: Item[] = [];
+	let itemAll: Item[] = this.getItems();
+	for(let item of itemAll){
+	    if(item.tag.indexOf(tag) >= 0 && item.tag.indexOf(sex) >= 0){
+		items.push(item);
+	    }
+	}
+	// Id順に並べ替えて戻る
+	return items.sort(this.compareId);
+    }
     
 }

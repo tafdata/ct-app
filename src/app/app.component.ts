@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-
+import { User }              from './user';
 
 @Component({
     selector: 'app-root',
@@ -10,8 +10,6 @@ import { Component, OnInit } from '@angular/core';
 })
 
 
-export class AppComponent {
-    title = 'Coach-X';
-
-    
+export class AppComponent {    
+    // ローカル変数    
 }

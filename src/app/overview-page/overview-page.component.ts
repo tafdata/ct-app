@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location }                         from '@angular/common';
 
 import { User }        from '../user';
 import { UserService } from '../user.service';
@@ -16,7 +17,11 @@ import { TeamService } from '../team.service';
     providers: [ UserService ],
 })
 export class OverviewPageComponent implements OnInit {
+    // ログイン情報
+    user: User;
 
+    // ローカル変数
+    sex: string = "m";		// 表示選択(性別)
     itemCT: Item[]; // CT種目
     itemSP: Item[]  // 専門種目
     teams: Team[];
@@ -33,8 +38,9 @@ export class OverviewPageComponent implements OnInit {
 	private itemService: ItemService,
 	private dataService: DataService,
 	private teamService: TeamService,
+	private location:    Location,
     ){
-	this.itemCT = itemService.getItemsByTag("ct");
+	this.itemCT = itemService.getItemsBySexAndTag("m","ct");
 	this.itemSP = itemService.getItemsByTag("sp");
 	this.metaData = dataService.getCtMeta();
 	this.correlations = dataService.getCorrelations();
@@ -48,6 +54,12 @@ export class OverviewPageComponent implements OnInit {
     //
     getItem(id: number): Item{
 	return this.itemCT.find(item => item.id === id);
+    }
+    
+    getItemsBySex(sex: string, itemService: any): Promise<Item[]>{
+	return new Promise(function(resolve, reject){
+	    resolve(itemService.getItemsBySexAndTag(sex, "ct"));
+	});
     }
     getCtMeta(id: number): CtMeta{
 	return this.metaData.find(meta => meta.itemId === id);
@@ -81,7 +93,7 @@ export class OverviewPageComponent implements OnInit {
 
     //
     // Overview用データセット
-    makeDataForOverviewTable(): void{
+    makeDataForOverviewTable(itemCT: Item[]): void{
 	// ヘッダ
 	let thead: any = [
 	    {head:"平均"},{head:"最高"},{head:"分散"},{head:"参加人数"}
@@ -89,7 +101,7 @@ export class OverviewPageComponent implements OnInit {
 
 	//
 	let tbody: any = [];
-	for(let item of this.itemCT){
+	for(let item of itemCT){
 	    let meta = this.getCtMeta(item.id);
 	    console.log(meta);
 	    if(meta){
@@ -121,13 +133,13 @@ export class OverviewPageComponent implements OnInit {
 
     //
     // 相関係数用データセット
-    makeDataForCorrelationTable(): void{
+    makeDataForCorrelationTable(itemCT: Item[]): void{
 	let thead: any[] = [
 	    {head:"走幅跳"},{head:"三段跳"},{head:"走高跳"},{head:"棒高跳"}
 	];
 	let tbody: any = [];
 
-	for(let item of this.itemCT){
+	for(let item of itemCT){
 	    let cor = this.getCorrelationByItemId(item.id);
 	    console.log(cor);
 	    if(cor){
@@ -148,18 +160,41 @@ export class OverviewPageComponent implements OnInit {
     }
 
 
+    //
+    // 戻るボタン
+    goBack(): void{
+	this.location.back();	
+    }
+
+    //
+    // 性別を切り替え
+    changeSex(sex: string): void{
+	console.log("changeSex(): "+sex);
+	this.getItemsBySex(sex, this.itemService)
+	    .then(response => {
+		this.itemCT = response;
+		// データの更新
+		this.makeDataForOverviewTable(response);
+		this.makeDataForCorrelationTable(response);
+//		this.setDataForHistgram(this.itemCT[0]);		
+	    });
+    }
+
     
     ngOnInit(): void{
 	console.log(this.itemCT);
 	console.log(this.itemSP);
 	console.log(this.metaData);
+	this.user = this.userService.getLoginUser();
+	console.log(this.user);
+	
 
 	this.makeDataForPieChart();
 	console.log(this.dataPieChart);
-	this.makeDataForOverviewTable();
-	this.makeDataForCorrelationTable();
+	this.makeDataForOverviewTable(this.itemCT);
+	this.makeDataForCorrelationTable(this.itemCT);
 
-	this.setDataForHistgram(this.itemCT[0]);
+	this.setDataForHistgram(this.itemCT[0]);	
     }
 
 }

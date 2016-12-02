@@ -1,9 +1,10 @@
-import { Component, Output, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router }                    from '@angular/router';
 import { Observable }                from 'rxjs/Observable';
 import { Subject }                   from 'rxjs/Subject';
 
 import { User }                      from '../user';
+import { UserService }               from '../user.service';
 import { UserSearchService }         from '../user-search.service';
 
 @Component({
@@ -13,12 +14,16 @@ import { UserSearchService }         from '../user-search.service';
     providers: [UserSearchService],
 })
 export class LoginComponent implements OnInit {
-    users: Observable<User[]>;
+    // ユーザー情報
     user: User;
+
+    // ローカル変数
+    users: Observable<User[]>;
     private searchTerms = new Subject<string>();
 
     
     constructor(
+	private userService: UserService,
 	private userSearchService: UserSearchService,
 	private router: Router,
     ) { }
@@ -51,18 +56,17 @@ export class LoginComponent implements OnInit {
     
 
     // マイページへ移動
-    gotoMyPage(user: User): void{
-	let link = ['/mypage', user.id];
-	this.router.navigate(link);
+    gotoMyPage(): void{	
+	this.router.navigate(['/mypage', this.user.id]);
     }
 
+    
     // ユーザー選択
     setUser(user: User): void{
 	this.user = user;
 	console.log(this.user);
 	this.users = null;
+	this.userService.handleLogin(user);
     }
-
-
     
 }

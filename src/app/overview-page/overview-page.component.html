@@ -1,21 +1,34 @@
-<h3>overview-page works!</h3>
-
-
-<!-- CT Score  一覧 -->
-<section class="row">
-		<div class="col-sm-12">
-				<h3>記録一覧</h3>
-		</div>
-</section>
 
 <!-- CT参加者 -->
 <section class="row">
 		<div class="col-sm-12">
 				<h3>参加者</h3>
-				<app-pie-chart [data]="dataPieChart"></app-pie-chart>
-				<app-multi-bar-horizontal-chart></app-multi-bar-horizontal-chart>
+				<div class="row">
+						<div class="col-md-6">
+								<app-pie-chart [data]="dataPieChart"></app-pie-chart>
+						</div>
+						<div class="col-md-6">
+								<app-multi-bar-horizontal-chart></app-multi-bar-horizontal-chart>
+						</div>
+				</div>
 		</div>
 </section>
+
+<!-- 性別切り替え -->
+<div class="row flex-items-xs-right">
+		<div class="col-xs-12">
+				<div [(ngModel)]="sex" ngbRadioGroup name="radioBasic" style="width:100%;">
+						<label class="btn btn-outline-info btn-lg" style="width:50%;" (click)="changeSex(sex)">
+								<input type="radio" value="m"> 男
+						</label>
+						<label class="btn btn-outline-danger btn-lg" style="width:50%;" (click)="changeSex(sex)">
+								<input type="radio" value="w"> 女
+						</label>
+				</div>
+		</div>
+</div>
+
+
 <!-- CT Overview -->
 <section class="row" *ngIf="dataOverviewTable">
 		<div class="col-sm-12">
@@ -41,3 +54,5 @@
 </section>
 
 
+<!-- 戻るボタン -->
+<button class="btn btn-default" (click)="goBack()">Back</button>

@@ -15,11 +15,12 @@ import { RecordService }            from '../record.service';
     styleUrls: ['./my-page.component.css']
 })
 export class MyPageComponent implements OnInit {
-
+    // ユーザー情報
     user: User;
+
+    // ローカル変数
     records: Record;
     data: any;
-
     
     constructor(
 	private userService: UserService,
@@ -27,7 +28,7 @@ export class MyPageComponent implements OnInit {
 	private router: Router,
 	private route: ActivatedRoute,
 	private location: Location
-    ) { }
+    ) {	}
 
     
 
@@ -77,6 +78,8 @@ export class MyPageComponent implements OnInit {
     }
 
     ngOnInit(): void {
+	console.log("User: ");
+	console.log(this.userService.getLoginUser());
 	this.route.params.forEach((params: Params) => {
 	    let id = params['id'];
 	    this.userService.getUser(id)
@@ -84,11 +87,11 @@ export class MyPageComponent implements OnInit {
 		    this.user = user;
 		});
 	    this.getRecord(id, this.recordService)
-		.then(records => {
-		    console.log(records);
-		    this.records = records;
-		    this.data = this.formatData(records);
-		});	    
+	    	.then(records => {
+	    	    console.log(records);
+	    	    this.records = records;
+	    	    this.data = this.formatData(records);
+	    	});	    
 	});
     }
     

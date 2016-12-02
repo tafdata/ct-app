@@ -9,12 +9,35 @@ import { User }       from './user';
 
 @Injectable()
 export class UserService {
+    // ログイン情報
+    private user: User;
+
+    // ローカル変数
     private usersUrl = 'app/users'; // URL to web api
+
     
     constructor(
 	private http: Http,
     ) { }
 
+    /**********************
+     **  ログイン         **
+     **********************/
+    //
+    // ログイン処理
+    handleLogin(user: User): void{
+	this.user = user;
+	console.log("Login: "+user.name);
+    }
+    //
+    // ログインユーザー情報を取得
+    getLoginUser(): User{
+	return this.user;
+    }
+
+    /**********************
+     ** ユーザー情報       **
+     **********************/
     //
     // 全取得
     getUsers(): Promise<User[]>{

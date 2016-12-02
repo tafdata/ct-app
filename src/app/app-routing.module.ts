@@ -11,7 +11,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
     {
 	path: '',
-	redirectTo: 'mypage/OSK14326',
+	redirectTo: 'login',
 	pathMatch: 'full',
     },
     {
@@ -23,12 +23,12 @@ const routes: Routes = [
 	component: OverviewPageComponent,
     },
     {
-	path: 'mypage',
-	redirectTo: '404',
-    },
-    {
 	path: 'mypage/:id',
 	component: MyPageComponent,
+    },
+    {
+	path: 'mypage',
+	redirectTo: '404',
     },
     {
 	path: 'team',

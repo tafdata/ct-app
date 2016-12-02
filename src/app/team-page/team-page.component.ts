@@ -13,7 +13,10 @@ import { TeamService }            from '../team.service';
     styleUrls: ['./team-page.component.css']
 })
 export class TeamPageComponent implements OnInit {
+    // 共通変数
+    user: User;
 
+    // ローカル変数
     teams: Team[];
     model: number;
     selectedTeam: Team;
@@ -23,7 +26,9 @@ export class TeamPageComponent implements OnInit {
 	private location: Location,
 	private teamService: TeamService,
 	private userService: UserService,
-    ) { }
+    ) {
+	this.teams = teamService.getTeams();
+    }
 
     //
     // チーム選択
@@ -48,9 +53,8 @@ export class TeamPageComponent implements OnInit {
     }
     
     ngOnInit() {
-	this.teams = this.teamService.getTeams();
 	this.selectedTeam = this.teams[0];
-	this.makeTeamMemberList(this.selectedTeam.id);
+	this.makeTeamMemberList(this.teams[0].id);
     }
 
 }
