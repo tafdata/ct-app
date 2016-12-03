@@ -19,6 +19,7 @@ import { RecordService }            from '../record.service';
 export class CtScoreTableComponent implements OnChanges{
     @Input()
     userList: User[]; // 結果を表示するユーザーIDのリスト
+    @Input() sex: string; // 性別(M/W)
     tbody: any = [];    //  tbody用データ
     thead: any = [];       // thead用データ
 
@@ -30,7 +31,7 @@ export class CtScoreTableComponent implements OnChanges{
 
     // thead用データを作成
     makeTHeadDataset(): Promise<any>{
-	let items: Item[] = this.itemService.getItemsByTag("ct");
+	let items: Item[] = this.itemService.getItemsBySexAndTag(this.sex,"ct");
 	return new Promise(function(resolve, reject){
 	    resolve(items);
 	});
@@ -79,6 +80,7 @@ export class CtScoreTableComponent implements OnChanges{
     }
     
     ngOnChanges(changes: any){
+	console.log(this.sex);
 	this.makeTHeadDataset()
 	    .then(response => {
 		this.thead = response;

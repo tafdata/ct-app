@@ -64,7 +64,10 @@ export class LoginComponent implements OnInit {
 
     // マイページへ移動
     gotoMyPage(): void{
+	// Cookie
+	this.cookieService.put("taf-ct-app-user-id",this.user.id);
 	console.log("Coolkie: "+this.cookieService.get("taf-ct-app-user-id"));
+	// ルーティング
 	this.router.navigate(['/mypage', this.user.id]);
     }
 
@@ -74,9 +77,6 @@ export class LoginComponent implements OnInit {
 	this.user = user;
 	console.log(this.user);
 	this.users = null;
-
-	// Cookie
-	this.cookieService.put("taf-ct-app-user-id",user.id);
     }
     
 }

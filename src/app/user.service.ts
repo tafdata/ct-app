@@ -21,6 +21,17 @@ export class UserService {
     ) { }
 
     /**********************
+     ** sort用比較関数     **
+     **********************/
+    compareId(a: User, b: User): number{
+	if(a.id < b.id) return -1;
+	else if(a.id > b.id) return 1;
+
+	return 0;	
+    }
+
+    
+    /**********************
      ** ユーザー情報       **
      **********************/
     //
@@ -51,6 +62,21 @@ export class UserService {
 		return users;
 	    });
     }
+    //
+    // teamIdと性別を指定
+    getUsersByTeamIdAndSex(teamId: string, sex: string): Promise<User[]>{
+	return this.getUsers()
+	    .then(response => {
+		let users: User[] = []; 
+		for(let user of response){
+		    if(user.team === teamId && user.sex == sex){
+			users.push(user);
+		    }
+		}
+		return users.sort(this.compareId);	
+	    });
+    }
+	
 
     
     // エラーハンドリング

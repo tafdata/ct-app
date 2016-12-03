@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Location }                         from '@angular/common';
+import { Location }          from '@angular/common';
+import { Router }            from '@angular/router';
+import { CookieService }     from 'angular2-cookie/core';
 
 import { User }        from '../user';
 import { UserService } from '../user.service';
@@ -21,7 +23,8 @@ export class OverviewPageComponent implements OnInit {
     user: User;
 
     // ローカル変数
-    sex: string = "m";	// 表示選択(性別)
+    flgReady: boolean = false;  // データセットが準備完了したか？
+    sex: string;	// 表示選択(性別)
     itemCT: Item[]; // CT種目
     itemSP: Item[]  // 専門種目
     teams: Team[];
@@ -34,13 +37,15 @@ export class OverviewPageComponent implements OnInit {
     dataPieChart: any = [];
     
     constructor(
+	private cookieService: CookieService,
+	private location:    Location,
+	private router:      Router,
     	private userService: UserService,
 	private itemService: ItemService,
 	private dataService: DataService,
 	private teamService: TeamService,
-	private location:    Location,
     ){
-	this.itemCT = itemService.getItemsBySexAndTag("m","ct");
+
 	this.itemSP = itemService.getItemsByTag("sp");
 	this.metaData = dataService.getCtMeta();
 	this.correlations = dataService.getCorrelations();
@@ -117,7 +122,7 @@ export class OverviewPageComponent implements OnInit {
 	    thead: thead,
 	    tbody: tbody,
 	};
-	//console.log(this.dataOverviewTable);
+	console.log(this.dataOverviewTable);
     }
 
     //
@@ -176,23 +181,43 @@ export class OverviewPageComponent implements OnInit {
 		// データの更新
 		this.makeDataForOverviewTable(response);
 		this.makeDataForCorrelationTable(response);
-//		this.setDataForHistgram(this.itemCT[0]);		
 	    });
     }
 
     
     ngOnInit(): void{
+	this.flgReady = false;
 	console.log(this.itemCT);
 	console.log(this.itemSP);
 	console.log(this.metaData);
+	console.log(this.dataOverviewTable);
+	console.log(this.dataCorrelation);
 
+	let cookieUserId = this.cookieService.get("taf-ct-app-user-id");
+	console.log("CookieUserId: "+cookieUserId);
+	if(cookieUserId){ // ログイン情報あり
+	    this.userService.getUser(cookieUserId)
+		.then(user => {
+		    console.log(user);
+		    this.user = user;
+		    this.sex = user.sex;
+		    return this.getItemsBySex(this.sex, this.itemService);
+		})
+		.then(response => {
+		    console.log(response);
+		    this.itemCT = response;
+		    this.makeDataForOverviewTable(response);
+		    this.makeDataForCorrelationTable(response);
+		    this.setDataForHistgram(response[0]);
+		    this.makeDataForPieChart();
+		    this.flgReady = true;
+		});
+	}else{ // ログイン情報なし
+	    // ログイン画面にリダイレクト
+	    this.router.navigate(['/login']);	
+	}
 	
-	this.makeDataForPieChart();
-	console.log(this.dataPieChart);
-	this.makeDataForOverviewTable(this.itemCT);
-	this.makeDataForCorrelationTable(this.itemCT);
-
-	this.setDataForHistgram(this.itemCT[0]);	
+		
     }
 
 }

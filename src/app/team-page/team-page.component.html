@@ -4,7 +4,7 @@
 
 <div class="row">
 		<div class="col-xs-6">
-				<div ngbDropdown class="d-inline-block w-100" >
+				<div ngbDropdown class="d-inline-block w-100">
 						<button class="btn btn-outline-primary btn-block" id="dropdownMenu1" ngbDropdownToggle>{{selectedTeam.name}}</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
 								<button *ngFor="let team of teams" class="dropdown-item" (click)="changeTeam(team.id)">{{team.name}}</button>
@@ -17,7 +17,14 @@
 <div class="row">
 		<div class="col-xs-12">
 				<h3>{{selectedTeam.name}}のスコア一覧</h3>
-				<app-ct-score-table [userList]="userList" ></app-ct-score-table>
+				<div *ngIf="userListMen">
+						<h4>男子</h4>
+						<app-ct-score-table [userList]="userListMen.list" [sex]="userListMen.sex"></app-ct-score-table>
+				</div>
+				<div *ngIf="userListWomen">
+						<h4>女子</h4>
+						<app-ct-score-table [userList]="userListWomen.list" [sex]="userListWomen.sex"></app-ct-score-table>
+				</div>
 		</div>
 </div>
 
