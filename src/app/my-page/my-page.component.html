@@ -1,17 +1,42 @@
-<h2>マイページ</h2>
-<!-- ユーザー情報 -->
-<div *ngIf="user">
-		<h2>{{user.name}}</h2>
-		<app-my-summary [user]="user" [record]="records"></app-my-summary>
+<div class="row mb-1">
+		<div class="col-xs-12">
+				<h2>マイページ</h2>
+		</div>
 </div>
+<div class="row mb-1">
+		<div class="col-xs-12">
+				<!-- ユーザー情報 -->
+				<div *ngIf="user">
+						<app-my-summary [user]="user" [record]="records"></app-my-summary>
+				</div>
+		</div>
+</div>
+
 <!-- CTの結果 -->
-<div *ngIf="records">
-		<app-ct-score-chart [data]="data"></app-ct-score-chart>
-		<app-my-ct-score-table [records]="records"></app-my-ct-score-table>		
+<div class="row mb-2" *ngIf="data">
+		<div class="col-xs-12">
+				<h3>スコア</h3>
+				<app-ct-score-chart [data]="data"></app-ct-score-chart>
+		</div>
 </div>
+<div class="row mb-1" *ngIf="records">
+		<div class="col-xs-12">
+				<h3 *ngIf="user">{{user.name}}さんの記録</h3>
+				<app-my-ct-score-table [records]="records"></app-my-ct-score-table>
+		</div>
+</div>
+
+
 <!-- CT 目標値 -->
-<div *ngIf="user">
-		<app-my-ct-target [user]="user" ></app-my-ct-target>
+<div class="row mb-1" *ngIf="user">
+		<div class="col-md-6">
+				<h3>目標記録</h3>
+				<app-my-ct-target [user]="user" ></app-my-ct-target>
+		</div>
+		<div class="col-md-6" *ngIf="rivalList">
+				<h3>ライバル</h3>
+				<app-my-rivals [user]="user" [rivalList]="rivalList" ></app-my-rivals>
+		</div>
 </div>
 
 <!-- 戻るボタン -->

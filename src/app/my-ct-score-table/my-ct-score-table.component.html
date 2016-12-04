@@ -1,32 +1,29 @@
 <!-- My CT Score Table Component -->
-<div *ngIf="records">
-		<h2>CT Score Table</h2>
-		<div class="table-responsive">
-				<table class="table table-sm table-striped table-bordered">
-						<thead class="thead-inverse">
-								<tr>
-										<th colspan="3"></th>
-										<th colspan="3" class="text-xs-center">順位</th>
-								</tr>
-								<tr>
-										<th>種目</th>
-										<th>記録</th>
-										<th>スコア</th>
-										<th>総合</th>
-										<th>専門1</th>
-										<th>専門2</th>
-								</tr>
-						</thead>
-						<tbody>
-								<tr *ngFor="let mark of records.records">
-										<td>{{mark.name}}</td>
-										<td>{{mark.mark}}</td>
-										<td>{{mark.score}}</td>
-										<td>{{mark.rank}}</td>
-										<td>{{mark.rankSP1}}</td>
-										<td>{{mark.rankSP2}}</td>
-						 		</tr>
-						</tbody>
-				</table>
-		</div>
+<div class="table-responsive" *ngIf="records">
+		<table class="table table-sm table-striped table-bordered">
+				<thead class="thead-inverse">
+						<tr>
+								<th colspan="3"></th>
+								<th colspan="3" class="text-xs-center">順位</th>
+						</tr>
+						<tr>
+								<th>種目</th>
+								<th>記録</th>
+								<th>スコア</th>
+								<th>総合</th>
+								<th>専門1</th>
+								<th>専門2</th>
+						</tr>
+				</thead>
+				<tbody>
+						<tr *ngFor="let mark of records.records">
+								<td>{{mark.name}}</td>
+								<td>{{mark.mark}}</td>
+								<td>{{mark.score}}</td>
+								<td>{{mark.rank}}</td>
+								<td>{{mark.rankSP1}}</td>
+								<td>{{mark.rankSP2}}</td>
+						</tr>
+				</tbody>
+		</table>
 </div>

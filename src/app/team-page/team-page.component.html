@@ -1,9 +1,9 @@
-<h2>Team Page</h2> 
-
-<!-- チーム選択 -->
-
-<div class="row">
-		<div class="col-xs-6">
+<div class="row mb-1">
+		<div class="col-md-6">
+				<h2>Team Page</h2> 
+		</div>
+		<!-- チーム選択 -->
+		<div class="col-md-6">
 				<div ngbDropdown class="d-inline-block w-100">
 						<button class="btn btn-outline-primary btn-block" id="dropdownMenu1" ngbDropdownToggle>{{selectedTeam.name}}</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -14,16 +14,23 @@
 </div>
 
 <!-- チームメンバーのスコア一覧 -->
-<div class="row">
+<div class="row mb-1">
 		<div class="col-xs-12">
-				<h3>{{selectedTeam.name}}のスコア一覧</h3>
-				<div *ngIf="userListMen">
-						<h4>男子</h4>
-						<app-ct-score-table [userList]="userListMen.list" [sex]="userListMen.sex"></app-ct-score-table>
-				</div>
-				<div *ngIf="userListWomen">
-						<h4>女子</h4>
-						<app-ct-score-table [userList]="userListWomen.list" [sex]="userListWomen.sex"></app-ct-score-table>
+				<div class="card">
+						<div class="card-block">
+								<h4 class="card-title">{{selectedTeam.name}}</h4>
+								<h6 class="card-subtitle text-muted">チームメンバーのスコア一覧表</h6>
+						</div>
+						<div class="card-block">
+								<div *ngIf="userListMen">
+										<h5>男子</h5>
+										<app-ct-score-table [userList]="userListMen.list" [sex]="userListMen.sex"></app-ct-score-table>
+								</div>
+								<div *ngIf="userListWomen">
+										<h5>女子</h5>
+										<app-ct-score-table [userList]="userListWomen.list" [sex]="userListWomen.sex"></app-ct-score-table>
+								</div>
+						</div>
 				</div>
 		</div>
 </div>

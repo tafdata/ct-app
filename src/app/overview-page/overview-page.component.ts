@@ -31,10 +31,11 @@ export class OverviewPageComponent implements OnInit {
     metaData: CtMeta[];
     correlations: Correlation[]; // 相関係数
     histgram: Histgram[]; // ヒストグラム用データセット
-    dataOverviewTable: any = { thead: [], tbody: {}}; // Overview    
+    dataOverview: any; // Overview    
     dataCorrelation: any = { thead: [], tbody: {}};    // 相関係数
     dataHistgram: any;
     dataPieChart: any = [];
+    dataBarChart: any;
     
     constructor(
 	private cookieService: CookieService,
@@ -93,17 +94,15 @@ export class OverviewPageComponent implements OnInit {
 	    });
 	}
 	this.dataPieChart =  data;
-    }    
+    }
+    makeDataForMultiBarChart(): void{
+	this.dataBarChart = this.dataService.getBarChartById("overview-participant").data;
+    }
 
 
     //
     // Overview用データセット
     makeDataForOverviewTable(itemCT: Item[]): void{
-	// ヘッダ
-	let thead: any = [
-	    {head:"平均"},{head:"最高"},{head:"分散"},{head:"参加人数"}
-	];
-
 	//
 	let tbody: any = [];
 	for(let item of itemCT){
@@ -118,11 +117,8 @@ export class OverviewPageComponent implements OnInit {
 	}
 
 
-	this.dataOverviewTable = {
-	    thead: thead,
-	    tbody: tbody,
-	};
-	console.log(this.dataOverviewTable);
+	this.dataOverview = tbody;
+	console.log(this.dataOverview);
     }
 
     //
@@ -187,11 +183,6 @@ export class OverviewPageComponent implements OnInit {
     
     ngOnInit(): void{
 	this.flgReady = false;
-	console.log(this.itemCT);
-	console.log(this.itemSP);
-	console.log(this.metaData);
-	console.log(this.dataOverviewTable);
-	console.log(this.dataCorrelation);
 
 	let cookieUserId = this.cookieService.get("taf-ct-app-user-id");
 	console.log("CookieUserId: "+cookieUserId);
@@ -210,6 +201,7 @@ export class OverviewPageComponent implements OnInit {
 		    this.makeDataForCorrelationTable(response);
 		    this.setDataForHistgram(response[0]);
 		    this.makeDataForPieChart();
+		    this.makeDataForMultiBarChart();
 		    this.flgReady = true;
 		});
 	}else{ // ログイン情報なし

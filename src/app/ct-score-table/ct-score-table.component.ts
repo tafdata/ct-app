@@ -48,6 +48,7 @@ export class CtScoreTableComponent implements OnChanges{
 		    tbody.push(this.buildTBodyRecord(user, response, thead));
 		});
 	}
+	console.log(tbody);
 	return tbody;
     }
     getMarksByUserId(id: string, recordService: any): Promise<Mark[]>{
@@ -81,10 +82,12 @@ export class CtScoreTableComponent implements OnChanges{
     
     ngOnChanges(changes: any){
 	console.log(this.sex);
+	console.log(this.userList.length);
 	this.makeTHeadDataset()
 	    .then(response => {
 		this.thead = response;
 		this.tbody =  this.makeTBodyDataset(this.userList, response);
+		console.log(this.tbody);
 	    });
 
     }

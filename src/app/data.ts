@@ -62,3 +62,13 @@ export class Histgram{
     itemId: number; // 種目Id
     values: any;    // 配列 [ {x:number,y:number}, ....]
 }
+
+
+//
+// Overview Page用 人数棒グラフ
+//
+export class BarChart{
+    id: string; // グラフのid
+    data: any;  // nvd3用データセット
+    // { key: string, color: string, "values": [{label: string, value: number}]}
+}

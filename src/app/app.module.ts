@@ -38,6 +38,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { MultiBarHorizontalChartComponent } from './multi-bar-horizontal-chart/multi-bar-horizontal-chart.component';
 import { CtMetaTableComponent } from './ct-meta-table/ct-meta-table.component';
 import { MultiBarChartComponent } from './multi-bar-chart/multi-bar-chart.component';
+import { MyRivalsComponent } from './my-rivals/my-rivals.component';
 
 
 
@@ -61,6 +62,7 @@ import { MultiBarChartComponent } from './multi-bar-chart/multi-bar-chart.compon
 	MultiBarHorizontalChartComponent,
 	CtMetaTableComponent,
 	MultiBarChartComponent,
+	MyRivalsComponent,
     ],
     imports: [
 	AppRoutingModule,

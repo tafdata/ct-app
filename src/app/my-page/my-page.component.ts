@@ -5,9 +5,13 @@ import { CookieService }             from 'angular2-cookie/core';
 
 import { User }                     from '../user';
 import { UserService }              from '../user.service';
+import { Item }                     from '../item';
+import { ItemService }              from '../item.service';
 import { Mark }                     from '../mark';
 import { Record }                   from '../record';
 import { RecordService }            from '../record.service';
+import { Rival }                    from '../data'
+import { DataService }              from '../data.service';
 
 
 @Component({
@@ -22,14 +26,16 @@ export class MyPageComponent implements OnInit {
     // ローカル変数
     records: Record;
     data: any;
+    rivalList: any;
     
     constructor(
 	private cookieService: CookieService,
-	private userService: UserService,
-	private recordService: RecordService,
 	private router: Router,
 	private route: ActivatedRoute,
-	private location: Location
+	private location: Location,
+	private userService: UserService,
+	private dataService: DataService,
+	private recordService: RecordService,
     ) {	}
 
     
@@ -78,6 +84,15 @@ export class MyPageComponent implements OnInit {
 	// 結果を格納
 	return [{ key: key, values: values}];
     }
+    
+    /************************************
+     ** Ct Rival リスト取得 **
+     *************************************/
+    getRivals(id: string): void{
+	this.rivalList = this.dataService.getRivalsByUserId(id);
+    }
+
+    
 
     ngOnInit(): void {
 	console.log("Coolkie: "+this.cookieService.get("taf-ct-app-user-id"));
@@ -85,7 +100,6 @@ export class MyPageComponent implements OnInit {
 	    let id = params['id'];
 	    let cookieUserId = this.cookieService.get("taf-ct-app-user-id");
 	    console.log("URL Param: "+id+", cookie:"+cookieUserId);
-
 	    if(!id){ // URLにIDの指定がない
 		if(cookieUserId){
 		    id = cookieUserId;
@@ -94,10 +108,13 @@ export class MyPageComponent implements OnInit {
 		    this.router.navigate(['/login']);	
 		}
 	    }
+
+	    
 	    // 指定されたユーザー情報の取得
 	    this.userService.getUser(id)
 		.then(user => {
 		    this.user = user;
+		    this.getRivals(user.id);
 		});
 	    this.getRecord(id, this.recordService)
 	    	.then(records => {

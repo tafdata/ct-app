@@ -41,7 +41,7 @@ export class CtScoreChartComponent implements OnChanges {
     	    	showValues: true,
 		showControls: false,
     	    	valueFormat: function(d){
-    	    	    return d3.format(',.2f')(d);
+    	    	    return d3.format(',.1d')(d);
     	    	},
     	    	duration: 500,
 		xAxis: {

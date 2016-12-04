@@ -49,6 +49,21 @@ export class UserService {
     	    .then(users => users.find(user => user.id === id));
     }
     //
+    // id リストをしてい
+    getUsersByIdList(list: string[]): Promise<User[]>{
+	return this.getUsers()
+	    .then(response => {
+		let users: User[] = [];
+
+		for(let user of response){
+		    if(list.indexOf(user.id) >= 0){
+			users.push(user);
+		    }
+		}
+		return users;
+	    });
+    }
+    //
     // teamId指定
     getUsersByTeamId(teamId: string): Promise<User[]>{
 	return this.getUsers()

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -22,11 +22,10 @@ import { DataService } from '../data.service';
     styleUrls: ['./my-ct-target.component.css']
 })
 
-export class MyCtTargetComponent implements OnChanges {
+export class MyCtTargetComponent implements OnInit {
     @Input() user: User;
     dataTargetMarks: any = []; // CT目標記録テーブル用データ
-    dataTableRivals: any = []; // CTライバルテーブル用データ
-
+    flgTargetMarks: boolean = false; // データ準備のフラグ
     
     constructor(
 	private itemService: ItemService,
@@ -62,8 +61,10 @@ export class MyCtTargetComponent implements OnChanges {
 	    })
 	    .then(response => {
 		this.dataTargetMarks.push(response);
+		this.flgTargetMarks = true;
+		console.log(this.dataTargetMarks);
 	    });
-	
+
     }
     // 専門種目のItemを取得
     getSPItem(id: number, itemService: any): Promise<Item>{	
@@ -134,56 +135,18 @@ export class MyCtTargetComponent implements OnChanges {
     }
 
 
-    /************************************
-     ** Ct Rival Table用データセット作成 **
-     *************************************/
-    makeDatasetForTableRivals(userId: string, sp: number): void{    
-	let rivals: Rival;
-	let spItem: Item;
-	let list: User[] = [];
 
-	this.getRivals(userId, sp, this.dataService)
-	    .then(response =>{
-		rivals = response;
-		return this.getItem(sp, this.itemService);
-	    })
-	    .then(response => {
-		spItem = response;		
-		for(let userId of rivals.rivalsId){
-		    this.userService.getUser(userId)
-			.then(response => {
-			    list.push(response);
-			});
-		}		
-		this.dataTableRivals.push({
-		    spItem: spItem,
-		    rivalUsers: list,
-		});
-	    });
-    }
-    getRivals(userId: string, sp: number, dataService: any): Promise<Rival>{
-	return new Promise(function(resolve,reject){
-	    resolve(dataService.getRivalsByUserIdAndSp(userId, sp));
-	});
-    }
-    getItem(sp: number, itemService: any): Promise<Item>{
-	return new Promise(function(resolve, reject){
-	    resolve(itemService.getItem(sp));
-	});
-    }
 	
-    ngOnChanges(changes: any) {
+    ngOnInit() {
 	// 目標データのデータセット作成
 	if(this.user.SP1){
+	    console.log("SP1");
 	    this.makeDataSetForCtTargetTable(this.user.SP1);
-	    this.makeDatasetForTableRivals(this.user.id, this.user.SP1);
 	}
 	if(this.user.SP2){
+	    console.log("SP2");
 	    this.makeDataSetForCtTargetTable(this.user.SP2);
-	    this.makeDatasetForTableRivals(this.user.id, this.user.SP2);
 	}
-	
-
     }
 
 }

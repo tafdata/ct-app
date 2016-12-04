@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { nvD3 }                     from 'ng2-nvd3';
 declare let d3, nv: any;
 
@@ -8,56 +8,9 @@ declare let d3, nv: any;
   styleUrls: ['./multi-bar-horizontal-chart.component.css']
 })
 export class MultiBarHorizontalChartComponent implements OnInit {
-    // ユーザ
-    data: any = [
-	{
-	    "key": "男子",
-	    "color": "#1f77b4",
-	    "values": [
-		{ 
-		    "label" : "走幅跳" ,
-		    "value" : 60
-		} , 
-		{ 
-		    "label" : "三段跳" ,
-		    "value" : 35
-		} , 
-		{ 
-		    "label" : "走高跳" ,
-		    "value" : 49
-		}, 
-		{ 
-		    "label" : "棒高跳" ,
-		    "value" : 20
-		},
-	    ]
-	},
-		{
-	    "key": "女子",
-	    "color": "#d62728",
-	    "values": [
-		{ 
-		    "label" : "走幅跳" ,
-		    "value" : 20
-		} , 
-		{ 
-		    "label" : "三段跳" ,
-		    "value" : 5
-		} , 
-		{ 
-		    "label" : "走高跳" ,
-		    "value" : 15
-		}, 
-		{ 
-		    "label" : "棒高跳" ,
-		    "value" : 8
-		},
-	    ]
-	},
-    ];
-
     // Chartの設定オブジェクト
     options;
+    @Input() data: any;    
 
     
     constructor() { }
@@ -107,7 +60,6 @@ export class MultiBarHorizontalChartComponent implements OnInit {
 
     ngOnInit() {
 	this.drawGraph();
-	
     }
 
 }

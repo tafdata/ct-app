@@ -1,0 +1,26 @@
+<!-- CT Rival --><!-- ng-bootstrap: Tab -->
+<ngb-tabset *ngIf="dataTableRivals">
+		<ngb-tab *ngFor="let data of dataTableRivals">
+				<template ngbTabTitle>{{data.spItem.name}}</template>
+				<template ngbTabContent>
+						<div class="table-responsive">
+								<table class="table table-striped">
+										<thead *ngIf="data.thead">
+												<tr>
+														<th>Name</th>
+														<th style="white-space: nowrap;">総合スコア</th>
+														<th *ngFor="let item of data.thead" style="white-space: nowrap;">{{item.name}}[{{item.unit}}]</th>
+												</tr>
+										</thead>
+										<tbody *ngIf="data.tbody">
+												<tr *ngFor="let record of data.tbody">
+														<th scope="row" class="white-space: nowrap;">{{record.user.name}}<small>({{record.user.team}})</small></th>
+														<td>{{record.score.mark}}</td>
+														<td *ngFor="let val of record.values">{{val.mark}}</td>
+												</tr>
+										</tbody>
+								</table>
+						</div>
+				</template>
+		</ngb-tab>
+</ngb-tabset>

@@ -8,7 +8,7 @@
 								<app-pie-chart [data]="dataPieChart"></app-pie-chart>
 						</div>
 						<div class="col-md-6">
-								<app-multi-bar-horizontal-chart></app-multi-bar-horizontal-chart>
+								<app-multi-bar-horizontal-chart [data]="dataBarChart"></app-multi-bar-horizontal-chart>
 						</div>
 				</div>
 		</div>
@@ -33,7 +33,29 @@
 <section class="row" *ngIf="flgReady">
 		<div class="col-sm-12">
 				<h3>Overview</h3>
-				<app-ct-meta-table [thead]="dataOverviewTable.thead" [tbody]="dataOverviewTable.tbody"></app-ct-meta-table>
+				<div class="table-responsive">
+						<table class="table table-striped">
+								<thead>
+										<tr>
+												<th style="white-space: nowrap;">CT種目</th>
+												<th style="white-space: nowrap;">平均</th>
+												<th style="white-space: nowrap;">最高</th>
+												<th style="white-space: nowrap;">分散</th>
+												<th style="white-space: nowrap;">参加人数</th>
+												<th style="white-space: nowrap;">記録の分布</th>											
+										</tr>
+								</thead>
+								<tbody *ngIf="dataOverview">
+										<tr *ngFor="let record of dataOverview">
+												<th scope="row" class="white-space: nowrap;">{{record.item.name}}</th>
+												<td *ngFor="let val of record.values">{{val}}</td>
+												<td>
+														<button type="button" class="btn btn-info btn-sm" (click)="setDataForHistgram(record.item)">ヒストグラムをみる</button>
+												</td>
+										</tr>
+								</tbody>
+						</table>
+				</div>
 		</div>
 </section>
 

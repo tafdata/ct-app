@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { REGRESSION_LINE_PARAM, RECORD_RANGE, RIVALS, CT_META, CORRELATIONS, HISTGRAM }       from '../data/mock-data'
-import { RegressionLineParam, RecordRange, Rival, CtMeta, Correlation, Histgram }           from './data'
+import { REGRESSION_LINE_PARAM, RECORD_RANGE, RIVALS, CT_META, CORRELATIONS, HISTGRAM, BARCHART }       from '../data/mock-data'
+import { RegressionLineParam, RecordRange, Rival, CtMeta, Correlation, Histgram, BarChart }             from './data'
 
 @Injectable()
 export class DataService {
@@ -151,6 +151,20 @@ export class DataService {
     // 全取得
     getHistgram(): Histgram[]{
 	return HISTGRAM;
+    }
+    /******************************
+     **  BarChart
+     **  棒グラフ用
+     ******************************/
+    //
+    // 全取得
+    getBarChart(): BarChart[]{
+	return BARCHART;
+    }
+    //
+    // Id指定
+    getBarChartById(id: string): BarChart{
+	return this.getBarChart().find(data => data.id === id);
     }
     
 }
