@@ -37,7 +37,7 @@
 														<tr *ngFor="let record of tbodySP; let idx = index;">
 																<th scope="row" class="white-space: nowrap;">{{idx + 1}}位</th>
 																<td>{{record.user.name}}<small>({{record.user.team}})</small></td>
-																<td>{{record.mark}}</td>
+																<td>{{record.mark | zeroToHyphen }}</td>
 																<td><button type="button" class="btn btn-outline-info" (click)="gotoMyPage(record.user)">{{record.user.name}}さんのページを見る</button></td>
 														</tr>
 												</tbody>
@@ -85,7 +85,7 @@
 														<tr *ngFor="let record of tbodyCT; let idx = index;">
 																<th scope="row" class="white-space: nowrap;">{{idx + 1}}位</th>
 																<td>{{record.user.name}}<small>({{record.user.team}})</small></td>
-																<td>{{record.mark}}</td>
+																<td>{{record.mark | zeroToHyphen }}</td>
 																<td></td>
 																<td><button type="button" class="btn btn-outline-info" (click)="gotoMyPage(record.user)">{{record.user.name}}さんのページを見る</button></td>
 														</tr>

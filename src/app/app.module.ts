@@ -40,6 +40,7 @@ import { CtMetaTableComponent } from './ct-meta-table/ct-meta-table.component';
 import { MultiBarChartComponent } from './multi-bar-chart/multi-bar-chart.component';
 import { MyRivalsComponent } from './my-rivals/my-rivals.component';
 import { RankingPageComponent } from './ranking-page/ranking-page.component';
+import { ZeroToHyphenPipe } from './zero-to-hyphen.pipe';
 
 
 
@@ -65,6 +66,7 @@ import { RankingPageComponent } from './ranking-page/ranking-page.component';
 	MultiBarChartComponent,
 	MyRivalsComponent,
 	RankingPageComponent,
+	ZeroToHyphenPipe,
     ],
     imports: [
 	AppRoutingModule,

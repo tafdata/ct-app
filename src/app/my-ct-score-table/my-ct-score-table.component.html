@@ -18,11 +18,11 @@
 				<tbody>
 						<tr *ngFor="let mark of records.records">
 								<td>{{mark.name}}</td>
-								<td>{{mark.mark}}</td>
-								<td>{{mark.score}}</td>
-								<td>{{mark.rank}}</td>
-								<td>{{mark.rankSP1}}</td>
-								<td>{{mark.rankSP2}}</td>
+								<td>{{mark.mark | zeroToHyphen }}</td>
+								<td>{{mark.score | zeroToHyphen }}</td>
+								<td>{{mark.rank | zeroToHyphen }}</td>
+								<td>{{mark.rankSP1 | zeroToHyphen }}</td>
+								<td>{{mark.rankSP2 | zeroToHyphen }}</td>
 						</tr>
 				</tbody>
 		</table>

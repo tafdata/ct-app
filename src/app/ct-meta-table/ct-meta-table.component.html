@@ -11,7 +11,7 @@
 						<tbody *ngIf="tbody">
 								<tr *ngFor="let record of tbody">
 										<th scope="row" class="white-space: nowrap;">{{record.item.name}}</th>
-										<td *ngFor="let val of record.values">{{val}}</td>
+										<td *ngFor="let val of record.values">{{val | zeroToHyphen }}</td>
 								</tr>
 						</tbody>
 				</table>
