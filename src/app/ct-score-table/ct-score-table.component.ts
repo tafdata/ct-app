@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { Router }                      from '@angular/router';
 
 import { User }                     from '../user';
 import { UserService }              from '../user.service';
@@ -27,6 +28,7 @@ export class CtScoreTableComponent implements OnChanges{
 	private itemService: ItemService,
 	private recordService: RecordService,
 	private userService: UserService,
+	private router: Router,
     ){}
 
     // thead用データを作成
@@ -79,6 +81,13 @@ export class CtScoreTableComponent implements OnChanges{
 	    
 
     }
+
+    //
+    // MyPageへ移動
+    gotoMyPage(user: User): void{
+	this.router.navigate(['/mypage', user.id]);
+    }
+    
     
     ngOnChanges(changes: any){
 	console.log(this.sex);

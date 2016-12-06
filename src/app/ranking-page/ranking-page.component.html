@@ -1,0 +1,98 @@
+<p>
+  ranking-page works!
+</p>
+<!-- 専門種目のランキング -->
+<div class="row mb-1">
+		<div class="col-xs-12">
+				<div class="card">
+						<div class="card-block" *ngIf="SP">
+								<div class="row">
+										<div class="col-xs-6">
+												<h6 class="card-subtitle text-muted">専門種目ランキング</h6>
+												<h4 class="card-title">{{SP.name}}</h4>
+										</div>
+										<div class="col-xs-6">										
+												<!-- 種目切り替えボタン -->
+												<div ngbDropdown class="d-inline-block w-100">
+														<button class="btn btn-outline-primary btn-block" id="dropdownMenu1" ngbDropdownToggle>種目選択</button>
+														<div class="dropdown-menu" aria-labelledby="dropdownMenuSP">
+																<button *ngFor="let item of optionSP" class="dropdown-item" (click)="changeSP(item)">{{item.name}}</button>
+														</div>
+												</div>
+										</div>
+								</div>
+						</div>
+						<div class="card-block">
+								<div class="table-responsive"  *ngIf="tbodySP">
+										<table class="table table-striped">
+												<thead>
+														<tr>
+																<th style="white-space: nowrap;">順位</th>
+																<th style="white-space: nowrap;">Name</th>
+																<th style="white-space: nowrap;">記録</th>
+																<th style="white-space: nowrap;"></th>
+														</tr>
+												</thead>
+												<tbody>
+														<tr *ngFor="let record of tbodySP; let idx = index;">
+																<th scope="row" class="white-space: nowrap;">{{idx + 1}}位</th>
+																<td>{{record.user.name}}<small>({{record.user.team}})</small></td>
+																<td>{{record.mark}}</td>
+																<td><button type="button" class="btn btn-outline-info" (click)="gotoMyPage(record.user)">{{record.user.name}}さんのページを見る</button></td>
+														</tr>
+												</tbody>
+										</table>
+								</div>	
+						</div>
+				</div>
+		</div>
+</div>
+
+<!-- CT種目のランキング -->
+<div class="row mb-1">
+		<div class="col-xs-12">
+				<div class="card">
+						<div class="card-block" *ngIf="CT">
+								<div class="row">
+										<div class="col-xs-6">
+												<h6 class="card-subtitle text-muted">CT種目別ランキング</h6>
+												<h4 class="card-title">{{CT.name}}</h4>
+										</div>
+										<div class="col-xs-6">										
+												<!-- 種目切り替えボタン -->
+												<div ngbDropdown class="d-inline-block w-100">
+														<button class="btn btn-outline-primary btn-block" id="dropdownMenuCT" ngbDropdownToggle>種目選択</button>
+														<div class="dropdown-menu" aria-labelledby="dropdownMenuCT">
+																<button *ngFor="let item of optionCT" class="dropdown-item" (click)="changeCT(item)">{{item.name}}</button>
+														</div>
+												</div>
+										</div>
+								</div>
+						</div>
+						<div class="card-block">
+								<div class="table-responsive"  *ngIf="tbodyCT">
+										<table class="table table-striped">
+												<thead>
+														<tr>
+																<th style="white-space: nowrap;">順位</th>
+																<th style="white-space: nowrap;">Name</th>
+																<th style="white-space: nowrap;">記録</th>
+																<th style="white-space: nowrap;">スコア</th>
+																<th style="white-space: nowrap;"></th>
+														</tr>
+												</thead>
+												<tbody>
+														<tr *ngFor="let record of tbodyCT; let idx = index;">
+																<th scope="row" class="white-space: nowrap;">{{idx + 1}}位</th>
+																<td>{{record.user.name}}<small>({{record.user.team}})</small></td>
+																<td>{{record.mark}}</td>
+																<td></td>
+																<td><button type="button" class="btn btn-outline-info" (click)="gotoMyPage(record.user)">{{record.user.name}}さんのページを見る</button></td>
+														</tr>
+												</tbody>
+										</table>
+								</div>	
+						</div>
+				</div>
+		</div>
+</div>

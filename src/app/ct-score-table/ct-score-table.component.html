@@ -7,6 +7,7 @@
 										<th>Name</th>
 										<th style="white-space: nowrap;">総合スコア</th>
 										<th *ngFor="let item of thead" style="white-space: nowrap;">{{item.name}}[{{item.unit}}]</th>
+										<th></th>
 								</tr>
 						</thead>
 						<tbody *ngIf="tbody">
@@ -14,6 +15,7 @@
 										<th scope="row" class="white-space: nowrap;">{{record.user.name}}<small>({{record.user.team}})</small></th>
 										<td>{{record.score.mark}}</td>
 										<td *ngFor="let val of record.values">{{val.mark}}</td>
+										<td><button type="button" class="btn btn-outline-info" (click)="gotoMyPage(record.user)">{{record.user.name}}さんのページを見る</button></td>
 								</tr>
 						</tbody>
 				</table>

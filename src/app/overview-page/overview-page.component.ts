@@ -132,6 +132,7 @@ export class OverviewPageComponent implements OnInit {
 	}];		
     }
 
+    
     //
     // 相関係数用データセット
     makeDataForCorrelationTable(itemCT: Item[]): void{
