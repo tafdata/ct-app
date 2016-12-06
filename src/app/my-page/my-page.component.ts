@@ -1,7 +1,8 @@
 import { Component, Input, OnInit }         from '@angular/core';
 import { ActivatedRoute, Params, Router }   from '@angular/router';
 import { Location }                         from '@angular/common';
-import { CookieService }             from 'angular2-cookie/core';
+import { CookieService }                    from 'angular2-cookie/core';
+import { NgbModal, ModalDismissReasons }    from '@ng-bootstrap/ng-bootstrap';
 
 import { User }                     from '../user';
 import { UserService }              from '../user.service';
@@ -27,6 +28,7 @@ export class MyPageComponent implements OnInit {
     records: Record;
     data: any;
     rivalList: any;
+    closeResult: string;
     
     constructor(
 	private cookieService: CookieService,
@@ -36,6 +38,7 @@ export class MyPageComponent implements OnInit {
 	private userService: UserService,
 	private dataService: DataService,
 	private recordService: RecordService,
+	private modalService: NgbModal,
     ) {	}
 
     
@@ -91,6 +94,26 @@ export class MyPageComponent implements OnInit {
     getRivals(id: string): void{
 	this.rivalList = this.dataService.getRivalsByUserId(id);
     }
+
+    /***********************
+     **  Modal            **
+     ***********************/
+    open(content) {
+    	this.modalService.open(content).result.then((result) => {
+    	    this.closeResult = `Closed with: ${result}`;
+    	}, (reason) => {
+    	    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    	});
+    }
+    private getDismissReason(reason: any): string {
+    	if (reason === ModalDismissReasons.ESC) {
+    	    return 'by pressing ESC';
+    	} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    	    return 'by clicking on a backdrop';
+    	} else {
+    	    return  `with: ${reason}`;
+    	}
+    }    
 
     
 

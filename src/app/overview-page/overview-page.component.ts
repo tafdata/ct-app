@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location }          from '@angular/common';
 import { Router }            from '@angular/router';
 import { CookieService }     from 'angular2-cookie/core';
+import { NgbModal, ModalDismissReasons }    from '@ng-bootstrap/ng-bootstrap';
 
 import { User }        from '../user';
 import { UserService } from '../user.service';
@@ -36,11 +37,13 @@ export class OverviewPageComponent implements OnInit {
     dataHistgram: any;
     dataPieChart: any = [];
     dataBarChart: any;
+    closeResult: string;
     
     constructor(
 	private cookieService: CookieService,
 	private location:    Location,
 	private router:      Router,
+	private modalService: NgbModal,
     	private userService: UserService,
 	private itemService: ItemService,
 	private dataService: DataService,
@@ -180,6 +183,26 @@ export class OverviewPageComponent implements OnInit {
 		this.makeDataForCorrelationTable(response);
 	    });
     }
+
+    /***********************
+     **  Modal            **
+     ***********************/
+    open(content) {
+    	this.modalService.open(content).result.then((result) => {
+    	    this.closeResult = `Closed with: ${result}`;
+    	}, (reason) => {
+    	    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    	});
+    }
+    private getDismissReason(reason: any): string {
+    	if (reason === ModalDismissReasons.ESC) {
+    	    return 'by pressing ESC';
+    	} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    	    return 'by clicking on a backdrop';
+    	} else {
+    	    return  `with: ${reason}`;
+    	}
+    }    
 
     
     ngOnInit(): void{

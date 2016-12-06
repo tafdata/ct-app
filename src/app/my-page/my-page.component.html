@@ -15,8 +15,30 @@
 <!-- CTの結果 -->
 <div class="row mb-2" *ngIf="data">
 		<div class="col-xs-12">
-				<h3>スコア</h3>
+				<h3>スコア<button class="btn btn-sm btn-info" (click)="open(contentScore)">?</button></h3>
 				<app-ct-score-chart [data]="data"></app-ct-score-chart>
+
+
+				<!-- Modal Template -->
+				<template ngbModalContainer #contentScore let-c="close" let-d="dismiss">
+						<div class="modal-header">
+								<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+										<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">スコア</h4>
+						</div>
+						<div class="modal-body">
+								<p>「スコア」とはコントロールテスト(以下CT)の各種目の記録を得点化したものです。計算方法は異なりますが混成競技の得点に似たものだと考えてください。以下にスコアの基本的なアイデアと計算方法を説明します。</p>
+
+								<h3>Idea<small>スコアの意味</small></h3>
+
+								<h3>Calculation<small>計算方法</small></h3>
+						</div>
+						<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+						</div>
+				</template>
+				
 		</div>
 </div>
 <div class="row mb-1" *ngIf="records">
@@ -30,12 +52,52 @@
 <!-- CT 目標値 -->
 <div class="row mb-1" *ngIf="user">
 		<div class="col-md-6">
-				<h3>目標記録</h3>
+				<h3>目標記録<button class="btn btn-sm btn-info" (click)="open(contentTarget)">?</button></h3>
 				<app-my-ct-target [user]="user" ></app-my-ct-target>
+
+				<!-- Modal Template -->
+				<template ngbModalContainer #contentTarget let-c="close" let-d="dismiss">
+						<div class="modal-header">
+								<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+										<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">目標記録</h4>
+						</div>
+						<div class="modal-body">
+								<p>各専門種目においてある記録を出すために必要とされるコントロールテスト種目の記録です。以下にその具体的な意味と計算方法を示します。</p>
+
+								<h3>Idea<small>目標記録の意味</small></h3>
+
+								<h3>Calculation<small>計算方法</small></h3>
+						</div>
+						<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+						</div>
+				</template>
 		</div>
 		<div class="col-md-6" *ngIf="rivalList">
-				<h3>ライバル</h3>
+				<h3>ライバル<button class="btn btn-sm btn-info" (click)="open(contentRivals)">?</button></h3>
 				<app-my-rivals [user]="user" [rivalList]="rivalList" ></app-my-rivals>
+
+				<!-- Modal Template -->
+				<template ngbModalContainer #contentRivals let-c="close" let-d="dismiss">
+						<div class="modal-header">
+								<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+										<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">ライバル</h4>
+						</div>
+						<div class="modal-body">
+								<p>あなたの専門種目の記録が近い人のコントロールテストの結果をまとめました。</p>
+
+								<h3>Idea<small>目標記録の意味</small></h3>
+								
+								
+						</div>
+						<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+						</div>
+				</template>
 		</div>
 </div>
 

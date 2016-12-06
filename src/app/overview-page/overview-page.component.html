@@ -70,8 +70,28 @@
 <!-- CT 相関係数 -->
 <section class="row" *ngIf="flgReady">
 		<div class="col-sm-12">
-				<h3>相関係数</h3>
+				<h3>相関係数<button class="btn btn-sm btn-info" (click)="open(contentCorrelation)">?</button></h3>
 				<app-ct-meta-table [thead]="dataCorrelation.thead" [tbody]="dataCorrelation.tbody"></app-ct-meta-table>
+
+				<!-- Modal Template -->
+				<template ngbModalContainer #contentCorrelation let-c="close" let-d="dismiss">
+						<div class="modal-header">
+								<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+										<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">相関係数</h4>
+						</div>
+						<div class="modal-body">
+								<p>コントロールテストの各種目が、専門種目での記録とどれだけ関連があるかを示した数値です。</p>
+
+								<h3>Idea:<small>相関係数の意味</small></h3>
+								
+								
+						</div>
+						<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+						</div>
+				</template>
 		</div>
 </section>
 
