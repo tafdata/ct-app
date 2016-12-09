@@ -13,8 +13,8 @@
 						<tbody *ngIf="tbody">
 								<tr *ngFor="let record of tbody">
 										<th scope="row" class="white-space: nowrap;">{{record.user.name}}<small>({{record.user.team}})</small></th>
-										<td>{{record.score.mark}}</td>
-										<td *ngFor="let val of record.values">{{val.mark | zeroToHyphen }}</td>
+										<td>{{record.score.mark | zeroToHyphen }}<small *ngIf="record.score.mark">点</small></td>
+										<td *ngFor="let val of record.values">{{val.mark | zeroToHyphen }}<small *ngIf="val.mark">{{ val.item.unit }}</small></td>
 										<td><button type="button" class="btn btn-outline-info" (click)="gotoMyPage(record.user)">{{record.user.name}}さんのページを見る</button></td>
 								</tr>
 						</tbody>

@@ -29,9 +29,14 @@ export class MySummaryComponent implements OnChanges {
 
 
     ngOnChanges(changes: any) {
+	console.log("my-summary");
+	//	console.log(this.record);
 	// 総合結果を取得
 	this.mark = this.record.records.find(mark => mark.id === 0);
-	console.log(this.mark);
+	if(!this.mark){
+	    this.mark = {"id": 0, "mark": 0, "name": "総合スコア", "rank": 0, "rankSP1": 0, "rankSP2": 0, "score": 0};
+	}
+	//	console.log(this.mark);
 	
 	if(this.user.SP1){
 	    this.SP1 = this.itemService.getItem(this.user.SP1);

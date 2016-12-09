@@ -18,17 +18,16 @@
 																		<p>全体順位</p>
 																		<h4 class="dislay-2">{{mark.rank | zeroToHyphen }}<small>位</small></h4>
 																</div>
-																<div class="col-xs-4" >
-																		<p *ngIf="SP1">{{SP1.name}}</p>
-																		<h4 class="dislay-2" *ngIf="mark.rankSP1">{{mark.rankSP1 | zeroToHyphen }}<small>位</small></h4>
+																<div class="col-xs-4" *ngIf="SP1">
+																		<p>{{SP1.name}}</p>
+																		<h4 class="dislay-2">{{mark.rankSP1 | zeroToHyphen }}<small>位</small></h4>
 																</div>
-																<div class="col-xs-4" *ngIf="mark.rankSP2">
-																		<p *ngIf="SP2">{{SP2.name}}</p>
+																<div class="col-xs-4" *ngIf="SP2">
+																		<p>{{SP2.name}}</p>
 																		<h4 class="dislay-2">{{mark.rankSP2 | zeroToHyphen }}<small>位</small></h4>
 																</div>
 														</div>
 												</div>
-
 										</div>
 								</div>
 						</div>

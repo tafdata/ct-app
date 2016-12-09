@@ -31,6 +31,9 @@ export class CtScoreTableComponent implements OnChanges{
 	private router: Router,
     ){}
 
+    /************************************
+     **  表作成                 **
+     *************************************/
     // thead用データを作成
     makeTHeadDataset(): Promise<any>{
 	let items: Item[] = this.itemService.getItemsBySexAndTag(this.sex,"ct");
@@ -43,10 +46,12 @@ export class CtScoreTableComponent implements OnChanges{
     // tbody用データの作成
     makeTBodyDataset(users: User[], thead: Item[]): any{
 	let tbody: any = [];
-
+	
 	for(let user of users){
 	    this.getMarksByUserId(user.id, this.recordService)
 		.then(response => { // response: Mark[];
+		    console.log(user);
+		    console.log(response);
 		    tbody.push(this.buildTBodyRecord(user, response, thead));
 		});
 	}
@@ -60,14 +65,26 @@ export class CtScoreTableComponent implements OnChanges{
     }	
     buildTBodyRecord(user: User, marks: Mark[], thead: Item[]): any{
 	let vals: any = [];
+	let totalScore = marks.find(obj => obj.id === 0);
+
+	// Total Scoreがないとき
+	if(!totalScore){
+	    totalScore = {"id": 0, "mark": 0, "name": "総合スコア", "rank": 0, "rankSP1": 0, "rankSP2": 0, "score": 0};
+	}
+
 	// theadに含まれている記録のみを選択
 	for(let item of thead){
 	    let mark: Mark;
 	    if((mark = marks.find(obj => obj.id === item.id))){
-		vals.push(mark);
+		console.log(mark);
+		vals.push({
+		    item: item,
+		    mark: mark.mark,
+		    score: mark.score,
+		});
 	    }else{
 		vals.push({
-		    id: item.id,
+		    item: item,
 		    mark: 0,
 		    score: 0,
 		});
@@ -75,7 +92,7 @@ export class CtScoreTableComponent implements OnChanges{
 	}
 	return {
 	    user: user,
-	    score: marks.find(obj => obj.id === 0),
+	    score: totalScore,
 	    values: vals,
 	};
 	    

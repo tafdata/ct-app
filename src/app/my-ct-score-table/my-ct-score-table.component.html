@@ -1,5 +1,5 @@
 <!-- My CT Score Table Component -->
-<div class="table-responsive" *ngIf="records">
+<div class="table-responsive" *ngIf="data.length > 0">
 		<table class="table table-sm table-striped table-bordered">
 				<thead class="thead-inverse">
 						<tr>
@@ -16,13 +16,13 @@
 						</tr>
 				</thead>
 				<tbody>
-						<tr *ngFor="let mark of records.records">
-								<td>{{mark.name}}</td>
-								<td>{{mark.mark | zeroToHyphen }}</td>
-								<td>{{mark.score | zeroToHyphen }}</td>
-								<td>{{mark.rank | zeroToHyphen }}</td>
-								<td>{{mark.rankSP1 | zeroToHyphen }}</td>
-								<td>{{mark.rankSP2 | zeroToHyphen }}</td>
+						<tr *ngFor="let obj of data">
+								<td>{{obj.item.name}}</td>
+								<td>{{obj.mark.mark | zeroToHyphen }}<small>{{obj.item.unit}}</small></td>
+								<td>{{obj.mark.score | zeroToHyphen }}<small>点</small></td>
+								<td>{{obj.mark.rank | zeroToHyphen }}<small>位</small></td>
+								<td>{{obj.mark.rankSP1 | zeroToHyphen }}<small *ngIf="obj.mark.rankSP1">位</small></td>
+								<td>{{obj.mark.rankSP2 | zeroToHyphen }}<small *ngIf="obj.mark.rankSP2">位</small></td>
 						</tr>
 				</tbody>
 		</table>

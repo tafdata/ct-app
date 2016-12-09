@@ -104,10 +104,17 @@ export class MyRivalsComponent implements OnInit{
     }
     buildTBodyRecord(user: User, marks: Mark[], thead: Item[]): any{
 	let vals: any = [];
+	let totalScore = marks.find(obj => obj.id === 0);
+
+	// Total Scoreがないとき
+	if(!totalScore){
+	    totalScore = {"id": 0, "mark": 0, "name": "総合スコア", "rank": 0, "rankSP1": 0, "rankSP2": 0, "score": 0};
+	}
+	
 	// theadに含まれている記録のみを選択
 	for(let item of thead){
-	    let mark: Mark;
-	    if((mark = marks.find(obj => obj.id === item.id))){
+	    let mark = marks.find(obj => obj.id === item.id);
+	    if(mark){
 		vals.push(mark);
 	    }else{
 		vals.push({
@@ -119,7 +126,7 @@ export class MyRivalsComponent implements OnInit{
 	}
 	return {
 	    user: user,
-	    score: marks.find(obj => obj.id === 0),
+	    score: totalScore,
 	    values: vals,
 	};
     }
@@ -143,7 +150,8 @@ export class MyRivalsComponent implements OnInit{
     
     
     ngOnInit() {
-	console.log(this.rivalList);
+	console.log("my-rivals");
+	//	console.log(this.rivalList);
 	// CT種目取得
 	this.getItemsBySexAndTag(this.user.sex,"ct")
 	    .then(response => {

@@ -1,7 +1,9 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import { Mark }    from '../mark';
-import { Record }  from '../record';
+import { Item }        from '../item';
+import { ItemService } from '../item.service';
+import { Mark }        from '../mark';
+import { Record }      from '../record';
 
 
 @Component({
@@ -11,14 +13,46 @@ import { Record }  from '../record';
 })
 
 
-export class MyCtScoreTableComponent implements OnChanges {
+export class MyCtScoreTableComponent implements OnInit {
     @Input() records: Record;
+    items: Item[];
+    data: any = [];
     
-    constructor() { }
+    constructor(
+	private itemService: ItemService,
+    ) {
+	this.items = itemService.getItems();
+    }
+
+    //
+    // recordとitemをパッケージする
+    makeDataset(): void{
+	for(let mark of this.records.records){
+	    if(mark.mark > 0){　	    // 実施していない種目を除外
+		this.getItemById(mark.id)
+		    .then(response => {
+			this.data.push({
+			    item: response,
+			    mark: mark,			
+			});
+		    });
+	    }
+	}
+	//	console.log(this.data);
+    }
+    //
+    //
+    getItemById(id: number): Promise<Item>{
+	let item = this.items.find(item => item.id === id);
+	return Promise.resolve(item);
+    }
     
-    ngOnChanges(changes: any) {
+    
+    ngOnInit() {
 	console.log("my-ct-score-table");
-	console.log(this.records);
+	//console.log(this.records);
+	//console.log(this.items);
+	this.makeDataset();
     }
 
 }

@@ -84,12 +84,11 @@ export const REGRESSION_LINE_PARAM: RegressionLineParam[] =  [
 //     step: number;  // 刻み幅
 // }
 export const RECORD_RANGE: RecordRange[] = [
-    { sp: 101, min:  6.00, max:  8.00, step: 0.10 },
-    { sp: 102, min: 11.00, max: 16.00, step: 0.20 },
-    { sp: 103, min:  1.70, max:  2.20, step: 0.05 },
-    { sp: 104, min:  3.00, max:  5.50, step: 0.10 },    
+    { sp: 101, min:  6.50, max:  8.00, step: 0.20 },
+    { sp: 102, min: 13.50, max: 16.00, step: 0.20 },
+    { sp: 103, min:  1.80, max:  2.30, step: 0.10 },
+    { sp: 104, min:  3.00, max:  5.50, step: 0.20 },    
 ];
-
 
 //
 // Overview Page用 人数棒グラフ
