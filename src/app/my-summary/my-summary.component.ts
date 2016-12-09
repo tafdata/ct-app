@@ -18,8 +18,6 @@ export class MySummaryComponent implements OnChanges {
     @Input() user: User;
     @Input() record: Record;
     mark: Mark;
-    scoreMax: number = 10000;
-    goalAvg: number = 0;
     SP1: Item;
     SP2: Item;
 
@@ -33,8 +31,8 @@ export class MySummaryComponent implements OnChanges {
     ngOnChanges(changes: any) {
 	// 総合結果を取得
 	this.mark = this.record.records.find(mark => mark.id === 0);
- 	this.goalAvg  = Math.floor((this.mark.score / this.scoreMax) * 1000) / 10;
-
+	console.log(this.mark);
+	
 	if(this.user.SP1){
 	    this.SP1 = this.itemService.getItem(this.user.SP1);
 	}
