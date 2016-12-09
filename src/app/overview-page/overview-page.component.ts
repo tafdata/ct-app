@@ -32,8 +32,9 @@ export class OverviewPageComponent implements OnInit {
     metaData: CtMeta[];
     correlations: Correlation[]; // 相関係数
     histgram: Histgram[]; // ヒストグラム用データセット
+    itemHistgram: Item;   // ヒストグラムで扱っている項目
     dataOverview: any; // Overview    
-    dataCorrelation: any = { thead: [], tbody: {}};    // 相関係数
+    dataCorrelation: any; // = { thead: [], tbody: {}};  相関係数
     dataHistgram: any;
     dataPieChart: any = [];
     dataBarChart: any;
@@ -77,10 +78,12 @@ export class OverviewPageComponent implements OnInit {
     //
     // 参加人数表用のデータセット作成
     makeDataForPieChart(): void{
+	console.log("makeDataForPieChart()");
 	this.dataPieChart = this.dataService.getBarChartById("overview-pie-chart").data;
-	console.log(this.dataPieChart);
+	//console.log(this.dataPieChart);
     }
     makeDataForMultiBarChart(): void{
+	console.log("makeDataForMultiBarChart()");
 	this.dataBarChart = this.dataService.getBarChartById("overview-participant").data;
     }
 
@@ -88,6 +91,7 @@ export class OverviewPageComponent implements OnInit {
     //
     // Overview用データセット
     makeDataForOverviewTable(itemCT: Item[]): void{
+	console.log("makeDataForOverviewTable()");
 	//
 	let tbody: any = [];
 	for(let item of itemCT){
@@ -96,21 +100,30 @@ export class OverviewPageComponent implements OnInit {
 	    if(meta){
 		tbody.push({
 		    item: item,
-		    values: [ meta.avg, meta.max, meta.variance, meta.N]
+		    avg: meta.avg,
+		    max: meta.max,
+		    sd: Math.sqrt(meta.variance),
+		    N: meta.N,
 		});
 	    }
 	}
 
 
 	this.dataOverview = tbody;
-	console.log(this.dataOverview);
+	//console.log(this.dataOverview);
     }
 
     //
     // ヒストグラム用
     setDataForHistgram(item: Item): any{
+	console.log("setDataForHistgram: "+item.id);
 	let values = this.histgram.find(data => data.itemId === item.id);
+	this.itemHistgram = item;
 
+	if(!values){
+	    values = {itemId: item.id, values: []};
+	}
+	
 	this.dataHistgram = [{
 	    key: item.name,
 	    values: values.values,
@@ -121,6 +134,7 @@ export class OverviewPageComponent implements OnInit {
     //
     // 相関係数用データセット
     makeDataForCorrelationTable(itemCT: Item[]): void{
+	console.log("makeDataForCorrelationTable()");
 	let thead: any[] = [
 	    {head:"走幅跳"},{head:"三段跳"},{head:"走高跳"},{head:"棒高跳"}
 	];
@@ -140,7 +154,7 @@ export class OverviewPageComponent implements OnInit {
 	this.dataCorrelation = {
 	    thead: thead,
 	    tbody: tbody,
-	}		
+	}
     }
     getCorrelationByItemId(id: number): Correlation{
 	return   this.correlations.find(val => val.itemId === id);
@@ -150,6 +164,7 @@ export class OverviewPageComponent implements OnInit {
     //
     // 戻るボタン
     goBack(): void{
+	console.log("goBack()")
 	this.location.back();	
     }
 
@@ -158,25 +173,36 @@ export class OverviewPageComponent implements OnInit {
     changeSex(sex: string): void{
 	console.log("changeSex(): "+sex);
 	this.getItemsBySex(sex, this.itemService)
-	    .then(response => {
+	    .then(response => { // Item[]
 		this.itemCT = response;
 		// データの更新
 		this.makeDataForOverviewTable(response);
 		this.makeDataForCorrelationTable(response);
+		
+		if(response[0]){ this.setDataForHistgram(response[0]);}
 	    });
     }
 
+    
     /***********************
      **  Modal            **
      ***********************/
     open(content) {
+	console.log("Modal: open()");
     	this.modalService.open(content).result.then((result) => {
     	    this.closeResult = `Closed with: ${result}`;
     	}, (reason) => {
     	    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     	});
     }
+    openHistgram(item: Item, content){
+	console.log("Modal: openHistgram()");
+	// ヒストグラム用にデータを格納
+	this.setDataForHistgram(item)
+	this.open(content);
+    }
     private getDismissReason(reason: any): string {
+	console.log("Modal: getDismissReason()");
     	if (reason === ModalDismissReasons.ESC) {
     	    return 'by pressing ESC';
     	} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -195,21 +221,15 @@ export class OverviewPageComponent implements OnInit {
 	if(cookieUserId){ // ログイン情報あり
 	    this.userService.getUser(cookieUserId)
 		.then(user => {
-		    console.log(user);
+		    console.log("[Init]OverviewPage: "+user.sex);
 		    this.user = user;
 		    this.sex = user.sex;
-		    return this.getItemsBySex(this.sex, this.itemService);
-		})
-		.then(response => {
-		    console.log(response);
-		    this.itemCT = response;
-		    this.makeDataForOverviewTable(response);
-		    this.makeDataForCorrelationTable(response);
-		    this.setDataForHistgram(response[0]);
-		    this.makeDataForPieChart();
-		    this.makeDataForMultiBarChart();
-		    this.flgReady = true;
+		    this.changeSex(user.sex);
 		});
+	    
+	    // 参加人数関係のグラフ
+	    this.makeDataForPieChart();
+	    this.makeDataForMultiBarChart();
 	}else{ // ログイン情報なし
 	    // ログイン画面にリダイレクト
 	    this.router.navigate(['/login']);	

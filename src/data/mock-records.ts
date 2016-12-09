@@ -4,8 +4,9 @@ export const RECORDS: Record[] =
 	{
 	    "id": "OSK16015",
 	    "records": [
+		{"id": 0, "mark": 1234, "name": "総合スコア", "rank": 25, "rankSP1": 3, "rankSP2": 0, "score": 1234},
 		{"id": 6, "mark": 2.15, "name": "立幅跳", "rank": 25, "rankSP1": 3, "rankSP2": 0, "score": 0},
-		{"id": 1, "mark": 0.0, "name": "スナッッチ", "rank": 0, "rankSP1": 0, "rankSP2": 0, "score": 0},
+		{"id": 1, "mark": 0.0, "name": "スナッチ", "rank": 0, "rankSP1": 0, "rankSP2": 0, "score": 0},
 		{"id": 5, "mark": 8.0, "name": "両手砲丸投げ（後）", "rank": 27, "rankSP1": 4, "rankSP2": 0, "score": 0},
 		{"id": 3, "mark": 0.0, "name": "フルスクワット", "rank": 0, "rankSP1": 0, "rankSP2": 0, "score": 0},
 		{"id": 10, "mark": 9.04, "name": "60mCS", "rank": 4, "rankSP1": 3, "rankSP2": 0, "score": 0},
@@ -22,7 +23,7 @@ export const RECORDS: Record[] =
 	    "id": "OSK11296",
 	    "records": [
 		{"id": 6, "mark": 2.25, "name": "立幅跳", "rank": 24, "rankSP1": 2, "rankSP2": 0, "score": 0},
-		{"id": 1, "mark": 27.5, "name": "スナッッチ", "rank": 22, "rankSP1": 2, "rankSP2": 0, "score": 0},
+		{"id": 1, "mark": 27.5, "name": "スナッチ", "rank": 22, "rankSP1": 2, "rankSP2": 0, "score": 0},
 		{"id": 5, "mark": 8.78, "name": "両手砲丸投げ（後）", "rank": 26, "rankSP1": 3, "rankSP2": 0, "score": 0},
 		{"id": 3, "mark": 55.0, "name": "フルスクワット", "rank": 22, "rankSP1": 3, "rankSP2": 0, "score": 0},
 		{"id": 10, "mark": 8.9, "name": "60mCS", "rank": 5, "rankSP1": 4, "rankSP2": 0, "score": 0},

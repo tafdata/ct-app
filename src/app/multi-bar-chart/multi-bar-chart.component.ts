@@ -30,18 +30,18 @@ export class MultiBarChartComponent implements OnInit {
 		type: 'multiBarChart',
 		height: 300,
 		margin : {
-		    top: 20,
+		    top: 10,
 		    right: 10,
-		    bottom: 40,
-		    left: 45
+		    bottom: 60,
+		    left: 50,
 		},
 		clipEdge: true,
-		staggerLabels: true,
+		staggerLabels: false,
 		duration: 500,
-		stacked: true,
+		stacked: false,
 		xAxis: {
 		    axisLabel: '記録',
-		    showMaxMin: false,
+		    showMaxMin: true,
 		    tickFormat: function(d){
 			return d3.format(',.2f')(d);
 		    }

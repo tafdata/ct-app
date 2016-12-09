@@ -1,6 +1,6 @@
 
 <!-- CT参加者 -->
-<section class="row">
+<section class="row mb-1">
 		<div class="col-sm-12">
 				<h3>参加者</h3>
 				<div class="row">
@@ -15,14 +15,14 @@
 </section>
 
 <!-- 性別切り替え -->
-<div class="row flex-items-xs-right">
+<div class="row mb-1 flex-items-xs-right">
 		<div class="col-xs-12">
 				<div [(ngModel)]="sex" ngbRadioGroup name="radioBasic" style="width:100%;">
-						<label class="btn btn-outline-info btn-lg" style="width:50%;" (click)="changeSex(sex)">
-								<input type="radio" value="M"> 男
+						<label class="btn btn-outline-info btn-lg" style="width:50%;" >
+								<input type="radio" value="M" (click)="changeSex('M')"> 男
 						</label>
-						<label class="btn btn-outline-danger btn-lg" style="width:50%;" (click)="changeSex(sex)">
-								<input type="radio" value="W"> 女
+						<label class="btn btn-outline-danger btn-lg" style="width:50%;">
+								<input type="radio" value="W"  (click)="changeSex('W')"> 女
 						</label>
 				</div>
 		</div>
@@ -30,7 +30,7 @@
 
 
 <!-- CT Overview -->
-<section class="row" *ngIf="flgReady">
+<section class="row mb-1" *ngIf="dataOverview">
 		<div class="col-sm-12">
 				<h3>Overview</h3>
 				<div class="table-responsive">
@@ -38,37 +38,50 @@
 								<thead>
 										<tr>
 												<th style="white-space: nowrap;">CT種目</th>
-												<th style="white-space: nowrap;">平均</th>
 												<th style="white-space: nowrap;">最高</th>
-												<th style="white-space: nowrap;">分散</th>
+												<th style="white-space: nowrap;">平均(分散)</th>
 												<th style="white-space: nowrap;">参加人数</th>
+												<th style="white-space: nowrap;">標準偏差</th>
 												<th style="white-space: nowrap;">記録の分布</th>											
 										</tr>
 								</thead>
-								<tbody *ngIf="dataOverview">
+								<tbody>
 										<tr *ngFor="let record of dataOverview">
 												<th scope="row" class="white-space: nowrap;">{{record.item.name}}</th>
-												<td *ngFor="let val of record.values">{{val}}</td>
+												<td>{{record.max | number:'1.0-2'}}<small>{{ record.item.unit }}</small></td>
+												<td>{{record.avg | number:'1.0-2'}}<small>{{ record.item.unit }}</small></td>
+												<td>{{record.N | number:'1.0-2'}}<small>人</small></td>
+												<td><small>{{record.sd | number:'1.0-2'}}</small></td>
 												<td>
-														<button type="button" class="btn btn-info btn-sm" (click)="setDataForHistgram(record.item)">ヒストグラムをみる</button>
+														<button type="button" class="btn btn-info btn-sm" (click)="openHistgram(record.item, contentHistgram)">ヒストグラムをみる</button>
 												</td>
 										</tr>
 								</tbody>
 						</table>
 				</div>
 		</div>
+
+		<!-- Modal Template | ヒストグラム -->
+		<template ngbModalContainer #contentHistgram let-c="close" let-d="dismiss">
+				<div class="modal-header">
+						<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+								<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">記録の分布<small *ngIf="itemHistgram" class="tag tag-pill tag-default">{{ itemHistgram.name }}</small></h4>
+				</div>
+				<div class="modal-body" *ngIf="dataHistgram">
+						<app-multi-bar-chart [data]="dataHistgram"></app-multi-bar-chart>
+						<p>＊状況によって、グラフの右端が表示されないことがあります。その場合はグラフ上部の"Grouped/Stacked"ボタンを押してください。正しく全体が表示されるようになります。</p>
+				</div>
+				<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+				</div>
+		</template>
 </section>
 
-<!-- ヒストグラム -->
-<section class="row">
-		<div class="col-sm-12">
-				<h3>記録の分布</h3>
-				<app-multi-bar-chart [data]="dataHistgram"></app-multi-bar-chart>
-		</div>
-</section>
 
 <!-- CT 相関係数 -->
-<section class="row" *ngIf="flgReady">
+<section class="row mb-1" *ngIf="dataCorrelation">
 		<div class="col-sm-12">
 				<h3>相関係数<button class="btn btn-sm btn-info" (click)="open(contentCorrelation)">?</button></h3>
 				<app-ct-meta-table [thead]="dataCorrelation.thead" [tbody]="dataCorrelation.tbody"></app-ct-meta-table>
@@ -82,11 +95,50 @@
 								<h4 class="modal-title">相関係数</h4>
 						</div>
 						<div class="modal-body">
-								<p>コントロールテストの各種目が、専門種目での記録とどれだけ関連があるかを示した数値です。</p>
+								<div cass="mb-2">
+										<h3><span class="tag tag-success">Concept</span>相関係数の意味</h3>
+										<p>相関係数を見ることで「コントロールテスト(CT)の各種目」が「専門種目」(ex.走幅跳)にどの程度影響しているかを知ることができます</p>
+										<p>相関係数とは2つの変数の間にある関係の強弱を測る指標です。-1から1の間の値をとります。女子はデータ数が少なく相関係数の信頼度が落ちるため計算していません。男子のものを参考にしてください。</p>
+										<p>相関係数が正(正の相関)ならば、CTの記録が大きい人ほど専門種目の記録が大きくなる傾向にあります。逆に相関係数が負の場合(負の相関)、CT記録が小さい人ほど専門種目の記録が大きくなる傾向があります。相関係数の値と相関の強さに関しては次の表を参考にしてください。</p>
 
-								<h3>Idea:<small>相関係数の意味</small></h3>
-								
-								
+										<table class="table">
+												<thead class="thead-inverse">
+														<tr>
+																<th>相関係数</th>
+																<th>相関の強さ</th>
+														</tr>
+												</thead>
+												<tbody>
+														<tr>
+																<td>0.0～±0.2</td>
+																<td>(ほとんど)相関がない</td>
+														</tr>
+														<tr>
+																<td>±0.2～±0.4</td>
+																<td>弱い相関がある</td>
+														</tr>
+														<tr>
+																<td>±0.4～±0.7</td>
+																<td>相関がある</td>
+														</tr>
+														<tr>
+																<td>±0.7～±0.9</td>
+																<td>相関がある</td>
+														</tr>
+														<tr>
+																<td>±0.9～±1.0</td>
+																<td>相関がある</td>
+														</tr>
+												</tbody>
+										</table>
+										<span>参考: <a href="http://rplus.wb-nahce.info/statsemi_basic/sokankeisu.html" tatget="_blank">R+ 相関係数</a></span>
+								</div>
+								<div class="mb-2">
+										<h3><span class="tag tag-danger">Usage</span>相関係数の使い方</h3>
+										<p>相関が大きいということは、そのCT種目の能力を高めることが専門種目の記録の向上に繋がりやすいということになります。限られた練習時間の中でどの練習に時間を割くべきか考える指標になれば良いと思います。また各専門種目で相関が強い種目が異なるので自分にあった練習を組み立てるのに活用してください。</p>
+										<p>練習を組み立てるときに、相関が大きいものを積極的に取り入れるようにしましょう。具体的には相関係数の絶対値が0.4以上のCT種目は優先的に練習に取り入れていきましょう。</p>
+										<p><span class="tag tag-warning">Warning</span>相関係数はあくまでも関連の強さを表すものであって記録が向上する原因であるという保証はありません。何か別の能力が高い結果としてあるCT種目の記録が良くなっている可能性もあります。この点についての判断は各自の経験を勘に頼るしかありません。</p>
+								</div>
 						</div>
 						<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
