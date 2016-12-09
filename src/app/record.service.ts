@@ -34,8 +34,8 @@ export class RecordService {
     //
     // sort用 比較関数
     compareMark(a:any, b:any): number{
-	if(a.mark < b.mark) return -1;
-	else if(a.mark > b.mark) return 1;
+	if(a.mark > b.mark) return -1;
+	else if(a.mark < b.mark) return 1;
 
 	return 0;
     }
@@ -47,7 +47,7 @@ export class RecordService {
 
 	for(let record of recordAll){
 	    for(let mark of record.records){
-		if(mark.id === id){
+		if(mark.id === id && mark.mark > 0){
 		    result.push({
 			userId: record.id,
 			itemId: mark.id,

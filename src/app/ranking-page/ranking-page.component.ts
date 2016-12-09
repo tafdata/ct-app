@@ -58,12 +58,12 @@ export class RankingPageComponent implements OnInit {
 	this.getRecordAndUserIdByItemId(item.id)
 	    .then(response => {
 		// {userId: record.id,itemId: mark.id,mark: mark.mark,}
-		console.log(response);
+		//		console.log(response);
 		return this.makeTbody(item, response)
 	    })
 	    .then(response => { // tbody
 		this.tbodySP = response;;
-		console.log(this.tbodySP);
+		//		console.log(this.tbodySP);
 	    });
     }
 
@@ -74,12 +74,12 @@ export class RankingPageComponent implements OnInit {
 	this.getRecordAndUserIdByItemId(item.id)
 	    .then(response => {
 		// {userId: record.id,itemId: mark.id,mark: mark.mark,}
-		console.log(response);
+		//		console.log(response);
 		return this.makeTbody(item, response)
 	    })
 	    .then(response => { // tbody
-		this.tbodyCT = response;;
-		console.log(this.tbodyCT);
+		this.tbodyCT = response;
+		//		console.log(this.tbodyCT);
 	    });
     }
 
@@ -94,7 +94,7 @@ export class RankingPageComponent implements OnInit {
 		this.optionSP.push(sp);
 	    }
 	}
-	console.log(this.optionSP);
+	//	console.log(this.optionSP);
 	this.SP = this.optionSP[0];
 	this.changeSP(this.SP);
 	
@@ -105,7 +105,7 @@ export class RankingPageComponent implements OnInit {
 		this.optionCT.push(ct);
 	    }
 	}
-	console.log(this.optionCT);
+	//	console.log(this.optionCT);
 	this.CT = this.optionCT[0];
 	this.changeCT(this.CT);
     }
@@ -126,9 +126,6 @@ export class RankingPageComponent implements OnInit {
     
     ngOnInit() {
 	this.changeSex("M");
-	// this.marksSP = 
-	
-	// this.marksCT = this.recordService.getRecordAndUserIdByItemId(this.itemCT[0].id);
     }
 
 }

@@ -1,6 +1,11 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" routerLink="/login">Login</a>
+  <a class="breadcrumb-item" routerLink="/mypage">MyPage</a>
+  <span class="breadcrumb-item active" *ngIf="user">{{ user.name }}</span>
+</nav>
 <div class="row mb-1">
 		<div class="col-xs-12">
-				<h2>マイページ</h2>
+				<h2>MyPage</h2>
 		</div>
 </div>
 <div class="row mb-1">
@@ -28,11 +33,14 @@
 								<h4 class="modal-title">スコア</h4>
 						</div>
 						<div class="modal-body">
-								<p>「スコア」とはコントロールテスト(以下CT)の各種目の記録を得点化したものです。計算方法は異なりますが混成競技の得点に似たものだと考えてください。以下にスコアの基本的なアイデアと計算方法を説明します。</p>
+								<h3><span class="tag tag-success">Concept</span>スコアとは？</h3>
+								<p>コントロールテストの記録を得点化したものが「スコア」です。混成種目の得点に似たものだと考えてください。</p>
+								<p>スコアは記録の偏差値を元に計算されます。偏差値70が1000点かつ記録が0を0点となるように設定されています。偏差値70は集団の上位2.3%に入ることを意味します。</p>								
+								
+								<h3><span class="tag tag-success">Method</span>計算方法</h3>
 
-								<h3>Idea<small>スコアの意味</small></h3>
 
-								<h3>Calculation<small>計算方法</small></h3>
+
 						</div>
 						<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
@@ -64,11 +72,11 @@
 								<h4 class="modal-title">目標記録</h4>
 						</div>
 						<div class="modal-body">
+								<h3><span class="tag tag-success">Concept</span>目標記録の意味</h3>
 								<p>各専門種目においてある記録を出すために必要とされるコントロールテスト種目の記録です。以下にその具体的な意味と計算方法を示します。</p>
 
-								<h3>Idea<small>目標記録の意味</small></h3>
+								<h3><span class="tag tag-success">Method</span>計算方法</h3>
 
-								<h3>Calculation<small>計算方法</small></h3>
 						</div>
 						<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>

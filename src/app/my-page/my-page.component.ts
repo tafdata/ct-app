@@ -71,10 +71,11 @@ export class MyPageComponent implements OnInit {
 	
 	try{
 	    for(let mark of records.records){
-		if(mark.id != 0){
+		if(mark.id != 0 && mark.mark > 0){
 		    values.push({
+			itemId: mark.id,
 			label: mark.name,
-			value: mark.mark,
+			value: Math.floor(mark.mark),
 		    });
 		}
 	    }
@@ -85,8 +86,15 @@ export class MyPageComponent implements OnInit {
 	}
 
 	// 結果を格納
-	return [{ key: key, values: values}];
+	return [{ key: key, values: values.sort(this.compareItemId)}];
     }
+    // itemId順に並べ替え
+    compareItemId(a:any, b:any): number{
+	if(a.itemId < b.itemId) return -1;
+	else if(a.itemId > b.itemId) return 1;
+	return 0;
+    }
+    
     
     /************************************
      ** Ct Rival リスト取得 **

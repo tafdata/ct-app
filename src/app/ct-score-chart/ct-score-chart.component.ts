@@ -34,7 +34,7 @@ export class CtScoreChartComponent implements OnChanges {
     	    	    top: 20,
     	    	    right: 20,
     	    	    bottom: 20,
-    	    	    left: 30,
+    	    	    left: 20,
     	    	},
     	    	x: function(d){return d.label;},
     	    	y: function(d){return d.value;},
@@ -48,6 +48,9 @@ export class CtScoreChartComponent implements OnChanges {
 		    axisDistance: 10,
 		},
     	    	yAxis: {
+		    tickFormat: function(d){
+		    	return d3.format(',.1d')(d);
+		    },
     	    	    axisLabelDistance: -10,
     	    	}
     	    }

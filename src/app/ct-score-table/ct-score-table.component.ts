@@ -50,12 +50,12 @@ export class CtScoreTableComponent implements OnChanges{
 	for(let user of users){
 	    this.getMarksByUserId(user.id, this.recordService)
 		.then(response => { // response: Mark[];
-		    console.log(user);
-		    console.log(response);
+		    //		    console.log(user);
+		    //		    console.log(response);
 		    tbody.push(this.buildTBodyRecord(user, response, thead));
 		});
 	}
-	console.log(tbody);
+	//	console.log(tbody);
 	return tbody;
     }
     getMarksByUserId(id: string, recordService: any): Promise<Mark[]>{
@@ -76,7 +76,7 @@ export class CtScoreTableComponent implements OnChanges{
 	for(let item of thead){
 	    let mark: Mark;
 	    if((mark = marks.find(obj => obj.id === item.id))){
-		console.log(mark);
+		//console.log(mark);
 		vals.push({
 		    item: item,
 		    mark: mark.mark,
@@ -107,13 +107,13 @@ export class CtScoreTableComponent implements OnChanges{
     
     
     ngOnChanges(changes: any){
-	console.log(this.sex);
-	console.log(this.userList.length);
+	console.log("ct-score-table: "+this.sex);
+	//console.log(this.userList.length);
 	this.makeTHeadDataset()
 	    .then(response => {
 		this.thead = response;
 		this.tbody =  this.makeTBodyDataset(this.userList, response);
-		console.log(this.tbody);
+		//		console.log(this.tbody);
 	    });
 
     }
