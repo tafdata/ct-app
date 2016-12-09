@@ -43,14 +43,14 @@ export class MultiBarChartComponent implements OnInit {
 		    axisLabel: '記録',
 		    showMaxMin: false,
 		    tickFormat: function(d){
-			return d3.format(',f')(d);
+			return d3.format(',.2f')(d);
 		    }
 		},
 		yAxis: {
 		    axisLabel: '人数[人]',
 		    axisLabelDistance: -20,
 		    tickFormat: function(d){
-			return d3.format(',.1f')(d);
+			return d3.format(',1d')(d);
 		    }
 		}
 	    }

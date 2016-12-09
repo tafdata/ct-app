@@ -73,30 +73,12 @@ export class OverviewPageComponent implements OnInit {
     getCtMeta(id: number): CtMeta{
 	return this.metaData.find(meta => meta.itemId === id);
     }
-    getParticipant(team: Team, itemId: number): number{
-	let N: number;
-	if(N = team.participant.find(n => n.sp === itemId).N){
-	    return N;
-	}else{
-	    return 0;
-	}
-    }
 
     //
     // 参加人数表用のデータセット作成
     makeDataForPieChart(): void{
-	let data: any = [];
-	for(let item of this.itemSP){
-	    let N: number = 0;
-	    for(let team of this.teams){
-		N += this.getParticipant(team, item.id);
-	    }
-	    data.push({
-		key: item.name,
-		y:   N,
-	    });
-	}
-	this.dataPieChart =  data;
+	this.dataPieChart = this.dataService.getBarChartById("overview-pie-chart").data;
+	console.log(this.dataPieChart);
     }
     makeDataForMultiBarChart(): void{
 	this.dataBarChart = this.dataService.getBarChartById("overview-participant").data;

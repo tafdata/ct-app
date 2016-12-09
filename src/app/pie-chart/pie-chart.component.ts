@@ -29,9 +29,12 @@ export class PieChartComponent implements OnChanges {
 		x: function(d){return d.key;},
 		y: function(d){return d.y;},
 		showLabels: true,
+		valueFormat: function(d){
+		    return d3.format(',.1d')(d);
+		},
 		duration: 500,
 		labelThreshold: 0.01,
-		labelSunbeamLayout: false,
+		labelSunbeamLayout: true,
 		legend: {
 		    margin: {
 			top: 10,

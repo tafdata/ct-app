@@ -107,9 +107,9 @@ export const BARCHART: BarChart[] = [
 		"key": "男子",
 		"color": "#1f77b4",
 		"values": [
-		    {"label" : "走幅跳","value" : 60}, 
-		    {"label" : "三段跳","value" : 35},
-		    {"label" : "走高跳","value" : 49}, 
+		    {"label" : "走幅跳","value" : 44}, 
+		    {"label" : "三段跳","value" : 27},
+		    {"label" : "走高跳","value" : 22}, 
 		    {"label" : "棒高跳","value" : 20},
 		]
 	    },
@@ -118,11 +118,22 @@ export const BARCHART: BarChart[] = [
 		"color": "#d62728",
 		"values": [
 		    {"label" : "走幅跳","value" : 20},		    
-		    {"label" : "三段跳","value" : 5}, 
-		    {"label" : "走高跳","value" : 15}, 
-		    {"label" : "棒高跳","value" : 8},
+		    {"label" : "三段跳","value" : 3}, 
+		    {"label" : "走高跳","value" : 12}, 
+		    {"label" : "棒高跳","value" : 10},
 		]
 	    },
 	],
-    }
+    },
+    {
+	id: "overview-pie-chart",
+	data: [
+	    {key: "KYT", y: 23},
+	    {key: "THK", y: 18},
+	    {key: "TKY", y: 9},
+  	    {key: "NGY", y: 14},
+	    {key: "KOB", y: 13},
+	    {key: "OSK", y: 21},
+	],
+    },
 ];
