@@ -10,11 +10,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
     {
-	path: '',
-	redirectTo: 'mypage',
-	pathMatch: 'full',
-    },
-    {
 	path: 'login',
 	component: LoginComponent,
     },
@@ -35,12 +30,17 @@ const routes: Routes = [
 	component: TeamPageComponent,
     },
     {
+	path: '',
+	redirectTo: 'mypage',
+	pathMatch: 'full',
+    },
+    {
 	path: '404',
 	component: NotFoundComponent,
     },
     {
-	path: '**',
-	redirectTo: '404',
+    	path: '**',
+    	redirectTo: '404',
     },
 ];
 @NgModule({

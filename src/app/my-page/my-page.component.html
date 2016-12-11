@@ -35,11 +35,8 @@
 						<div class="modal-body">
 								<h3><span class="tag tag-success">Concept</span>スコアとは？</h3>
 								<p>コントロールテストの記録を得点化したものが「スコア」です。混成種目の得点に似たものだと考えてください。</p>
-								<p>スコアは記録の偏差値を元に計算されます。偏差値70が1000点かつ記録が0を0点となるように設定されています。偏差値70は集団の上位2.3%に入ることを意味します。</p>								
+								<p>スコアは記録の偏差値を元に計算されます。偏差値70が1000点かつ記録0を0点となるように設定されています。偏差値70(スコア1000点)は集団の上位2.3%に入ることを意味します。</p>
 								
-								<h3><span class="tag tag-success">Method</span>計算方法</h3>
-
-
 
 						</div>
 						<div class="modal-footer">
@@ -73,10 +70,12 @@
 						</div>
 						<div class="modal-body">
 								<h3><span class="tag tag-success">Concept</span>目標記録の意味</h3>
-								<p>各専門種目においてある記録を出すために必要とされるコントロールテスト種目の記録です。以下にその具体的な意味と計算方法を示します。</p>
+								<p>各専門種目においてある記録を出すために必要とされるコントロールテスト種目の記録です。</p>
 
 								<h3><span class="tag tag-success">Method</span>計算方法</h3>
-
+								<p>線形回帰分析の一つである最小自乗法を利用しています。詳しくは以下のページをご覧ください。</p>
+								<a href="https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%97%E6%B3%95">wikipedia: 最小自乗法</a>
+								
 						</div>
 						<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
@@ -96,10 +95,8 @@
 								<h4 class="modal-title">ライバル</h4>
 						</div>
 						<div class="modal-body">
-								<p>あなたの専門種目の記録が近い人のコントロールテストの結果をまとめました。</p>
-
-								<h3>Idea<small>目標記録の意味</small></h3>
-								
+								<h3><span class="tag tag-success">Concept</span>ライバル</h3>
+								<p>あなたの専門種目の記録が近い人のコントロールテストの結果をまとめました。</p>								
 								
 						</div>
 						<div class="modal-footer">

@@ -97,6 +97,43 @@ export class MyPageComponent implements OnInit {
     
     
     /************************************
+     ** ユーザー情報取得  **
+     *************************************/
+    checkLoginInfo(): void{
+	console.log("Coolkie: "+this.cookieService.get("taf-ct-app-user-id"));
+	this.route.params.forEach((params: Params) => {
+	    let id = params['id'];
+	    let cookieUserId = this.cookieService.get("taf-ct-app-user-id");
+	    console.log("URL Param: "+id+", cookie:"+cookieUserId);
+	    if(id){ // URLにIdの指定あり
+		this.getUserInfo(id);
+	    }else{ // URLにIDの指定がない
+		console.log("id has not defineded");
+		if(cookieUserId){ // ログイン情報あり
+		    this.getUserInfo(cookieUserId);
+		}else{ // ログイン情報もない
+		    // ログイン画面にリダイレクト
+		    this.router.navigate(['/login']);	
+		}
+	    }
+	});
+    }
+    getUserInfo(id: string): void{
+	// 指定されたユーザー情報の取得
+	this.userService.getUser(id)
+	    .then(user => {
+		this.user = user;
+		this.getRivals(user.id);
+	    });
+	this.getRecord(id, this.recordService)
+	    .then(records => {
+	    	console.log(records);
+	    	this.records = records;
+	    	this.data = this.formatData(records);
+	    });
+    }
+    
+    /************************************
      ** Ct Rival リスト取得 **
      *************************************/
     getRivals(id: string): void{
@@ -126,35 +163,7 @@ export class MyPageComponent implements OnInit {
     
 
     ngOnInit(): void {
-	console.log("Coolkie: "+this.cookieService.get("taf-ct-app-user-id"));
-	this.route.params.forEach((params: Params) => {
-	    let id = params['id'];
-	    let cookieUserId = this.cookieService.get("taf-ct-app-user-id");
-	    console.log("URL Param: "+id+", cookie:"+cookieUserId);
-	    if(!id){ // URLにIDの指定がない
-		if(cookieUserId){
-		    id = cookieUserId;
-		}else{ // ログイン情報もない
-		    // ログイン画面にリダイレクト
-		    this.router.navigate(['/login']);	
-		}
-	    }
-
-	    
-	    // 指定されたユーザー情報の取得
-	    this.userService.getUser(id)
-		.then(user => {
-		    this.user = user;
-		    this.getRivals(user.id);
-		});
-	    this.getRecord(id, this.recordService)
-	    	.then(records => {
-	    	    console.log(records);
-	    	    this.records = records;
-	    	    this.data = this.formatData(records);
-	    	});
-	});
-				 
+	this.checkLoginInfo();
     }
     
 }
