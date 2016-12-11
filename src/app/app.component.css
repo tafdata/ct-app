@@ -2,3 +2,6 @@
  *  app.component.css
  * 
  */
+#main-container{
+    min-height: 80vh;
+}
