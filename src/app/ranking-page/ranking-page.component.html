@@ -1,6 +1,17 @@
-<p>
-  ranking-page works!
-</p>
+<!-- 性別切り替え -->
+<div class="row mb-1 flex-items-xs-right">
+		<div class="col-xs-12">
+				<div [(ngModel)]="sex" ngbRadioGroup name="radioBasic" style="width:100%;">
+						<label class="btn btn-outline-info btn-lg" style="width:50%;" >
+								<input type="radio" value="M" (click)="changeSex('M')"> 男
+						</label>
+						<label class="btn btn-outline-danger btn-lg" style="width:50%;">
+								<input type="radio" value="W"  (click)="changeSex('W')"> 女
+						</label>
+				</div>
+		</div>
+</div>
+
 <!-- 専門種目のランキング -->
 <div class="row mb-1">
 		<div class="col-xs-12">
@@ -35,15 +46,29 @@
 												</thead>
 												<tbody>
 														<tr *ngFor="let record of tbodySP; let idx = index;">
-																<th scope="row" class="white-space: nowrap;">{{idx + 1}}位</th>
+																<th scope="row" class="white-space: nowrap;">{{ record.mark.mark.rank | zeroToHyphen}}位</th>
 																<td>{{record.user.name}}<small>({{record.user.team}})</small></td>
-																<td>{{record.mark | zeroToHyphen }}</td>
+																<td>{{record.mark.mark | zeroToHyphen }}<small>{{ SP.unit }}</small></td>
 																<td><button type="button" class="btn btn-sm btn-outline-info" (click)="gotoMyPage(record.user)">{{record.user.name}}さんのページを見る</button></td>
 														</tr>
 												</tbody>
 										</table>
 								</div>	
 						</div>
+				</div>
+		</div>
+</div>
+
+<!-- 性別切り替え -->
+<div class="row mb-1 flex-items-xs-right">
+		<div class="col-xs-12">
+				<div [(ngModel)]="sex" ngbRadioGroup name="radioBasic" style="width:100%;">
+						<label class="btn btn-outline-info btn-lg" style="width:50%;" >
+								<input type="radio" value="M" (click)="changeSex('M')"> 男
+						</label>
+						<label class="btn btn-outline-danger btn-lg" style="width:50%;">
+								<input type="radio" value="W"  (click)="changeSex('W')"> 女
+						</label>
 				</div>
 		</div>
 </div>
@@ -83,10 +108,10 @@
 												</thead>
 												<tbody>
 														<tr *ngFor="let record of tbodyCT; let idx = index;">
-																<th scope="row" class="white-space: nowrap;">{{idx + 1}}位</th>
+																<th scope="row" class="white-space: nowrap;">{{ record.mark.mark.rank | zeroToHyphen }}位</th>
 																<td>{{record.user.name}}<small>({{record.user.team}})</small></td>
-																<td>{{record.mark | zeroToHyphen }}</td>
-																<td></td>
+																<td>{{record.mark.mark.mark | zeroToHyphen }}<small>{{ CT.unit }}</small></td>
+																<td>{{record.mark.mark.score | zeroToHyphen }}<small>点</small></td>
 																<td><button type="button" class="btn btn-sm btn-outline-info" (click)="gotoMyPage(record.user)">{{record.user.name}}さんのページを見る</button></td>
 														</tr>
 												</tbody>

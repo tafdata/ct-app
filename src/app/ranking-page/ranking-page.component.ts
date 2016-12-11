@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Router }                   from '@angular/router';
 
 import { User }              from '../user';
@@ -12,7 +12,7 @@ import { ItemService }       from '../item.service';
   templateUrl: './ranking-page.component.html',
   styleUrls: ['./ranking-page.component.css']
 })
-export class RankingPageComponent implements OnInit {
+export class RankingPageComponent implements OnChanges {
     // ログイン情報
     @Input() user: User;
 
@@ -25,6 +25,7 @@ export class RankingPageComponent implements OnInit {
     optionCT: Item[];
     tbodySP: any = [];
     tbodyCT: any = [];
+    sex: string;
     
     constructor(
 	private itemService: ItemService,
@@ -42,22 +43,27 @@ export class RankingPageComponent implements OnInit {
 	let tbody: any = [];
 	
 	for(let mark of marks){
+//	    console.log(mark);
 	    this.userService.getUser(mark.userId)
 		.then(response => { // User
-		    tbody.push({ user: response,mark: mark.mark});
+		    // 男子/女子の記録だけを抽出
+		    if(response.sex === this.sex){
+			tbody.push({ user: response, mark: mark});
+		    }
 		});
 	}
 
 	return Promise.resolve(tbody);
     }
 
+    
     //
     // 専門種目の切り替え
     changeSP(item: Item): void{
 	this.SP = item;
 	this.getRecordAndUserIdByItemId(item.id)
 	    .then(response => {
-		// {userId: record.id,itemId: mark.id,mark: mark.mark,}
+		// {userId: record.id,itemId: mark.id,mark: mark}
 		//		console.log(response);
 		return this.makeTbody(item, response)
 	    })
@@ -73,8 +79,8 @@ export class RankingPageComponent implements OnInit {
 	this.CT = item;
 	this.getRecordAndUserIdByItemId(item.id)
 	    .then(response => {
-		// {userId: record.id,itemId: mark.id,mark: mark.mark,}
-		//		console.log(response);
+		// {userId: record.id,itemId: mark.id,mark: mark,}
+		//console.log(response);
 		return this.makeTbody(item, response)
 	    })
 	    .then(response => { // tbody
@@ -87,6 +93,8 @@ export class RankingPageComponent implements OnInit {
     //
     // 性別の切り替え
     changeSex(sex: string): void{
+	// 性別の更新
+	this.sex = sex;
 	// 専門種目の切り替え
 	this.optionSP = [];
 	for(let sp of this.itemSP){
@@ -101,14 +109,16 @@ export class RankingPageComponent implements OnInit {
 	// CT種目の切り替え
 	this.optionCT = [];
 	for(let ct of this.itemCT){
+//	    console.log(ct);
 	    if(ct.tag.indexOf(sex) >= 0){
 		this.optionCT.push(ct);
 	    }
 	}
-	//	console.log(this.optionCT);
+	console.log(this.optionCT);
 	this.CT = this.optionCT[0];
 	this.changeCT(this.CT);
     }
+
 
     //
     // My Pageへ移動
@@ -124,8 +134,11 @@ export class RankingPageComponent implements OnInit {
 
 
     
-    ngOnInit() {
-	this.changeSex("M");
+    ngOnChanges(changes: any) {
+	//console.log(this.user);
+	if(this.user){
+	    this.changeSex(this.user.sex);
+	}
     }
 
 }

@@ -127,7 +127,7 @@ export class MyPageComponent implements OnInit {
 	    });
 	this.getRecord(id, this.recordService)
 	    .then(records => {
-	    	console.log(records);
+		//	    	console.log(records);
 	    	this.records = records;
 	    	this.data = this.formatData(records);
 	    });

@@ -6,8 +6,8 @@
 						</div>
 						<div class="card-block">
 								<form class="form-inline">
-										<div class="form-group">
-												<label for="inputPassword4">User</label>
+										<div class="form-group mb-1">
+												<label for="inputPassword4">ユーザー選択</label>
 												<div>
 														<input #searchBox id="search-box" (keyup)="search(searchBox.value)" (focus)="autoComplete()" placeholder="名前(姓)" class="form-control form-control-lg"/>
 														<div>
@@ -16,11 +16,11 @@
 																</div>
 														</div>
 														<small id="passwordHelpInline" class="text-muted">
-																上の検索ボックスに名前(姓)を入力して、候補からユーザーを選択してください。
+																上の検索ボックスに名前(姓)を入力して、候補からあなたの名前を選択してください。
 														</small>
 												</div>
 												<div *ngIf="user" class="alert alert-success" role="alert">
-														<strong>{{user.name}}({{user.team}})</strong> さんが選択されました。
+														<strong>{{user.name}}({{user.team}})</strong> さんが選択されました。"Log in"ボタンをクリックしてください。
 												</div>
 										</div>
 										<button class="btn btn-primary" (click)="gotoMyPage()">Log in</button>

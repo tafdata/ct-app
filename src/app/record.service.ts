@@ -34,9 +34,13 @@ export class RecordService {
     //
     // sort用 比較関数
     compareMark(a:any, b:any): number{
-	if(a.mark > b.mark) return -1;
-	else if(a.mark < b.mark) return 1;
-
+	if(a.mark.mark > b.mark.mark) return -1;
+	else if(a.mark.mark < b.mark.mark) return 1;
+	return 0;
+    }
+    compareRank(a:any, b:any): number{
+	if(a.mark.rank < b.mark.rank) return -1;
+	else if(a.mark.rank > b.mark.rank) return 1;
 	return 0;
     }
     //
@@ -51,14 +55,14 @@ export class RecordService {
 		    result.push({
 			userId: record.id,
 			itemId: mark.id,
-			mark: mark.mark,
+			mark: mark,
 		    });
 		    break;
 		}
 	    }
 	}
 
-	return result.sort(this.compareMark);
+	return result.sort(this.compareRank);
     }
     
 }
