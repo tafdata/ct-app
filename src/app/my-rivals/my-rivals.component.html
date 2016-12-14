@@ -15,7 +15,7 @@
 										<tbody *ngIf="data.tbody">
 												<tr *ngFor="let record of data.tbody">
 														<th scope="row" class="white-space: nowrap;">{{record.user.name}}<small>({{record.user.team}})</small></th>
-														<td>{{record.score.mark | zeroToHyphen }}</td>
+														<td>{{record.score.mark | number:'1.0-0' | zeroToHyphen }}</td>
 														<td *ngFor="let val of record.values">{{val.mark | zeroToHyphen }}</td>
 												</tr>
 										</tbody>

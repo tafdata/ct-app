@@ -19,6 +19,7 @@ export class RankingPageComponent implements OnChanges {
     // 変数
     SP: Item;
     CT: Item;
+    CtTotal: Item;
     itemSP: Item[];
     itemCT: Item[];
     optionSP: Item[];
@@ -35,6 +36,7 @@ export class RankingPageComponent implements OnChanges {
     ) {
 	this.itemSP = this.itemService.getItemsByTag("sp");
 	this.itemCT = this.itemService.getItemsByTag("ct");
+	this.CtTotal = this.itemService.getItem(0);
     }
 
     //
@@ -108,6 +110,7 @@ export class RankingPageComponent implements OnChanges {
 	
 	// CT種目の切り替え
 	this.optionCT = [];
+	this.optionCT.push(this.CtTotal);
 	for(let ct of this.itemCT){
 //	    console.log(ct);
 	    if(ct.tag.indexOf(sex) >= 0){

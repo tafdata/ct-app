@@ -29,6 +29,7 @@ export class MyPageComponent implements OnInit {
     data: any;
     rivalList: any;
     closeResult: string;
+    items: Item[];
     
     constructor(
 	private cookieService: CookieService,
@@ -36,10 +37,13 @@ export class MyPageComponent implements OnInit {
 	private route: ActivatedRoute,
 	private location: Location,
 	private userService: UserService,
+	private itemService: ItemService,
 	private dataService: DataService,
 	private recordService: RecordService,
 	private modalService: NgbModal,
-    ) {	}
+    ) {
+	this.items = itemService.getItems();
+    }
 
     
 
@@ -71,12 +75,17 @@ export class MyPageComponent implements OnInit {
 	
 	try{
 	    for(let mark of records.records){
+		let item: Item;
 		if(mark.id != 0 && mark.mark > 0){
-		    values.push({
-			itemId: mark.id,
-			label: mark.name,
-			value: Math.floor(mark.mark),
-		    });
+		    // 種目を取得
+		    item = this.items.find(itemObj => itemObj.id === mark.id);
+		    if(item){
+			values.push({
+			    itemId: mark.id,
+			    label: item.name,
+			    value: Math.floor(mark.score),
+			});
+		    }
 		}
 	    }
 	}

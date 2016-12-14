@@ -34,7 +34,7 @@ export class MySummaryComponent implements OnChanges {
 	// 総合結果を取得
 	this.mark = this.record.records.find(mark => mark.id === 0);
 	if(!this.mark){
-	    this.mark = {"id": 0, "mark": 0, "name": "総合スコア", "rank": 0, "rankSP1": 0, "rankSP2": 0, "score": 0};
+	    this.mark = {"id": 0, "mark": 0,"rank": 0, "rankSP1": 0, "rankSP2": 0, "score": 0};
 	}
 	//	console.log(this.mark);
 	

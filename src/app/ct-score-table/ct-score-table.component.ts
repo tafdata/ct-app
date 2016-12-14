@@ -69,7 +69,7 @@ export class CtScoreTableComponent implements OnChanges{
 
 	// Total Scoreがないとき
 	if(!totalScore){
-	    totalScore = {"id": 0, "mark": 0, "name": "総合スコア", "rank": 0, "rankSP1": 0, "rankSP2": 0, "score": 0};
+	    totalScore = {"id": 0, "mark": 0, "rank": 0, "rankSP1": 0, "rankSP2": 0, "score": 0};
 	}
 
 	// theadに含まれている記録のみを選択

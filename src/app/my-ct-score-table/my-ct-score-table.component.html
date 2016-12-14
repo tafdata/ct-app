@@ -11,15 +11,23 @@
 								<th>記録</th>
 								<th>スコア</th>
 								<th>総合</th>
-								<th>専門1</th>
-								<th>専門2</th>
+								<th><span *ngIf="SP1">{{ SP1.name }}</span></th>
+								<th><span *ngIf="SP2">{{ SP2.name }}</span></th>
 						</tr>
 				</thead>
 				<tbody>
+						<tr class="table-success" *ngIf="totalScore">
+								<td>総合スコア</td>
+								<td>{{totalScore.mark | number:'1.0-0' |zeroToHyphen }}<small>点</small></td>
+								<td>-</td>
+								<td>{{totalScore.rank | zeroToHyphen }}<small>位</small></td>
+								<td>{{totalScore.rankSP1 | zeroToHyphen }}<small *ngIf="totalScore.rankSP1">位</small></td>
+								<td>{{totalScore.rankSP2 |zeroToHyphen }}<small *ngIf="totalScore.rankSP2">位</small></td>
+						</tr>
 						<tr *ngFor="let obj of data">
 								<td>{{obj.item.name}}</td>
 								<td>{{obj.mark.mark | zeroToHyphen }}<small>{{obj.item.unit}}</small></td>
-								<td>{{obj.mark.score | zeroToHyphen }}<small>点</small></td>
+								<td>{{obj.mark.score | number:'1.0-0' | zeroToHyphen }}<small>点</small></td>
 								<td>{{obj.mark.rank | zeroToHyphen }}<small>位</small></td>
 								<td>{{obj.mark.rankSP1 | zeroToHyphen }}<small *ngIf="obj.mark.rankSP1">位</small></td>
 								<td>{{obj.mark.rankSP2 | zeroToHyphen }}<small *ngIf="obj.mark.rankSP2">位</small></td>
