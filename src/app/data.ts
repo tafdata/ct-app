@@ -37,6 +37,7 @@ export class Rival{
 // ==>  Overview Pageに使用
 export class CtMeta {
     itemId: number;      // 種目Id
+    sex: string;	 // 性別(M/W)
     avg: number;         // 平均
     max: number;         // 最高記録
     variance: number;    // 分散

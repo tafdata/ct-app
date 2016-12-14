@@ -1,7 +1,6 @@
 // 記録クラス
 export class Mark{
     id: number;       // 種目Id
-    name: string;     // 種目名
     mark: number;     // 記録[ex. 6.00]
     score: number;    // スコア
     rank: number;     // 総合順位
