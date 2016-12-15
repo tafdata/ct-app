@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
 	    .catch(error => {
 		// エラー処理
 		console.log(error);
+		this.autoComplete();
 		return Observable.of<User[]>([]);
 	    });
     }
@@ -65,10 +66,14 @@ export class LoginComponent implements OnInit {
     // マイページへ移動
     gotoMyPage(): void{
 	// Cookie
-	this.cookieService.put("taf-ct-app-user-id",this.user.id);
-	console.log("Coolkie: "+this.cookieService.get("taf-ct-app-user-id"));
-	// ルーティング
-	this.router.navigate(['/mypage', this.user.id]);
+	if(this.user){
+	    this.cookieService.put("taf-ct-app-user-id",this.user.id);
+	    console.log("Coolkie: "+this.cookieService.get("taf-ct-app-user-id"));
+	    // ルーティング
+	    this.router.navigate(['/mypage', this.user.id]);
+	}else{
+	    this.autoComplete();
+	}
     }
 
     
